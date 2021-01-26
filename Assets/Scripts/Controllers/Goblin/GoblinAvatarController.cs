@@ -28,7 +28,7 @@ namespace Controllers.Goblin
             UpdateDesign();
         }
 
-        private void UpdateDesign()
+        public void UpdateDesign()
         {
             var sprites = GoblinAvatarSprites.Instance;
             
@@ -38,7 +38,7 @@ namespace Controllers.Goblin
                 accessoryObject.SetActive(false);
             }
             data.accessories.ForEach(accessory => accessories[accessory].SetActive(true));
-
+            
             expression.sprite = sprites.expressions[data.expression];
             costume.sprite = sprites.costumes[data.costume];
             

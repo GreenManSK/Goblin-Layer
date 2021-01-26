@@ -33,7 +33,7 @@ namespace Services
         private static Random _random = new Random();
 
         public static Goblin Generate(
-            float beard = 0.5f,
+            float beard = 0.25f,
             Glasses[] glasses = null,
             Blush[] blushes = null,
             Expression[] expressions = null,

@@ -1,0 +1,500 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8352730160003744123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8352730160003744125}
+  - component: {fileID: 8352730160003744124}
+  m_Layer: 0
+  m_Name: GoblinAvatarSprites
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8352730160003744125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8352730160003744123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8352730160003744124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8352730160003744123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a443e257fdb34473ab7f3130f73c0310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hair:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 0
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 0
+    _keyValues: 0100000000000000020000000300000004000000
+    _keys: 0100000000000000020000000300000004000000
+    _values:
+    - hairBack:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 0
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 0
+        _keyValues: 01000000000000000200000003000000
+        _keys: 01000000000000000200000003000000
+        _values:
+        - {fileID: 21300000, guid: f7bd33b520614c14382e41f0cea28aa7, type: 3}
+        - {fileID: 21300000, guid: 8678d89c197a0964482aeff68cc0ff58, type: 3}
+        - {fileID: 21300000, guid: 75fb10a30e666e343b18f9d84608e1d8, type: 3}
+        - {fileID: 21300000, guid: 80861dbfae7f61a41922ba32c8a4f2bf, type: 3}
+      hairFront:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 1
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 1
+        _keyValues: 01000000000000000200000003000000
+        _keys: 01000000000000000200000003000000
+        _values:
+        - {fileID: 21300000, guid: 5b07d8cd7adac6a4e8f6488aa5744ca5, type: 3}
+        - {fileID: 21300000, guid: f93c454aff3da9b42a88327500ca6894, type: 3}
+        - {fileID: 21300000, guid: ae5556035f08ff942aaaac2678ab6ddd, type: 3}
+        - {fileID: 21300000, guid: c27529ba4a362624fa08ec0b72b6b0a9, type: 3}
+    - hairBack:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 1
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 1
+        _keyValues: 01000000000000000200000003000000
+        _keys: 01000000000000000200000003000000
+        _values:
+        - {fileID: 21300000, guid: 4430008b83854bd4b896b2835955a859, type: 3}
+        - {fileID: 21300000, guid: 47d9fca8f08f9d740804a5ca0a774970, type: 3}
+        - {fileID: 21300000, guid: d7cc4d56878904a4080b5cfabd2110c0, type: 3}
+        - {fileID: 21300000, guid: ce2c25a31bd3ea944b9a0c20aaadc4ca, type: 3}
+      hairFront:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 0
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 0
+        _keyValues: 01000000000000000200000003000000
+        _keys: 01000000000000000200000003000000
+        _values:
+        - {fileID: 21300000, guid: 5e2b9fb39ea27a14cbb0c1444a10f71a, type: 3}
+        - {fileID: 21300000, guid: 01a004f54cbeaa6448145256a6b2c27b, type: 3}
+        - {fileID: 21300000, guid: 6bc52f1215379084cbd854a21ae0a540, type: 3}
+        - {fileID: 21300000, guid: ae4297bf75bddc64bad836942fac657f, type: 3}
+    - hairBack:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 0
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 0
+        _keyValues: 01000000000000000200000003000000
+        _keys: 01000000000000000200000003000000
+        _values:
+        - {fileID: 21300000, guid: a58a0a96bcb01d841a36a387d1d938ac, type: 3}
+        - {fileID: 21300000, guid: 6a29a869e1a747f428aad3546e0ed430, type: 3}
+        - {fileID: 21300000, guid: 0ded2842f3045b3419f28490840eba54, type: 3}
+        - {fileID: 21300000, guid: e81b2840f5bd2f84686ea4f11ae4177a, type: 3}
+      hairFront:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 1
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 1
+        _keyValues: 01000000000000000200000003000000
+        _keys: 01000000000000000200000003000000
+        _values:
+        - {fileID: 21300000, guid: 0b879ae23ffcdbe42afeb018b50d45a7, type: 3}
+        - {fileID: 21300000, guid: 52486120e307a874f84650a70f4aa6cb, type: 3}
+        - {fileID: 21300000, guid: 5fa50cab2a5f2b34eac82674c19aa757, type: 3}
+        - {fileID: 21300000, guid: 1b46dcb080cfcd34b97e1093aca0eac4, type: 3}
+    - hairBack:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 1
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 1
+        _keyValues: 01000000000000000200000003000000
+        _keys: 01000000000000000200000003000000
+        _values:
+        - {fileID: 21300000, guid: 0433a47a5e45d094e8f6e04a0ba43a64, type: 3}
+        - {fileID: 21300000, guid: 80cdf067613f6174bb9a76c57471eed6, type: 3}
+        - {fileID: 21300000, guid: bf87d7a3266e38149b83e776be668dd9, type: 3}
+        - {fileID: 21300000, guid: 9d9e913f90af66e4980dcb0d1b590569, type: 3}
+      hairFront:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 0
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 0
+        _keyValues: 01000000000000000200000003000000
+        _keys: 01000000000000000200000003000000
+        _values:
+        - {fileID: 21300000, guid: f5e051485e83b8147a2200f22b41905b, type: 3}
+        - {fileID: 21300000, guid: acf21ce901052e748bb4dc556cdd5dce, type: 3}
+        - {fileID: 21300000, guid: 4f8dc4b0a0b26bd41b9b74cefb2c0067, type: 3}
+        - {fileID: 21300000, guid: f6095d66eb0937a4e940c9cb140eab82, type: 3}
+    - hairBack:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 0
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 0
+        _keyValues: 01000000000000000200000003000000
+        _keys: 01000000000000000200000003000000
+        _values:
+        - {fileID: 21300000, guid: 93b71fe7dac52ff49b62f828c1a8ef9a, type: 3}
+        - {fileID: 21300000, guid: 4aba9da5e8baf644ca076b771605dc71, type: 3}
+        - {fileID: 21300000, guid: 78376015ccf277f4a9f5ae11b3f15644, type: 3}
+        - {fileID: 21300000, guid: ef9ee2028e695b44fa06b6cc829b68dd, type: 3}
+      hairFront:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 1
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 1
+        _keyValues: 01000000000000000200000003000000
+        _keys: 01000000000000000200000003000000
+        _values:
+        - {fileID: 21300000, guid: 2a87ad49c9da46a46842df6a51b602d0, type: 3}
+        - {fileID: 21300000, guid: 27f96cd1ec50a754883e9aa9cea4cdb0, type: 3}
+        - {fileID: 21300000, guid: 2df58ed6e252957438281de88e97a22a, type: 3}
+        - {fileID: 21300000, guid: 49e3d6530eca08345baf032c21c47140, type: 3}
+  expressions:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 0
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 0
+    _keyValues: 010000000000000002000000030000000400000005000000060000000700000008000000090000000a000000
+    _keys: 010000000000000002000000030000000400000005000000060000000700000008000000090000000a000000
+    _values:
+    - {fileID: 21300000, guid: 01e4fb272911f3a45b5a42c3e03d3989, type: 3}
+    - {fileID: 21300000, guid: b59ace09fe41df94b8f093121509dd9c, type: 3}
+    - {fileID: 21300000, guid: 7f375a41ea043ce48ab3dea7b4df4475, type: 3}
+    - {fileID: 21300000, guid: d0abed1305041b64781affc782fc9cc9, type: 3}
+    - {fileID: 21300000, guid: da6c14bb2a5a8e945ac38b9768ed2f79, type: 3}
+    - {fileID: 21300000, guid: 62e8141112858cc43b2629475bcc4606, type: 3}
+    - {fileID: 21300000, guid: c038c084608f02849b4917015631eb0b, type: 3}
+    - {fileID: 21300000, guid: 73e563ec78da5bb4186a6dbde0aca5ce, type: 3}
+    - {fileID: 21300000, guid: 12f11d803b31e6841945586193286eac, type: 3}
+    - {fileID: 21300000, guid: 5a8094d5e5bc9ad49b115e59e9412593, type: 3}
+    - {fileID: 21300000, guid: 026859b5e3e56e04a9359d0a4c66ab7a, type: 3}
+  costumes:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 0
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 0
+    _keyValues: 010000000000000002000000030000000400000005000000060000000700000008000000
+    _keys: 010000000000000002000000030000000400000005000000060000000700000008000000
+    _values:
+    - {fileID: 21300000, guid: 9fb1a3f30eb1efd41bad078adfcde9db, type: 3}
+    - {fileID: 21300000, guid: 192bd3502f8a5f64c8e77b66eca383e3, type: 3}
+    - {fileID: 21300000, guid: 8732af96cc45db442ac704f3175c599d, type: 3}
+    - {fileID: 21300000, guid: b7523a0c0a8fe424fa0c818080ac0398, type: 3}
+    - {fileID: 21300000, guid: d124e5196f3cadf4e926b7e75b7e7cd7, type: 3}
+    - {fileID: 21300000, guid: 02e162d5e52fc6047b509cb1110927c1, type: 3}
+    - {fileID: 21300000, guid: a818f0c28eddb504ba56f59ac584615c, type: 3}
+    - {fileID: 21300000, guid: 2d1fa7c0c985d144d893e5a884443a28, type: 3}
+    - {fileID: 21300000, guid: dccfcc1c0fef2dd438686360fd8f31e9, type: 3}
+  blushes:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 0
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 0
+    _keyValues: 0100000002000000
+    _keys: 0100000002000000
+    _values:
+    - {fileID: 21300000, guid: 3e16ae204d3874344a8c7afea80d6da4, type: 3}
+    - {fileID: 21300000, guid: cf622e8a833c7fa428772f1605294a9b, type: 3}
+  glasses:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 0
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 0
+    _keyValues: 010000000000000002000000
+    _keys: 010000000000000002000000
+    _values:
+    - {fileID: 21300000, guid: 910bb291fbb56ff4d9ed57fef8221f09, type: 3}
+    - {fileID: 21300000, guid: 039cec007ae08084e8c261c8d244e4cd, type: 3}
+    - {fileID: 21300000, guid: e3c27016dceb5d84bba689c6039986dc, type: 3}

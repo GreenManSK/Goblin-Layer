@@ -8,7 +8,18 @@ namespace Data
     {
         private static GoblinAvatarSprites _instance = null;
 
-        public static GoblinAvatarSprites Instance => _instance;
+        public static GoblinAvatarSprites Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<GoblinAvatarSprites>();
+                }
+
+                return _instance;
+            }
+        }
 
         private void Awake()
         {
