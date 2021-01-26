@@ -4,7 +4,7 @@ using System.Linq;
 using Entities;
 using Entities.Types;
 
-namespace Data
+namespace Services
 {
     public static class GoblinGenerator
     {
