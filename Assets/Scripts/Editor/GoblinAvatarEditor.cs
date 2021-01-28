@@ -1,9 +1,7 @@
 using Controllers.Goblin;
-using Entities;
 using Services;
 using UnityEditor;
 using UnityEngine;
-
 
 [CustomEditor(typeof(GoblinAvatarController))]
 public class GoblinAvatarEditor : Editor
