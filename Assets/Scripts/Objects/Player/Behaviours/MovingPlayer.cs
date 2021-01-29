@@ -9,7 +9,6 @@ namespace Objects.Player.Behaviours
         public override void OnTransitionIn(PlayerController context)
         {
             base.OnTransitionIn(context);
-            Debug.Log("move");
             Player.Animator.SetTrigger(Animation);
         }
 

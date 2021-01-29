@@ -14,6 +14,11 @@ public class GameController : MonoBehaviour, IEventListener<GoblinActivationEven
 
     private HashSet<GameObject> activeGoblins = new HashSet<GameObject>();
 
+    public GameController()
+    {
+        _instance = this;
+    }
+
     private void Awake()
     {
         _instance = this;

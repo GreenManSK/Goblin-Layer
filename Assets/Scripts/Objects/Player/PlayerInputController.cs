@@ -7,7 +7,16 @@ namespace Objects.Player
 {
     public class PlayerInputController : MonoBehaviour
     {
-        public PlayerControlls.PlayerActions Actions => GameController.Instance.Input.Player;
+        public PlayerControlls.PlayerActions Actions
+        {
+            get
+            {
+                _action ??= GameController.Instance.Input.Player;
+                return _action.Value;
+            }
+        }
+
+        private PlayerControlls.PlayerActions? _action = null;
 
         private Dictionary<(InputAction, ActionType), Action<InputAction.CallbackContext>> _actions =
             new Dictionary<(InputAction, ActionType), Action<InputAction.CallbackContext>>();
@@ -33,12 +42,12 @@ namespace Objects.Player
 
         private void OnEnable()
         {
-            GameController.Instance.Input.Player.Enable();
+            Actions.Enable();
         }
 
         private void OnDisable()
         {
-            GameController.Instance.Input.Player.Disable();
+            Actions.Disable();
         }
 
         public void AddAction(InputAction inputAction, ActionType type, Action<InputAction.CallbackContext> callback)
