@@ -9,18 +9,18 @@ namespace Objects.Player.Behaviours
         public override void OnTransitionIn(PlayerController context)
         {
             base.OnTransitionIn(context);
-            Player.Animator.SetTrigger(Animation);
+            Context.Animator.SetTrigger(Animation);
         }
 
         public override void OnFixedUpdate()
         {
-            var change = Player.moveSpeed * Time.deltaTime * Player.movement;
-            Player.Rigidbody2D.MovePosition(Player.Rigidbody2D.position + change);
+            var change = Context.moveSpeed * Time.deltaTime * Context.movement;
+            Context.Rigidbody2D.MovePosition(Context.Rigidbody2D.position + change);
         }
 
         public override void OnUpdate()
         {
-            Player.FixFlip();
+            Context.FixFlip();
         }
 
         public override bool IsState(PlayerState state)

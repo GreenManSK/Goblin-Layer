@@ -9,7 +9,7 @@ namespace Objects.Player.Behaviours
         public override void OnTransitionIn(PlayerController context)
         {
             base.OnTransitionIn(context);
-            Player.Animator.SetTrigger(Animation);
+            Context.Animator.SetTrigger(Animation);
         }
 
         public override bool IsState(PlayerState state)
