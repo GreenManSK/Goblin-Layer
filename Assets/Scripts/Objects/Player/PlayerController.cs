@@ -1,55 +1,56 @@
-using System;
-using System.Collections.Generic;
-using Objects.Player.Behaviours;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Objects.Player
 {
+    [RequireComponent(typeof(PlayerStateController))]
+    [RequireComponent(typeof(PlayerInputController))]
+    [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerController : MonoBehaviour
     {
-        private IPlayerBehaviour _behaviour;
+        public Rigidbody2D Rigidbody2D => _rigidbody2D;
 
-        private readonly Dictionary<PlayerState, IPlayerBehaviour> _behaviours =
-            new Dictionary<PlayerState, IPlayerBehaviour>();
+        public Vector2 movement = Vector2.zero;
+        public float moveSpeed = 1f;
+
+        private Rigidbody2D _rigidbody2D;
+
+        private PlayerStateController _playerStateController;
+        private PlayerInputController _playerInputController;
 
         private void Start()
         {
-            ChangeState(PlayerState.Idle);
+            _playerStateController = GetComponent<PlayerStateController>();
+            _playerInputController = GetComponent<PlayerInputController>();
+
+            _rigidbody2D = GetComponent<Rigidbody2D>();
+
+            RegisterInputs();
+            _playerStateController.ChangeState(PlayerState.Idle);
         }
 
-        private void Update()
+        private void RegisterInputs()
         {
-            _behaviour?.OnUpdate();
+            _playerInputController.AddAction(_playerInputController.Actions.Move, ActionType.Performed, Move);
+            _playerInputController.AddAction(_playerInputController.Actions.Move, ActionType.Canceled, Stop);
         }
 
-        private void ChangeState(PlayerState state)
+        private void Move(InputAction.CallbackContext ctx)
         {
-            if (_behaviour != null && _behaviour.IsState(state))
+            movement = ctx.ReadValue<Vector2>();
+            if (_playerStateController.IsState(PlayerState.Idle))
             {
-                return;
+                _playerStateController.ChangeState(PlayerState.Moving);
             }
+        }
 
-            if (!_behaviours.ContainsKey(state))
+        private void Stop(InputAction.CallbackContext ctx)
+        {
+            movement = Vector2.zero;
+            if (_playerStateController.IsState(PlayerState.Moving))
             {
-                switch (state)
-                {
-                    case PlayerState.Idle:
-                        _behaviours.Add(PlayerState.Idle, new IdlePlayer());
-                        break;
-                    case PlayerState.Moving:
-                        _behaviours.Add(PlayerState.Moving, new MovingPlayer());
-                        break;
-                    case PlayerState.Dating:
-                        _behaviours.Add(PlayerState.Dating, new DatingPlayer());
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(state), state, null);
-                }
+                _playerStateController.ChangeState(PlayerState.Idle);
             }
-
-            _behaviour?.OnTransitionOut();
-            _behaviour = _behaviours[state];
-            _behaviour.OnTransitionIn(this);
         }
     }
 }

@@ -5,6 +5,7 @@ namespace Objects.Player.Behaviours
         void OnTransitionIn(PlayerController context);
         void OnTransitionOut();
         void OnUpdate();
+        void OnFixedUpdate();
         bool IsState(PlayerState state);
     }
 }

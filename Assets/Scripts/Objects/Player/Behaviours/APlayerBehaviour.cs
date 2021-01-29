@@ -2,19 +2,24 @@ namespace Objects.Player.Behaviours
 {
     public abstract class APlayerBehaviour : IPlayerBehaviour
     {
-        protected PlayerController Context;
+        protected PlayerController Player;
 
-        public void OnTransitionIn(PlayerController context)
+        public virtual void OnTransitionIn(PlayerController context)
         {
-            Context = context;
+            Player = context;
         }
 
-        public void OnTransitionOut()
+        public virtual void OnTransitionOut()
         {
         }
 
-        public void OnUpdate()
+        public virtual void OnUpdate()
         {
+        }
+
+        public virtual void OnFixedUpdate()
+        {
+            
         }
 
         public abstract bool IsState(PlayerState state);
