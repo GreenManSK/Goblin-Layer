@@ -16,13 +16,11 @@ namespace Objects.Player
 
         private void Awake()
         {
-            Debug.Log("created");
             _inupt = new PlayerControlls();
         }
 
         private void OnDestroy()
         {
-            Debug.Log("deleted");
             foreach (var action in _actions)
             {
                 var inputAction = action.Key.Item1;
