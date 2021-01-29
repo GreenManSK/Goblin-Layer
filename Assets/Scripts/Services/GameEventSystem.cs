@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Services
 {
-    public class EventSystem : MonoBehaviour
+    public class GameEventSystem : MonoBehaviour
     {
-        private static EventSystem _instance;
+        private static GameEventSystem _instance;
 
-        public static EventSystem Instance
+        public static GameEventSystem Instance
         {
             get
             {
@@ -25,7 +25,7 @@ namespace Services
         {
             if (_instance != null) return;
             var obj = new GameObject {name = "EventSystem"};
-            _instance = obj.AddComponent<EventSystem>();
+            _instance = obj.AddComponent<GameEventSystem>();
             DontDestroyOnLoad(obj);
         }
 

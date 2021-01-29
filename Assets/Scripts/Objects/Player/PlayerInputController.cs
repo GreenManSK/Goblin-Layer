@@ -7,17 +7,10 @@ namespace Objects.Player
 {
     public class PlayerInputController : MonoBehaviour
     {
-        public PlayerControlls.PlayerActions Actions => _inupt.Player;
-
-        private PlayerControlls _inupt;
+        public PlayerControlls.PlayerActions Actions => GameController.Instance.Input.Player;
 
         private Dictionary<(InputAction, ActionType), Action<InputAction.CallbackContext>> _actions =
             new Dictionary<(InputAction, ActionType), Action<InputAction.CallbackContext>>();
-
-        private void Awake()
-        {
-            _inupt = new PlayerControlls();
-        }
 
         private void OnDestroy()
         {
@@ -40,12 +33,12 @@ namespace Objects.Player
 
         private void OnEnable()
         {
-            _inupt.Player.Enable();
+            GameController.Instance.Input.Player.Enable();
         }
 
         private void OnDisable()
         {
-            _inupt.Player.Disable();
+            GameController.Instance.Input.Player.Disable();
         }
 
         public void AddAction(InputAction inputAction, ActionType type, Action<InputAction.CallbackContext> callback)
