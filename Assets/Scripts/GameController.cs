@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour, IEventListener<GoblinActivationEven
     public PlayerControlls Input => _input ??= new PlayerControlls();
     private PlayerControlls _input;
 
+    public float datingRestartTimeInS = 10;
+    
     private HashSet<GameObject> activeGoblins = new HashSet<GameObject>();
 
     public GameController()

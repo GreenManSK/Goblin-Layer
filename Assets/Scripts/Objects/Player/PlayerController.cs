@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Events;
 using Services;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace Objects.Player
         public Vector2 movement = Vector2.zero;
         public float moveSpeed = 1f;
         public float health = 100f;
+        public bool canDate = true;
 
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _sprite;
@@ -54,6 +56,7 @@ namespace Objects.Player
         {
             _playerInputController.AddAction(_playerInputController.Actions.Move, ActionType.Performed, Move);
             _playerInputController.AddAction(_playerInputController.Actions.Move, ActionType.Canceled, Stop);
+            _playerInputController.AddAction(_playerInputController.Actions.Date, ActionType.Performed, ToggleDate);
         }
 
         public void FixFlip()
@@ -66,6 +69,8 @@ namespace Objects.Player
 
         private void Move(InputAction.CallbackContext ctx)
         {
+            if (_playerStateController.IsState(PlayerState.Dating))
+                return;
             movement = ctx.ReadValue<Vector2>();
             if (_playerStateController.IsState(PlayerState.Idle))
             {
@@ -75,6 +80,8 @@ namespace Objects.Player
 
         private void Stop(InputAction.CallbackContext ctx)
         {
+            if (_playerStateController.IsState(PlayerState.Dating))
+                return;
             movement = Vector2.zero;
             if (_playerStateController.IsState(PlayerState.Moving))
             {
@@ -82,6 +89,30 @@ namespace Objects.Player
             }
         }
 
+        private void ToggleDate(InputAction.CallbackContext ctx)
+        {
+            if (!canDate)
+                return;
+            var start = !_playerStateController.IsState(PlayerState.Dating);
+            GameEventSystem.Send(new DateEvent(start));
+            if (start)
+            {
+                _playerStateController.ChangeState(PlayerState.Dating);
+            }
+            else
+            {
+                canDate = false;
+                _playerStateController.ChangeState(PlayerState.Idle);
+                StartCoroutine(RestartDating(GameController.Instance.datingRestartTimeInS));
+            }
+        }
+
+        private IEnumerator RestartDating(float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);
+            canDate = true;
+        }
+        
         public void OnEvent(AttackEvent @event)
         {
             health -= @event.Damage;

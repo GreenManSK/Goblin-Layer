@@ -1,5 +1,5 @@
 {
-    "name": "Player",
+    "name": "PlayerControlls",
     "maps": [
         {
             "name": "Player",
@@ -25,6 +25,14 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "94bea41a-a1ce-406e-a62e-9c9f8bb3455c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Date",
+                    "type": "Button",
+                    "id": "990adb20-001e-4aa2-b3fd-5773dbfbcb76",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -248,6 +256,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b103960a-d41f-47d5-a8d1-3bdf6a627c1d",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Date",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

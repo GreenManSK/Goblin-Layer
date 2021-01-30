@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Constants;
@@ -13,7 +14,7 @@ namespace Objects.Golbin
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Seeker))]
-    public class GoblinController : MonoBehaviour
+    public class GoblinController : MonoBehaviour, IEventListener<DateEvent>
     {
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public Animator Animator => _animator;
@@ -51,12 +52,18 @@ namespace Objects.Golbin
             _goblinStateController.ChangeState(GoblinState.Idle);
         }
 
+        private void OnDestroy()
+        {
+            GameEventSystem.Unsubscribe(this);
+        }
+
         public void Activate(GameObject player)
         {
-            // TODO: Register for stuff
             _player = player;
             GameEventSystem.Send(new GoblinActivationEvent(gameObject));
             _goblinStateController.ChangeState(GoblinState.Chasing);
+            
+            GameEventSystem.Subscribe(this);
         }
 
         public bool CanAttack()
@@ -73,6 +80,18 @@ namespace Objects.Golbin
         public void Chase()
         {
             _goblinStateController.ChangeState(GoblinState.Chasing);
+        }
+
+        public void OnEvent(DateEvent @event)
+        {
+            if (@event.Start)
+            {
+                _goblinStateController.ChangeState(GoblinState.Dating);
+            }
+            else
+            {
+                _goblinStateController.ChangeState(GoblinState.Chasing);
+            }
         }
 
         private void OnCollisionEnter2D(Collision2D other)

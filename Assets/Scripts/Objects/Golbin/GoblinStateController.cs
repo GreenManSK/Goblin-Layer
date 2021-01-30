@@ -20,6 +20,7 @@ namespace Objects.Golbin
                 GoblinState.Idle => new IdleGoblin(),
                 GoblinState.Chasing => new ChasingGoblin(),
                 GoblinState.Attacking => new AttackingGoblin(),
+                GoblinState.Dating => new DatingGoblin(),
                 _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
             };
         }

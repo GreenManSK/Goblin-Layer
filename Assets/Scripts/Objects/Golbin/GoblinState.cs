@@ -4,6 +4,7 @@ namespace Objects.Golbin
     {
         Idle,
         Chasing,
-        Attacking
+        Attacking,
+        Dating
     }
 }

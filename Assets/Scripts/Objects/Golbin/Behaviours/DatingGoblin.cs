@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Objects.Golbin.Behaviours
 {
-    public class IdleGoblin : AGoblinBehaviour
+    public class DatingGoblin : AGoblinBehaviour
     {
         public static readonly int Animation = Animator.StringToHash("Idle");
 
@@ -14,7 +14,7 @@ namespace Objects.Golbin.Behaviours
 
         public override bool IsState(GoblinState state)
         {
-            return state == GoblinState.Idle;
+            return state == GoblinState.Dating;
         }
     }
 }
