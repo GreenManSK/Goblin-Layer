@@ -4,6 +4,7 @@ using Events;
 using Services;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace Objects.Player
 {
@@ -119,7 +120,7 @@ namespace Objects.Player
             _sprite.color = Color.Lerp(Color.red, Color.white, Mathf.Max(0, health / 100));
             if (health < 0)
             {
-                Application.LoadLevel(Application.loadedLevel);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
     }
