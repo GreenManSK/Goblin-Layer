@@ -1,3 +1,6 @@
+using System;
+using Events;
+using Services;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,13 +11,14 @@ namespace Objects.Player
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Animator))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IEventListener<AttackEvent>
     {
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public Animator Animator => _animator;
 
         public Vector2 movement = Vector2.zero;
         public float moveSpeed = 1f;
+        public float health = 100f;
 
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _sprite;
@@ -34,6 +38,16 @@ namespace Objects.Player
 
             RegisterInputs();
             _playerStateController.ChangeState(PlayerState.Idle);
+        }
+
+        private void OnEnable()
+        {
+            GameEventSystem.Subscribe(this);
+        }
+
+        private void OnDisable()
+        {
+            GameEventSystem.Unsubscribe(this);
         }
 
         private void RegisterInputs()
@@ -65,6 +79,16 @@ namespace Objects.Player
             if (_playerStateController.IsState(PlayerState.Moving))
             {
                 _playerStateController.ChangeState(PlayerState.Idle);
+            }
+        }
+
+        public void OnEvent(AttackEvent @event)
+        {
+            health -= @event.Damage;
+            _sprite.color = Color.Lerp(Color.red, Color.white, Mathf.Max(0, health / 100));
+            if (health < 0)
+            {
+                Application.LoadLevel(Application.loadedLevel);
             }
         }
     }

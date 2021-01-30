@@ -24,8 +24,10 @@ namespace Objects.Golbin
 
         public float moveSpeed = 1f;
         public float nextWaypointDistance = 3f;
+        public float attackSpeedInS = 5f;
         public float pathUpdateTimeInS = 0.5f;
         public float nearUpdateTimeInS = 0.5f;
+        public float lastAttack = 0; 
 
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _sprite;
@@ -54,6 +56,22 @@ namespace Objects.Golbin
             // TODO: Register for stuff
             _player = player;
             GameEventSystem.Send(new GoblinActivationEvent(gameObject));
+            _goblinStateController.ChangeState(GoblinState.Chasing);
+        }
+
+        public bool CanAttack()
+        {
+            // TODO: do not use timestamp difference
+            return (Time.time - lastAttack) > attackSpeedInS;
+        }
+
+        public void Attack()
+        {
+            _goblinStateController.ChangeState(GoblinState.Attacking);
+        }
+
+        public void Chase()
+        {
             _goblinStateController.ChangeState(GoblinState.Chasing);
         }
 

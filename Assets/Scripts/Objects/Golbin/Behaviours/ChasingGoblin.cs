@@ -73,6 +73,10 @@ namespace Objects.Golbin.Behaviours
             _reachedEndOfPath = _currentWaypoint >= _path.vectorPath.Count;
             if (_reachedEndOfPath)
             {
+                if (Context.CanAttack())
+                {
+                    Context.Attack();
+                }
                 return;
             }
 
@@ -87,7 +91,6 @@ namespace Objects.Golbin.Behaviours
                     avoidanceDirection += (position - (Vector2)near.transform.position).normalized;
                 }
                 avoidanceDirection /= Context.goblinsNear.Count;
-                // _movement = Time.fixedDeltaTime * Context.moveSpeed * move;
             }
             
             var direction = (target - position).normalized;
