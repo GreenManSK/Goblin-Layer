@@ -14,7 +14,7 @@ namespace Objects.Player.Behaviours
 
         public override void OnFixedUpdate()
         {
-            var change = Context.moveSpeed * Time.deltaTime * Context.movement;
+            var change = Context.moveSpeed * Time.fixedDeltaTime * Context.movement;
             Context.Rigidbody2D.MovePosition(Context.Rigidbody2D.position + change);
         }
 

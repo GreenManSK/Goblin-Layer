@@ -11,7 +11,7 @@ namespace Objects.StateMachine
         public IBehaviour<TC, TS> Behaviour { get; private set; }
         protected TC Context;
 
-        private void Start()
+        private void Awake()
         {
             Context = GetContext();
         }

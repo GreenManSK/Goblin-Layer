@@ -15,18 +15,13 @@ namespace Objects.Player
 
         protected override IBehaviour<PlayerController, PlayerState> CreateBehaviour(PlayerState state)
         {
-            switch (state)
+            return state switch
             {
-                case PlayerState.Idle:
-                    return new IdlePlayer();
-                    ;
-                case PlayerState.Moving:
-                    return new MovingPlayer();
-                case PlayerState.Dating:
-                    return new DatingPlayer();
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
-            }
+                PlayerState.Idle => new IdlePlayer(),
+                PlayerState.Moving => new MovingPlayer(),
+                PlayerState.Dating => new DatingPlayer(),
+                _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
+            };
         }
     }
 }
