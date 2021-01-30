@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using Constants;
 using Events;
 using Pathfinding;
 using Services;
@@ -17,10 +20,12 @@ namespace Objects.Golbin
         public Seeker Seeker => _seeker;
         public Transform Target => _player.transform;
         public SpriteRenderer Sprite => _sprite;
+        public HashSet<GameObject> goblinsNear = new HashSet<GameObject>();
 
         public float moveSpeed = 1f;
         public float nextWaypointDistance = 3f;
         public float pathUpdateTimeInS = 0.5f;
+        public float nearUpdateTimeInS = 0.5f;
 
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _sprite;
@@ -28,9 +33,10 @@ namespace Objects.Golbin
         private Seeker _seeker;
 
         private GameObject _player;
+        private Dictionary<GameObject, IEnumerator> _nearRemovingCoroutines = new Dictionary<GameObject, IEnumerator>();
 
         private GoblinStateController _goblinStateController;
-        
+
         private void Start()
         {
             _goblinStateController = GetComponent<GoblinStateController>();
@@ -39,7 +45,7 @@ namespace Objects.Golbin
             _sprite = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
             _seeker = GetComponent<Seeker>();
-            
+
             _goblinStateController.ChangeState(GoblinState.Idle);
         }
 
@@ -49,6 +55,35 @@ namespace Objects.Golbin
             _player = player;
             GameEventSystem.Send(new GoblinActivationEvent(gameObject));
             _goblinStateController.ChangeState(GoblinState.Chasing);
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag(Tags.Goblin))
+            {
+                if (_nearRemovingCoroutines.ContainsKey(other.gameObject))
+                {
+                    StopCoroutine(_nearRemovingCoroutines[other.gameObject]);
+                    _nearRemovingCoroutines.Remove(other.gameObject);
+                }
+                goblinsNear.Add(other.gameObject);
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag(Tags.Goblin))
+            {
+                var coroutine = RemoveNear(other.gameObject, nearUpdateTimeInS);
+                _nearRemovingCoroutines.Add(other.gameObject, coroutine);
+                StartCoroutine(coroutine);
+            }
+        }
+
+        private IEnumerator RemoveNear(GameObject near, float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);
+            goblinsNear.Remove(near);
         }
     }
 }

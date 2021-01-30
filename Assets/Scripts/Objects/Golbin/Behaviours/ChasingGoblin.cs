@@ -35,8 +35,10 @@ namespace Objects.Golbin.Behaviours
                 {
                     Context.Seeker.StartPath(Context.Rigidbody2D.position, Context.Target.position, OnPathComplete);
                 }
+
                 yield return new WaitForSeconds(waitTime);
             }
+
             // ReSharper disable once IteratorNeverReturns
         }
 
@@ -76,8 +78,22 @@ namespace Objects.Golbin.Behaviours
 
             var position = Context.Rigidbody2D.position;
             var target = (Vector2) _path.vectorPath[_currentWaypoint];
+
+            var avoidanceDirection = Vector2.zero;
+            if (Context.goblinsNear.Count > 0)
+            {
+                foreach (var near in Context.goblinsNear)
+                {
+                    avoidanceDirection += (position - (Vector2)near.transform.position).normalized;
+                }
+                avoidanceDirection /= Context.goblinsNear.Count;
+                // _movement = Time.fixedDeltaTime * Context.moveSpeed * move;
+            }
+            
             var direction = (target - position).normalized;
-            _movement = Time.fixedDeltaTime * Context.moveSpeed * direction;
+            var move = (direction + avoidanceDirection).normalized;
+            _movement = Time.fixedDeltaTime * Context.moveSpeed * move;
+
             Context.Rigidbody2D.MovePosition(position + _movement);
 
             var distance = Vector2.Distance(position, target);
