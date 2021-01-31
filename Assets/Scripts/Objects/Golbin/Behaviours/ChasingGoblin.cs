@@ -71,16 +71,16 @@ namespace Objects.Golbin.Behaviours
             }
 
             _reachedEndOfPath = _currentWaypoint >= _path.vectorPath.Count;
+            var position = Context.Rigidbody2D.position;
             if (_reachedEndOfPath)
             {
-                if (Context.CanAttack())
+                if (Context.CanAttack() && Vector2.Distance(position, Context.Target.position) <= Context.attackReach)
                 {
                     Context.Attack();
                 }
                 return;
             }
 
-            var position = Context.Rigidbody2D.position;
             var target = (Vector2) _path.vectorPath[_currentWaypoint];
 
             var avoidanceDirection = Vector2.zero;

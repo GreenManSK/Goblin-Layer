@@ -35,6 +35,7 @@ namespace Objects.Golbin
 
         public float moveSpeed = 1f;
         public float nextWaypointDistance = 3f;
+        public float attackReach = 1f;
         public float attackSpeedInS = 5f;
         public float pathUpdateTimeInS = 0.5f;
         public float nearUpdateTimeInS = 0.5f;
