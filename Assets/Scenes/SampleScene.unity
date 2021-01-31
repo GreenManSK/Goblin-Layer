@@ -7667,6 +7667,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 967539872}
+    - target: {fileID: 8046450759108593940, guid: 121cf0f1f30af864e96d969c30fc556d, type: 3}
+      propertyPath: datingRestartTimeInS
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8046450759108594154, guid: 121cf0f1f30af864e96d969c30fc556d, type: 3}
       propertyPath: m_Name
       value: GameController

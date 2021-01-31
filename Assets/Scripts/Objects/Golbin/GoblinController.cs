@@ -40,6 +40,9 @@ namespace Objects.Golbin
         public float nearUpdateTimeInS = 0.5f;
         public float lastAttack = 0;
 
+        public GameObject HearthsPrefab;
+        public GameObject BoltsPrefab;
+        
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _sprite;
         private Animator _animator;
@@ -114,21 +117,30 @@ namespace Objects.Golbin
 
         public void OnEvent(SeductionEvent @event)
         {
+            var change = 0f;
             if (@event.Target == this)
             {
-                seduction += @event.Strength * GoblinTypesConfig.GetMultiplier(type, @event.Type);
-                // TODO: Enable later, maybe make IsPositive type specific?
-                // if (@event.Type.IsPositive())
-                // {
-                //     seduction += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.BeforeOthers);
-                // }
+                change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, @event.Type);
+                if (@event.Type.IsPositive())
+                {
+                    change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.BeforeOthers);
+                }
             }
             else if (@event.Type.IsPositive())
             {
-                // seduction += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.SeeOthers);
+                change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.SeeOthers);
             }
 
+            seduction += change;
             data.blush = GetBlush(seduction);
+            if (change > 0)
+            {
+                Instantiate(HearthsPrefab, transform);
+            }
+            else if (!Mathf.Approximately(change, 0))
+            {
+                Instantiate(BoltsPrefab, transform);
+            }
             Updated?.Invoke();
             if (seduction >= 100)
             {

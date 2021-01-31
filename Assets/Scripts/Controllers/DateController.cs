@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 namespace Controllers
 {
     public class DateController : MonoBehaviour, IEventListener<GoblinActivationEvent>,
-        IEventListener<GoblinDeathEvent>, IEventListener<DateEvent>
+        IEventListener<GoblinDeathEvent>, IEventListener<DateEvent>, IEventListener<SeductionEvent>
     {
         private static readonly Vector2 PrevVector = new Vector2(-1, 1);
         private static readonly Vector2 NextVector = new Vector2(1, -1);
@@ -22,6 +22,7 @@ namespace Controllers
         private bool isDate = false;
         private GameObject _arrow;
         private int _activeIndex;
+        private int _availableActions = 0;
 
         private void Start()
         {
@@ -33,6 +34,7 @@ namespace Controllers
             GameEventSystem.Subscribe<GoblinActivationEvent>(this);
             GameEventSystem.Subscribe<GoblinDeathEvent>(this);
             GameEventSystem.Subscribe<DateEvent>(this);
+            GameEventSystem.Subscribe<SeductionEvent>(this);
         }
 
         private void OnDisable()
@@ -40,6 +42,7 @@ namespace Controllers
             GameEventSystem.Unsubscribe<GoblinActivationEvent>(this);
             GameEventSystem.Unsubscribe<GoblinDeathEvent>(this);
             GameEventSystem.Unsubscribe<DateEvent>(this);
+            GameEventSystem.Unsubscribe<SeductionEvent>(this);
         }
 
         public void OnEvent(GoblinActivationEvent @event)
@@ -80,11 +83,23 @@ namespace Controllers
             }
         }
 
+        public void OnEvent(SeductionEvent @event)
+        {
+            if (!@event.ByPlayer)
+                return;
+            _availableActions--;
+            if (_availableActions <= 0)
+            {
+                GameEventSystem.Send(new DateEvent(false));
+            }
+        }
+
         private void StartDate()
         {
             if (goblins.Count <= 0)
                 return;
             isDate = true;
+            _availableActions = 2; // TODO: Take from player stats
             goblins.Sort(GoblinSorter);
             _arrow = Instantiate(arrowPrefab, transform);
             SetActiveGoblin(0);

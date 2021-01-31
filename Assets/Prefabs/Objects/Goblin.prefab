@@ -78,11 +78,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8119938740869711914}
+  - component: {fileID: 6131196648658499441}
   - component: {fileID: 9114934777942143012}
   - component: {fileID: 4085779080052157641}
   - component: {fileID: 129070387746461080}
   - component: {fileID: 5828442503123040802}
-  - component: {fileID: 6131196648658499441}
   - component: {fileID: 6175009964775658662}
   - component: {fileID: 2339005069212489184}
   - component: {fileID: 2141419833}
@@ -108,6 +108,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6131196648658499441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4217182549281233305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5826252d23944c38ba8d60c0f67f41f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    glasses: 0
+    blush: 0
+    beard: 0
+    accessories: 
+    costume: 0
+    hairColor: 0
+    hairFront: 0
+    hairBack: 0
+    expression: 0
+  type: 0
+  seduction: 0
+  moveSpeed: 2
+  nextWaypointDistance: 1
+  attackSpeedInS: 5
+  pathUpdateTimeInS: 0.5
+  nearUpdateTimeInS: 0.5
+  lastAttack: 0
+  HearthsPrefab: {fileID: 3127232553185169188, guid: f747569c6458ae048a0f7b7082886183, type: 3}
+  BoltsPrefab: {fileID: 738183180299955854, guid: 2566b0775f3d3674486c666d4272f543, type: 3}
 --- !u!212 &9114934777942143012
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -211,21 +243,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6131196648658499441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4217182549281233305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5826252d23944c38ba8d60c0f67f41f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
-  nextWaypointDistance: 1
-  pathUpdateTimeInS: 0.5
 --- !u!58 &6175009964775658662
 CircleCollider2D:
   m_ObjectHideFlags: 0
