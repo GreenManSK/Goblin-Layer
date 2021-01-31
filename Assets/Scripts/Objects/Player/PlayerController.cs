@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Controllers;
 using Events;
@@ -14,7 +13,7 @@ namespace Objects.Player
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Animator))]
-    public class PlayerController : MonoBehaviour, IEventListener<AttackEvent>
+    public class PlayerController : MonoBehaviour, IEventListener<AttackEvent>, IEventListener<DateEvent>
     {
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public Animator Animator => _animator;
@@ -46,12 +45,14 @@ namespace Objects.Player
 
         private void OnEnable()
         {
-            GameEventSystem.Subscribe(this);
+            GameEventSystem.Subscribe<AttackEvent>(this);
+            GameEventSystem.Subscribe<DateEvent>(this);
         }
 
         private void OnDisable()
         {
-            GameEventSystem.Unsubscribe(this);
+            GameEventSystem.Unsubscribe<AttackEvent>(this);
+            GameEventSystem.Unsubscribe<DateEvent>(this);
         }
 
         private void RegisterInputs()
@@ -97,16 +98,6 @@ namespace Objects.Player
                 return;
             var start = !_playerStateController.IsState(PlayerState.Dating);
             GameEventSystem.Send(new DateEvent(start));
-            if (start)
-            {
-                _playerStateController.ChangeState(PlayerState.Dating);
-            }
-            else
-            {
-                canDate = false;
-                _playerStateController.ChangeState(PlayerState.Idle);
-                StartCoroutine(RestartDating(GameController.Instance.datingRestartTimeInS));
-            }
         }
 
         private IEnumerator RestartDating(float waitTime)
@@ -122,6 +113,20 @@ namespace Objects.Player
             if (health < 0)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+
+        public void OnEvent(DateEvent @event)
+        {
+            if (@event.Start)
+            {
+                _playerStateController.ChangeState(PlayerState.Dating);
+            }
+            else
+            {
+                canDate = false;
+                _playerStateController.ChangeState(PlayerState.Idle);
+                StartCoroutine(RestartDating(GameController.Instance.datingRestartTimeInS));
             }
         }
     }

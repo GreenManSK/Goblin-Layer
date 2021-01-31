@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Constants;
+using Data;
 using Entities;
+using Entities.Types;
 using Events;
 using Pathfinding;
 using Services;
@@ -15,23 +17,28 @@ namespace Objects.Golbin
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Seeker))]
-    public class GoblinController : MonoBehaviour, IEventListener<DateEvent>
+    public class GoblinController : MonoBehaviour, IEventListener<DateEvent>, IEventListener<SeductionEvent>
     {
+        public delegate void UpdatedEvent();
+        
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public Animator Animator => _animator;
         public Seeker Seeker => _seeker;
         public Transform Target => _player.transform;
         public SpriteRenderer Sprite => _sprite;
         public HashSet<GameObject> goblinsNear = new HashSet<GameObject>();
-
-        public Goblin data;
+        public event UpdatedEvent Updated;
         
+        public Goblin data;
+        public GoblinType type;
+        public float seduction = 0;
+
         public float moveSpeed = 1f;
         public float nextWaypointDistance = 3f;
         public float attackSpeedInS = 5f;
         public float pathUpdateTimeInS = 0.5f;
         public float nearUpdateTimeInS = 0.5f;
-        public float lastAttack = 0; 
+        public float lastAttack = 0;
 
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _sprite;
@@ -54,12 +61,13 @@ namespace Objects.Golbin
 
             _goblinStateController.ChangeState(GoblinState.Idle);
 
-            data = GoblinGenerator.Generate();
+            data = GoblinGenerator.Generate(blushes: GoblinGenerator.NoBlushes);
         }
 
         private void OnDestroy()
         {
-            GameEventSystem.Unsubscribe(this);
+            GameEventSystem.Unsubscribe<DateEvent>(this);
+            GameEventSystem.Unsubscribe<SeductionEvent>(this);
             if (!_goblinStateController.IsState(GoblinState.Idle))
             {
                 GameEventSystem.Send(new GoblinDeathEvent(this));
@@ -71,8 +79,9 @@ namespace Objects.Golbin
             _player = player;
             GameEventSystem.Send(new GoblinActivationEvent(this));
             _goblinStateController.ChangeState(GoblinState.Chasing);
-            
-            GameEventSystem.Subscribe(this);
+
+            GameEventSystem.Subscribe<DateEvent>(this);
+            GameEventSystem.Subscribe<SeductionEvent>(this);
         }
 
         public bool CanAttack()
@@ -103,6 +112,46 @@ namespace Objects.Golbin
             }
         }
 
+        public void OnEvent(SeductionEvent @event)
+        {
+            if (@event.Target == this)
+            {
+                seduction += @event.Strength * GoblinTypesConfig.GetMultiplier(type, @event.Type);
+                // TODO: Enable later, maybe make IsPositive type specific?
+                // if (@event.Type.IsPositive())
+                // {
+                //     seduction += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.BeforeOthers);
+                // }
+            }
+            else if (@event.Type.IsPositive())
+            {
+                // seduction += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.SeeOthers);
+            }
+
+            data.blush = GetBlush(seduction);
+            Updated?.Invoke();
+            if (seduction >= 100)
+            {
+                GameEventSystem.Send(new GoblinDeathEvent(this));
+                Destroy(gameObject);
+            }
+        }
+
+        private Blush GetBlush(float seduction)
+        {
+            if (seduction > 66)
+            {
+                return Blush.Strong;
+            }
+
+            if (seduction > 33)
+            {
+                return Blush.Weak;
+            }
+
+            return Blush.None;
+        }
+
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.CompareTag(Tags.Goblin))
@@ -112,6 +161,7 @@ namespace Objects.Golbin
                     StopCoroutine(_nearRemovingCoroutines[other.gameObject]);
                     _nearRemovingCoroutines.Remove(other.gameObject);
                 }
+
                 goblinsNear.Add(other.gameObject);
             }
         }

@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
+      propertyPath: type
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8119938740869711914, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -373,6 +377,85 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 1
   m_AspectRatio: 0.88296944
+--- !u!1 &233895555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 233895556}
+  - component: {fileID: 233895558}
+  - component: {fileID: 233895557}
+  m_Layer: 5
+  m_Name: TypeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &233895556
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233895555}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1752752547}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0.4, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 81.048}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &233895557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233895555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 6
+    m_MaxSize: 64
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Type: Tsun tusn'
+--- !u!222 &233895558
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233895555}
+  m_CullTransparentMesh: 1
 --- !u!4 &275486642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8119938740869711914, guid: 8ce144e2394810b43b954de653d17571, type: 3}
@@ -1589,6 +1672,7 @@ GameObject:
   - component: {fileID: 365921600}
   - component: {fileID: 365921599}
   - component: {fileID: 365921598}
+  - component: {fileID: 365921601}
   m_Layer: 5
   m_Name: Flirt
   m_TagString: Untagged
@@ -1611,10 +1695,10 @@ RectTransform:
   m_Father: {fileID: 1213039257}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 384, y: -321}
-  m_SizeDelta: {x: 768, y: 204}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &365921598
 MonoBehaviour:
@@ -1659,7 +1743,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 365921599}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1752752548}
+        m_TargetAssemblyTypeName: UI.Controllers.DateUiController, Assembly-CSharp
+        m_MethodName: Seduce
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 365921601}
+          m_ObjectArgumentAssemblyTypeName: UI.Controllers.SeductionDataMonoBehaviour,
+            Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &365921599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1698,6 +1795,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365921596}
   m_CullTransparentMesh: 1
+--- !u!114 &365921601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365921596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f7b38ee827446089c085fd31a2b86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!4 &371200895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8046450759108594155, guid: 121cf0f1f30af864e96d969c30fc556d, type: 3}
@@ -5168,6 +5278,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
+      propertyPath: type
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8119938740869711914, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -5292,6 +5406,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8119938740869711914, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -5395,7 +5513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5055132788430444576, guid: 24ebbe64a5382d84b94aa38657d9c9f0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -210.2077
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5055132788430444576, guid: 24ebbe64a5382d84b94aa38657d9c9f0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5463,6 +5581,7 @@ GameObject:
   - component: {fileID: 1031165258}
   - component: {fileID: 1031165257}
   - component: {fileID: 1031165256}
+  - component: {fileID: 1031165259}
   m_Layer: 5
   m_Name: Present
   m_TagString: Untagged
@@ -5485,10 +5604,10 @@ RectTransform:
   m_Father: {fileID: 1213039257}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 384, y: -759}
-  m_SizeDelta: {x: 768, y: 204}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031165256
 MonoBehaviour:
@@ -5533,7 +5652,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1031165257}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1752752548}
+        m_TargetAssemblyTypeName: UI.Controllers.DateUiController, Assembly-CSharp
+        m_MethodName: Seduce
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1031165259}
+          m_ObjectArgumentAssemblyTypeName: UI.Controllers.SeductionDataMonoBehaviour,
+            Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1031165257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5572,6 +5704,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031165254}
   m_CullTransparentMesh: 1
+--- !u!114 &1031165259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031165254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f7b38ee827446089c085fd31a2b86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
 --- !u!1 &1044866079
 GameObject:
   m_ObjectHideFlags: 0
@@ -5656,6 +5801,10 @@ PrefabInstance:
     - target: {fileID: 4217182549281233305, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_Name
       value: Goblin (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
+      propertyPath: type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8119938740869711914, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_RootOrder
@@ -5873,6 +6022,7 @@ GameObject:
   - component: {fileID: 1210736011}
   - component: {fileID: 1210736010}
   - component: {fileID: 1210736009}
+  - component: {fileID: 1210736012}
   m_Layer: 5
   m_Name: Compliment
   m_TagString: Untagged
@@ -5895,10 +6045,10 @@ RectTransform:
   m_Father: {fileID: 1213039257}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 384, y: -102}
-  m_SizeDelta: {x: 768, y: 204}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1210736009
 MonoBehaviour:
@@ -5943,7 +6093,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1210736010}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1752752548}
+        m_TargetAssemblyTypeName: UI.Controllers.DateUiController, Assembly-CSharp
+        m_MethodName: Seduce
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1210736012}
+          m_ObjectArgumentAssemblyTypeName: UI.Controllers.SeductionDataMonoBehaviour,
+            Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1210736010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5982,6 +6145,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210736007}
   m_CullTransparentMesh: 1
+--- !u!114 &1210736012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210736007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f7b38ee827446089c085fd31a2b86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
 --- !u!1 &1211329679
 GameObject:
   m_ObjectHideFlags: 0
@@ -6212,6 +6388,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5826252d23944c38ba8d60c0f67f41f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1413105799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1413105800}
+  - component: {fileID: 1413105802}
+  - component: {fileID: 1413105801}
+  m_Layer: 5
+  m_Name: SeductionText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1413105800
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413105799}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1752752547}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0.4, y: 1}
+  m_AnchoredPosition: {x: 0, y: -81}
+  m_SizeDelta: {x: -0.000015258789, y: 142.843}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1413105801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413105799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 6
+    m_MaxSize: 64
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Type: Tsun tusn'
+--- !u!222 &1413105802
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413105799}
+  m_CullTransparentMesh: 1
 --- !u!1 &1447368482
 GameObject:
   m_ObjectHideFlags: 0
@@ -6443,6 +6698,7 @@ GameObject:
   - component: {fileID: 1751287947}
   - component: {fileID: 1751287946}
   - component: {fileID: 1751287945}
+  - component: {fileID: 1751287948}
   m_Layer: 5
   m_Name: Ask
   m_TagString: Untagged
@@ -6465,10 +6721,10 @@ RectTransform:
   m_Father: {fileID: 1213039257}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 384, y: -978}
-  m_SizeDelta: {x: 768, y: 204}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1751287945
 MonoBehaviour:
@@ -6513,7 +6769,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1751287946}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1752752548}
+        m_TargetAssemblyTypeName: UI.Controllers.DateUiController, Assembly-CSharp
+        m_MethodName: Seduce
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1751287948}
+          m_ObjectArgumentAssemblyTypeName: UI.Controllers.SeductionDataMonoBehaviour,
+            Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1751287946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6552,6 +6821,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1751287943}
   m_CullTransparentMesh: 1
+--- !u!114 &1751287948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751287943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f7b38ee827446089c085fd31a2b86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 5
 --- !u!1 &1752752546
 GameObject:
   m_ObjectHideFlags: 0
@@ -6568,7 +6850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1752752547
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6582,6 +6864,8 @@ RectTransform:
   m_Children:
   - {fileID: 145545716}
   - {fileID: 1213039257}
+  - {fileID: 233895556}
+  - {fileID: 1413105800}
   m_Father: {fileID: 1926312330}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6603,6 +6887,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   avatar: {fileID: 145545717}
+  typeText: {fileID: 233895557}
+  seductionText: {fileID: 1413105801}
 --- !u!4 &1761927879 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8352730160003744125, guid: c3b383c0ba6a8d34581985e3d959ce64, type: 3}
@@ -6657,6 +6943,7 @@ GameObject:
   - component: {fileID: 1848388710}
   - component: {fileID: 1848388709}
   - component: {fileID: 1848388708}
+  - component: {fileID: 1848388711}
   m_Layer: 5
   m_Name: Insult
   m_TagString: Untagged
@@ -6679,10 +6966,10 @@ RectTransform:
   m_Father: {fileID: 1213039257}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 384, y: -540}
-  m_SizeDelta: {x: 768, y: 204}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1848388708
 MonoBehaviour:
@@ -6727,7 +7014,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1848388709}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1752752548}
+        m_TargetAssemblyTypeName: UI.Controllers.DateUiController, Assembly-CSharp
+        m_MethodName: Seduce
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1848388711}
+          m_ObjectArgumentAssemblyTypeName: UI.Controllers.SeductionDataMonoBehaviour,
+            Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1848388709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6766,6 +7066,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848388706}
   m_CullTransparentMesh: 1
+--- !u!114 &1848388711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848388706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f7b38ee827446089c085fd31a2b86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1001 &1868759380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6776,6 +7089,10 @@ PrefabInstance:
     - target: {fileID: 4217182549281233305, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_Name
       value: Goblin (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
+      propertyPath: type
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8119938740869711914, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_RootOrder

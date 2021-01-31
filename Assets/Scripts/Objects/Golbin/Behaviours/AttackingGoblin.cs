@@ -1,3 +1,5 @@
+using Constants;
+using Entities.Types;
 using Events;
 using Services;
 using UnityEngine;
@@ -9,7 +11,8 @@ namespace Objects.Golbin.Behaviours
         public override void OnTransitionIn(GoblinController context)
         {
             base.OnTransitionIn(context);
-            GameEventSystem.Send(new AttackEvent(10));
+            GameEventSystem.Send(new AttackEvent(Game.BaseGoblinAttack));
+            GameEventSystem.Send(new SeductionEvent(Context, SeductionType.AttackPlayer, Game.BaseSeduction, false));
             Context.lastAttack = Time.time;
             Context.Chase();
         }

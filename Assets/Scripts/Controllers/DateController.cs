@@ -19,6 +19,7 @@ namespace Controllers
         public List<GoblinController> goblins = new List<GoblinController>();
         public DateUiController dateUi;
 
+        private bool isDate = false;
         private GameObject _arrow;
         private int _activeIndex;
 
@@ -48,7 +49,23 @@ namespace Controllers
 
         public void OnEvent(GoblinDeathEvent @event)
         {
-            goblins.Remove(@event.Object);
+            var index = goblins.IndexOf(@event.Object);
+            if (index < 0)
+                return;
+            if (index <= _activeIndex)
+            {
+                _activeIndex = Mathf.Max(0, _activeIndex - 1);
+                
+            }
+            goblins.RemoveAt(index);
+            if (goblins.Count == 0 && isDate)
+            {
+                GameEventSystem.Send(new DateEvent(false));
+            }
+            else
+            {
+                SetActiveGoblin(_activeIndex);
+            }
         }
 
         public void OnEvent(DateEvent @event)
@@ -67,6 +84,7 @@ namespace Controllers
         {
             if (goblins.Count <= 0)
                 return;
+            isDate = true;
             goblins.Sort(GoblinSorter);
             _arrow = Instantiate(arrowPrefab, transform);
             SetActiveGoblin(0);
@@ -80,6 +98,7 @@ namespace Controllers
             dateUi.gameObject.SetActive(false);
             GameController.Instance.SetCameraTarget();
             GameController.Instance.Input.Player.Move.performed -= ChangeActive;
+            isDate = false;
         }
 
         private void ChangeActive(InputAction.CallbackContext ctx)
@@ -93,11 +112,18 @@ namespace Controllers
 
         private void SetActiveGoblin(int index)
         {
+            goblins[_activeIndex].Updated -= UpdateGoblin;
             _activeIndex = index;
             var goblin = goblins[index];
+            goblin.Updated += UpdateGoblin;
             _arrow.transform.position = goblins[_activeIndex].transform.position;
             GameController.Instance.SetCameraTarget(goblin.transform);
-            dateUi.SetGoblin(goblin.data);
+            UpdateGoblin();
+        }
+
+        private void UpdateGoblin()
+        {
+            dateUi.SetGoblin(goblins[_activeIndex]);
         }
 
         private int GoblinSorter(GoblinController a, GoblinController b)
