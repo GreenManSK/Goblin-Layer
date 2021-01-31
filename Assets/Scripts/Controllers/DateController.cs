@@ -78,6 +78,7 @@ namespace Controllers
         {
             Destroy(_arrow);
             dateUi.gameObject.SetActive(false);
+            GameController.Instance.SetCameraTarget();
             GameController.Instance.Input.Player.Move.performed -= ChangeActive;
         }
 
@@ -93,8 +94,10 @@ namespace Controllers
         private void SetActiveGoblin(int index)
         {
             _activeIndex = index;
+            var goblin = goblins[index];
             _arrow.transform.position = goblins[_activeIndex].transform.position;
-            dateUi.SetGoblin(goblins[_activeIndex].data);
+            GameController.Instance.SetCameraTarget(goblin.transform);
+            dateUi.SetGoblin(goblin.data);
         }
 
         private int GoblinSorter(GoblinController a, GoblinController b)
