@@ -61,9 +61,12 @@ namespace Controllers
                 
             }
             goblins.RemoveAt(index);
-            if (goblins.Count == 0 && isDate)
+            if (goblins.Count <= 0)
             {
-                GameEventSystem.Send(new DateEvent(false));
+                if (isDate)
+                {
+                    GameEventSystem.Send(new DateEvent(false));
+                }
             }
             else
             {
@@ -119,6 +122,8 @@ namespace Controllers
         private void ChangeActive(InputAction.CallbackContext ctx)
         {
             var input = ctx.ReadValue<Vector2>();
+            if (input.magnitude < 1)
+                return;
             var prevAngle = Vector2.Angle(input, PrevVector);
             var nextAngle = Vector2.Angle(input, NextVector);
             var change = prevAngle > nextAngle ? 1 : -1;
