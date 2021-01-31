@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Events;
+using Objects.Golbin;
 using Services;
+using UI.Controllers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,10 +16,16 @@ namespace Controllers
         private static readonly Vector2 NextVector = new Vector2(1, -1);
 
         public GameObject arrowPrefab;
-        public List<GameObject> goblins = new List<GameObject>();
+        public List<GoblinController> goblins = new List<GoblinController>();
+        public DateUiController dateUi;
 
         private GameObject _arrow;
         private int _activeIndex;
+
+        private void Start()
+        {
+            dateUi.gameObject.SetActive(false);
+        }
 
         private void OnEnable()
         {
@@ -61,13 +70,14 @@ namespace Controllers
             goblins.Sort(GoblinSorter);
             _arrow = Instantiate(arrowPrefab, transform);
             SetActiveGoblin(0);
+            dateUi.gameObject.SetActive(true);
             GameController.Instance.Input.Player.Move.performed += ChangeActive;
-            // TODO: Enable moving between goblins
         }
 
         private void StopDate()
         {
             Destroy(_arrow);
+            dateUi.gameObject.SetActive(false);
             GameController.Instance.Input.Player.Move.performed -= ChangeActive;
         }
 
@@ -84,12 +94,13 @@ namespace Controllers
         {
             _activeIndex = index;
             _arrow.transform.position = goblins[_activeIndex].transform.position;
+            dateUi.SetGoblin(goblins[_activeIndex].data);
         }
 
-        private int GoblinSorter(GameObject a, GameObject b)
+        private int GoblinSorter(GoblinController a, GoblinController b)
         {
-            var aPos = a.transform.position;
-            var bPos = b.transform.position;
+            var aPos = a.gameObject.transform.position;
+            var bPos = b.gameObject.transform.position;
             return Mathf.Approximately(aPos.x, bPos.x) ? aPos.y.CompareTo(bPos.y) : aPos.x.CompareTo(bPos.x);
         }
     }

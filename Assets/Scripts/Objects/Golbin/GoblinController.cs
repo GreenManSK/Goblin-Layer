@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Constants;
+using Entities;
 using Events;
 using Pathfinding;
 using Services;
@@ -23,6 +24,8 @@ namespace Objects.Golbin
         public SpriteRenderer Sprite => _sprite;
         public HashSet<GameObject> goblinsNear = new HashSet<GameObject>();
 
+        public Goblin data;
+        
         public float moveSpeed = 1f;
         public float nextWaypointDistance = 3f;
         public float attackSpeedInS = 5f;
@@ -50,17 +53,23 @@ namespace Objects.Golbin
             _seeker = GetComponent<Seeker>();
 
             _goblinStateController.ChangeState(GoblinState.Idle);
+
+            data = GoblinGenerator.Generate();
         }
 
         private void OnDestroy()
         {
             GameEventSystem.Unsubscribe(this);
+            if (!_goblinStateController.IsState(GoblinState.Idle))
+            {
+                GameEventSystem.Send(new GoblinDeathEvent(this));
+            }
         }
 
         public void Activate(GameObject player)
         {
             _player = player;
-            GameEventSystem.Send(new GoblinActivationEvent(gameObject));
+            GameEventSystem.Send(new GoblinActivationEvent(this));
             _goblinStateController.ChangeState(GoblinState.Chasing);
             
             GameEventSystem.Subscribe(this);

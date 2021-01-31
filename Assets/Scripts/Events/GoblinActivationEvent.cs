@@ -1,12 +1,13 @@
+using Objects.Golbin;
 using UnityEngine;
 
 namespace Events
 {
     public class GoblinActivationEvent : IEvent
     {
-        public GameObject Object { get; private set; }
+        public GoblinController Object { get; private set; }
 
-        public GoblinActivationEvent(GameObject o)
+        public GoblinActivationEvent(GoblinController o)
         {
             Object = o;
         }
