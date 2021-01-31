@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1194610319875451850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5608734155129690670}
+  - component: {fileID: 6692716832454230354}
+  m_Layer: 0
+  m_Name: GoblinTypesConfig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5608734155129690670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194610319875451850}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6692716832454230354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194610319875451850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad69f424ea3349408a5290cc2c8a0b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  definitions:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues: 010000000000000002000000030000000400000005000000
+    _keys: 010000000000000002000000030000000400000005000000
+    _values:
+    - compliment: 0
+      flirt: 1
+      insult: 0
+      present: 1
+      attack: 1
+      ask: 0
+      attackPlayer: 1
+      envy: 0
+      pride: 1
+    - compliment: 1
+      flirt: 0
+      insult: -1
+      present: 1
+      attack: 0
+      ask: 1
+      attackPlayer: 1
+      envy: -1
+      pride: 0
+    - compliment: -1
+      flirt: -1
+      insult: 0
+      present: 1
+      attack: 0
+      ask: -1
+      attackPlayer: 1
+      envy: 0
+      pride: 0
+    - compliment: -1
+      flirt: -1
+      insult: 1
+      present: -1
+      attack: 1
+      ask: 0
+      attackPlayer: 0
+      envy: 1
+      pride: 1
+    - compliment: 1
+      flirt: 0
+      insult: -1
+      present: 0
+      attack: -1
+      ask: 1
+      attackPlayer: 0
+      envy: -1
+      pride: 0
+    - compliment: 1
+      flirt: 1
+      insult: -1
+      present: 0
+      attack: -1
+      ask: 1
+      attackPlayer: 0
+      envy: -1
+      pride: -1
