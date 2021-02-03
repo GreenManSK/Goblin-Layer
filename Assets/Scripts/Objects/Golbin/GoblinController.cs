@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Constants;
+using Controllers.Weapon;
 using Data;
 using Entities;
 using Entities.Types;
@@ -39,6 +40,7 @@ namespace Objects.Golbin
         public float pathUpdateTimeInS = 0.5f;
         public float nearUpdateTimeInS = 0.5f;
         public float lastAttack = 0;
+        public GoblinWeaponController weapon;
 
         public GameObject HearthsPrefab;
         public GameObject BoltsPrefab;
