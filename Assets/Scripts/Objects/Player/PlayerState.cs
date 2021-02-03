@@ -4,6 +4,7 @@ namespace Objects.Player
     {
         Idle,
         Moving,
-        Dating
+        Dating,
+        Attacking
     }
 }

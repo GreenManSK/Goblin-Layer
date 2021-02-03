@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Constants;
@@ -24,7 +23,7 @@ namespace Objects.Golbin
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public Animator Animator => _animator;
         public Seeker Seeker => _seeker;
-        public Transform Target => _player.transform;
+        public GameObject Player => _player;
         public SpriteRenderer Sprite => _sprite;
         public HashSet<GameObject> goblinsNear = new HashSet<GameObject>();
         public event UpdatedEvent Updated;

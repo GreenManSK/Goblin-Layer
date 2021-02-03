@@ -33,7 +33,7 @@ namespace Objects.Golbin.Behaviours
             {
                 if (Context.Seeker.IsDone())
                 {
-                    Context.Seeker.StartPath(Context.Rigidbody2D.position, Context.Target.position, OnPathComplete);
+                    Context.Seeker.StartPath(Context.Rigidbody2D.position, Context.Player.transform.position, OnPathComplete);
                 }
 
                 yield return new WaitForSeconds(waitTime);
@@ -74,7 +74,7 @@ namespace Objects.Golbin.Behaviours
             var position = Context.Rigidbody2D.position;
             if (_reachedEndOfPath)
             {
-                if (Context.CanAttack() && Vector2.Distance(position, Context.Target.position) <= Context.attackReach)
+                if (Context.CanAttack() && Vector2.Distance(position, Context.Player.transform.position) <= Context.attackReach)
                 {
                     Context.Attack();
                 }

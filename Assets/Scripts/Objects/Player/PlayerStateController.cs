@@ -20,6 +20,7 @@ namespace Objects.Player
                 PlayerState.Idle => new IdlePlayer(),
                 PlayerState.Moving => new MovingPlayer(),
                 PlayerState.Dating => new DatingPlayer(),
+                PlayerState.Attacking => new AttackingPlayer(),
                 _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
             };
         }
