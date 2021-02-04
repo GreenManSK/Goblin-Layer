@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Constants;
 using Controllers.Goblin;
@@ -16,7 +17,16 @@ namespace UI.Controllers
         public ActionBarController actionBar;
         public TypeBarController typeBar;
 
+        public List<GameObject> talkButtons = new List<GameObject>();
+        public List<GameObject> actionButtons = new List<GameObject>();
+
         private GoblinController _target;
+
+        private void OnEnable()
+        {
+            talkButtons.ForEach(go => go.SetActive(false));
+            actionButtons.ForEach(go => go.SetActive(true));
+        }
 
         public void SetData(List<GoblinController> goblins)
         {
@@ -37,6 +47,12 @@ namespace UI.Controllers
             avatar.UpdateDesign();
         }
 
+        public void Talk(bool talk = true)
+        {
+            talkButtons.ForEach(go => go.SetActive(talk));
+            actionButtons.ForEach(go => go.SetActive(!talk));
+        }
+        
         public void Seduce(SeductionDataMonoBehaviour obj)
         {
             // TODO: Use player stats
