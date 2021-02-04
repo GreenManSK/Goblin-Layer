@@ -35,7 +35,6 @@ namespace UI.Controllers
             goblin = data;
             var type = GoblinTypesConfig.GetDefinition(goblin.type);
             typeIndicator.color = type.color;
-            // TODO: Reaction efects
         }
 
         public void SetActive(bool active)

@@ -13,6 +13,7 @@ namespace UI.Controllers
     {
         public GoblinAvatarController avatar;
         public EncounterBarController encounterBar;
+        public TypeBarController typeBar;
         public Text typeText;
         public Text seductionText;
 
@@ -35,6 +36,7 @@ namespace UI.Controllers
         {
             _target = goblin;
             encounterBar.SetActive(goblin);
+            typeBar.SetData(goblin);
             avatar.data = goblin.data;
             avatar.UpdateDesign();
         }
