@@ -52,5 +52,11 @@ namespace UI.Controllers
             // TODO: Use player stats
             GameEventSystem.Send(new SeductionEvent(_target, obj.type, Game.BaseSeduction));
         }
+
+        public void OpenCompendium()
+        {
+            // TODO: Open
+            Debug.Log("Opening compendium");
+        }
     }
 }
