@@ -15,18 +15,8 @@ namespace UI.Controllers
         public EncounterBarController encounterBar;
         public ActionBarController actionBar;
         public TypeBarController typeBar;
-        public Text typeText;
-        public Text seductionText;
 
         private GoblinController _target;
-
-        private void Update()
-        {
-            if (_target == null)
-                return;
-            typeText.text = $"Type: {_target.type.ToString()}";
-            seductionText.text = $"Seduction: {_target.seduction}";
-        }
 
         public void SetData(List<GoblinController> goblins)
         {
