@@ -13,6 +13,7 @@ namespace UI.Controllers
     {
         public GoblinAvatarController avatar;
         public EncounterBarController encounterBar;
+        public ActionBarController actionBar;
         public TypeBarController typeBar;
         public Text typeText;
         public Text seductionText;
@@ -30,6 +31,11 @@ namespace UI.Controllers
         public void SetData(List<GoblinController> goblins)
         {
             encounterBar.SetData(goblins);
+        }
+
+        public void SetActions(int available, int maximum)
+        {
+            actionBar.SetActions(available, maximum);
         }
 
         public void SetGoblin(GoblinController goblin)

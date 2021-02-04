@@ -11,6 +11,8 @@ namespace Controllers
     public class DateController : MonoBehaviour, IEventListener<GoblinActivationEvent>,
         IEventListener<GoblinDeathEvent>, IEventListener<DateEvent>, IEventListener<SeductionEvent>
     {
+        private const int MaxActions = 2;
+        
         private static readonly Vector2 PrevVector = new Vector2(-1, 1);
         private static readonly Vector2 NextVector = new Vector2(1, -1);
 
@@ -90,6 +92,7 @@ namespace Controllers
             if (!@event.ByPlayer)
                 return;
             _availableActions--;
+            dateUi.SetActions(_availableActions, MaxActions);
             if (_availableActions <= 0)
             {
                 GameEventSystem.Send(new DateEvent(false));
@@ -101,7 +104,8 @@ namespace Controllers
             if (goblins.Count <= 0)
                 return;
             isDate = true;
-            _availableActions = 2; // TODO: Take from player stats
+            _availableActions = MaxActions; // TODO: Take from player stats
+            dateUi.SetActions(_availableActions, MaxActions);
             goblins.Sort(GoblinSorter);
             _arrow = Instantiate(arrowPrefab, transform);
             dateUi.SetData(goblins);
