@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Events;
 using Objects.Golbin;
@@ -105,6 +104,7 @@ namespace Controllers
             _availableActions = 2; // TODO: Take from player stats
             goblins.Sort(GoblinSorter);
             _arrow = Instantiate(arrowPrefab, transform);
+            dateUi.SetData(goblins);
             SetActiveGoblin(0);
             dateUi.gameObject.SetActive(true);
             GameController.Instance.Input.Player.Move.performed += ChangeActive;

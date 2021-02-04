@@ -69,7 +69,8 @@ MonoBehaviour:
     _keyValues: 010000000000000002000000030000000400000005000000
     _keys: 010000000000000002000000030000000400000005000000
     _values:
-    - compliment: 0
+    - color: {r: 1, g: 0, b: 0, a: 1}
+      compliment: 0
       flirt: 1
       insult: 0
       present: 1
@@ -78,7 +79,8 @@ MonoBehaviour:
       attackPlayer: 1
       envy: 0
       pride: 1
-    - compliment: 1
+    - color: {r: 1, g: 0, b: 0.42356968, a: 1}
+      compliment: 1
       flirt: 0
       insult: -1
       present: 1
@@ -87,7 +89,8 @@ MonoBehaviour:
       attackPlayer: 1
       envy: -1
       pride: 0
-    - compliment: -1
+    - color: {r: 0.6414924, g: 0.8207547, b: 0.4219918, a: 1}
+      compliment: -1
       flirt: -1
       insult: 0
       present: 1
@@ -96,7 +99,8 @@ MonoBehaviour:
       attackPlayer: 1
       envy: 0
       pride: 0
-    - compliment: -1
+    - color: {r: 0.67817116, g: 0, b: 1, a: 1}
+      compliment: -1
       flirt: -1
       insult: 1
       present: -1
@@ -105,7 +109,8 @@ MonoBehaviour:
       attackPlayer: 0
       envy: 1
       pride: 1
-    - compliment: 1
+    - color: {r: 0, g: 1, b: 0.87342286, a: 1}
+      compliment: 1
       flirt: 0
       insult: -1
       present: 0
@@ -114,7 +119,8 @@ MonoBehaviour:
       attackPlayer: 0
       envy: -1
       pride: 0
-    - compliment: 1
+    - color: {r: 1, g: 0.524942, b: 0, a: 1}
+      compliment: 1
       flirt: 1
       insult: -1
       present: 0

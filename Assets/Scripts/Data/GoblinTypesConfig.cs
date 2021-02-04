@@ -47,6 +47,11 @@ namespace Data
                 _ => 0
             };
         }
+
+        public static TypeDefinition GetDefinition(GoblinType type)
+        {
+            return Instance.definitions[type];
+        }
     }
 
     [Serializable]

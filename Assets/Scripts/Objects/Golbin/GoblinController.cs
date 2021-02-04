@@ -143,6 +143,7 @@ namespace Objects.Golbin
             {
                 Instantiate(BoltsPrefab, transform);
             }
+            GameEventSystem.Send(new SeductionChangeEvent(this, seduction));
             Updated?.Invoke();
             if (seduction >= 100)
             {

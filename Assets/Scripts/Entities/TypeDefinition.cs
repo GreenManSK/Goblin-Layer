@@ -1,10 +1,12 @@
 using System;
+using UnityEngine;
 
 namespace Entities
 {
     [Serializable]
     public class TypeDefinition
     {
+        public Color color;
         public float compliment = 1f;
         public float flirt = 1f;
         public float insult = 1f;

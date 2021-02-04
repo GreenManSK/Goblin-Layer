@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using Constants;
 using Controllers.Goblin;
 using Events;
@@ -12,6 +12,7 @@ namespace UI.Controllers
     public class DateUiController : MonoBehaviour
     {
         public GoblinAvatarController avatar;
+        public EncounterBarController encounterBar;
         public Text typeText;
         public Text seductionText;
 
@@ -25,9 +26,15 @@ namespace UI.Controllers
             seductionText.text = $"Seduction: {_target.seduction}";
         }
 
+        public void SetData(List<GoblinController> goblins)
+        {
+            encounterBar.SetData(goblins);
+        }
+
         public void SetGoblin(GoblinController goblin)
         {
             _target = goblin;
+            encounterBar.SetActive(goblin);
             avatar.data = goblin.data;
             avatar.UpdateDesign();
         }
