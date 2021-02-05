@@ -1,7 +1,7 @@
 using Objects.Golbin;
 using UnityEngine;
 
-namespace UI.Controllers
+namespace UI.Components.Date
 {
     public class TypeBarController : MonoBehaviour
     {

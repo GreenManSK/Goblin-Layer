@@ -1,49 +1,68 @@
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Events;
 using Objects.Golbin;
 using Services;
-using UI.Controllers;
+using UI.Components.Date;
+using UI.Controllers.Date;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Controllers
 {
-    public class DateController : MonoBehaviour, IEventListener<GoblinActivationEvent>,
-        IEventListener<GoblinDeathEvent>, IEventListener<DateEvent>, IEventListener<SeductionEvent>
+    public class DateController : MonoBehaviour,
+        IEventListener<GoblinActivationEvent>,
+        IEventListener<GoblinDeathEvent>,
+        IEventListener<DateEvent>,
+        IEventListener<DateActionEvent>,
+        IEventListener<ChangeActiveGoblin>, 
+        IEventListener<DialogEvent>, 
+        IEventListener<DialogConfirmationEvent>
     {
-        private const int MaxActions = 2;
-        
-        private static readonly Vector2 PrevVector = new Vector2(-1, 1);
-        private static readonly Vector2 NextVector = new Vector2(1, -1);
+        private const int MaxActions = 2; // TODO: Take from player stats
+
+        private static readonly ReadOnlyCollection<Type> ListenEvents = new List<Type>
+        {
+            typeof(GoblinActivationEvent),
+            typeof(GoblinDeathEvent),
+            typeof(DateEvent),
+            typeof(DateActionEvent),
+            typeof(ChangeActiveGoblin),
+            typeof(DialogEvent),
+            typeof(DialogConfirmationEvent)
+        }.AsReadOnly();
 
         public GameObject arrowPrefab;
         public List<GoblinController> goblins = new List<GoblinController>();
         public DateUiController dateUi;
 
-        private bool isDate = false;
+        private bool _isDate = false;
         private GameObject _arrow;
         private int _activeIndex;
         private int _availableActions = 0;
+        private DialogBoxController _dialogBox;
+        private bool _canEnd = true;
 
         private void Start()
         {
             dateUi.gameObject.SetActive(false);
+            _dialogBox = dateUi.dialogBox;
         }
 
         private void OnEnable()
         {
-            GameEventSystem.Subscribe<GoblinActivationEvent>(this);
-            GameEventSystem.Subscribe<GoblinDeathEvent>(this);
-            GameEventSystem.Subscribe<DateEvent>(this);
-            GameEventSystem.Subscribe<SeductionEvent>(this);
+            foreach (var listenEvent in ListenEvents)
+            {
+                GameEventSystem.Subscribe(listenEvent, this);
+            }
         }
 
         private void OnDisable()
         {
-            GameEventSystem.Unsubscribe<GoblinActivationEvent>(this);
-            GameEventSystem.Unsubscribe<GoblinDeathEvent>(this);
-            GameEventSystem.Unsubscribe<DateEvent>(this);
-            GameEventSystem.Unsubscribe<SeductionEvent>(this);
+            foreach (var listenEvent in ListenEvents)
+            {
+                GameEventSystem.Unsubscribe(listenEvent, this);
+            }
         }
 
         public void OnEvent(GoblinActivationEvent @event)
@@ -59,12 +78,12 @@ namespace Controllers
             if (index <= _activeIndex)
             {
                 _activeIndex = Mathf.Max(0, _activeIndex - 1);
-                
             }
+
             goblins.RemoveAt(index);
             if (goblins.Count <= 0)
             {
-                if (isDate)
+                if (_isDate)
                 {
                     GameEventSystem.Send(new DateEvent(false));
                 }
@@ -87,61 +106,68 @@ namespace Controllers
             }
         }
 
-        public void OnEvent(SeductionEvent @event)
+        public void OnEvent(DateActionEvent @event)
         {
-            if (!@event.ByPlayer)
-                return;
             _availableActions--;
             dateUi.SetActions(_availableActions, MaxActions);
-            if (_availableActions <= 0)
+            // TODO: this feker not working because dialog is trigered after this
+            TryToEnd();
+        }
+
+        public void OnEvent(ChangeActiveGoblin @event)
+        {
+            SetActiveGoblin((goblins.Count + _activeIndex + (@event.Next ? 1 : -1)) % goblins.Count);
+        }
+
+        public void OnEvent(DialogEvent @event)
+        {
+            if (@event.Confirmational)
             {
-                GameEventSystem.Send(new DateEvent(false));
+                _canEnd = false;
             }
+        }
+
+        public void OnEvent(DialogConfirmationEvent @event)
+        {
+            _canEnd = true;
+            TryToEnd();
         }
 
         private void StartDate()
         {
             if (goblins.Count <= 0)
                 return;
-            isDate = true;
-            _availableActions = MaxActions; // TODO: Take from player stats
+            _isDate = true;
+            _canEnd = true;
+            _availableActions = MaxActions;
             dateUi.SetActions(_availableActions, MaxActions);
             goblins.Sort(GoblinSorter);
             _arrow = Instantiate(arrowPrefab, transform);
             dateUi.SetData(goblins);
-            SetActiveGoblin(0);
             dateUi.gameObject.SetActive(true);
-            GameController.Instance.Input.Player.Move.performed += ChangeActive;
+            SetActiveGoblin(0);
         }
 
         private void StopDate()
         {
             Destroy(_arrow);
+            _arrow = null;
             dateUi.gameObject.SetActive(false);
             GameController.Instance.SetCameraTarget();
-            GameController.Instance.Input.Player.Move.performed -= ChangeActive;
-            isDate = false;
-        }
-
-        private void ChangeActive(InputAction.CallbackContext ctx)
-        {
-            var input = ctx.ReadValue<Vector2>();
-            if (input.magnitude < 1)
-                return;
-            var prevAngle = Vector2.Angle(input, PrevVector);
-            var nextAngle = Vector2.Angle(input, NextVector);
-            var change = prevAngle > nextAngle ? 1 : -1;
-            SetActiveGoblin((goblins.Count + _activeIndex + change) % goblins.Count);
+            _isDate = false;
         }
 
         private void SetActiveGoblin(int index)
         {
+            if (index < 0 || index >= goblins.Count || _arrow == null)
+                return;
             goblins[_activeIndex].Updated -= UpdateGoblin;
             _activeIndex = index;
             var goblin = goblins[index];
             goblin.Updated += UpdateGoblin;
             _arrow.transform.position = goblins[_activeIndex].transform.position;
             GameController.Instance.SetCameraTarget(goblin.transform);
+            GameEventSystem.Send(new DialogEvent(goblin.type.ToString()));
             UpdateGoblin();
         }
 
@@ -155,6 +181,14 @@ namespace Controllers
             var aPos = a.gameObject.transform.position;
             var bPos = b.gameObject.transform.position;
             return Mathf.Approximately(aPos.x, bPos.x) ? aPos.y.CompareTo(bPos.y) : aPos.x.CompareTo(bPos.x);
+        }
+
+        private void TryToEnd()
+        {
+            if (_canEnd && _availableActions <= 0)
+            {
+                GameEventSystem.Send(new DateEvent(false));
+            }
         }
     }
 }

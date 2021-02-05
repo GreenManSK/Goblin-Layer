@@ -20,7 +20,7 @@ namespace Objects.Golbin
     public class GoblinController : MonoBehaviour, IEventListener<DateEvent>, IEventListener<SeductionEvent>
     {
         public delegate void UpdatedEvent();
-        
+
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public Animator Animator => _animator;
         public Seeker Seeker => _seeker;
@@ -28,7 +28,7 @@ namespace Objects.Golbin
         public SpriteRenderer Sprite => _sprite;
         public HashSet<GameObject> goblinsNear = new HashSet<GameObject>();
         public event UpdatedEvent Updated;
-        
+
         public Goblin data;
         public GoblinType type;
         public float seduction = 0;
@@ -44,7 +44,7 @@ namespace Objects.Golbin
 
         public GameObject HearthsPrefab;
         public GameObject BoltsPrefab;
-        
+
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _sprite;
         private Animator _animator;
@@ -127,6 +127,9 @@ namespace Objects.Golbin
                 {
                     change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.BeforeOthers);
                 }
+
+                GameEventSystem.Send(new DialogEvent(
+                    change > 0 ? "Positive" : (Mathf.Approximately(change, 0) ? "neutral" : "Negative"), true));
             }
             else if (@event.Type.IsPositive())
             {
@@ -143,6 +146,7 @@ namespace Objects.Golbin
             {
                 Instantiate(BoltsPrefab, transform);
             }
+
             GameEventSystem.Send(new SeductionChangeEvent(this, seduction));
             Updated?.Invoke();
             if (seduction >= 100)

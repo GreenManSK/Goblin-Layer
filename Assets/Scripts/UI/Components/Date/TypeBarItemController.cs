@@ -3,7 +3,7 @@ using Objects.Golbin;
 using TMPro;
 using UnityEngine;
 
-namespace UI.Controllers
+namespace UI.Components.Date
 {
     public class TypeBarItemController : MonoBehaviour
     {

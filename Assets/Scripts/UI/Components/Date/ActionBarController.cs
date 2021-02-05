@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace UI.Controllers
+namespace UI.Components.Date
 {
     public class ActionBarController : MonoBehaviour
     {

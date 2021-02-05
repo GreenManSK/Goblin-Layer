@@ -1,7 +1,7 @@
 using Entities.Types;
 using UnityEngine;
 
-namespace UI.Controllers
+namespace UI.Components.Date
 {
     public class SeductionDataMonoBehaviour : MonoBehaviour
     {

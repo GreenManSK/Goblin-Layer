@@ -13,7 +13,13 @@ namespace Objects.StateMachine
 
         private void Awake()
         {
-            Context = GetContext();
+            SetContext();
+        }
+
+        private void SetContext()
+        {
+            if (Context == null)
+                Context = GetContext();
         }
 
         private void Update()
@@ -45,7 +51,7 @@ namespace Objects.StateMachine
 
             Behaviour?.OnTransitionOut();
             Behaviour = _behaviours[state];
-            Behaviour.OnTransitionIn(Context);
+            Behaviour.OnTransitionIn(Context ?? GetContext());
         }
 
         protected abstract TC GetContext();

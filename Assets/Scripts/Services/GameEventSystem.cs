@@ -34,15 +34,25 @@ namespace Services
             var type = @event.GetType();
             var instance = Instance;
             if (!instance._listeners.ContainsKey(type)) return;
-            foreach (var listener in instance._listeners[type])
+            var listeners = instance._listeners[type];
+            for (var i = listeners.Count - 1; i >= 0; i--)
             {
-                (listener as IEventListener<T>)?.OnEvent(@event);
+                (listeners[i] as IEventListener<T>)?.OnEvent(@event);
             }
         }
 
         public static void Subscribe<T>(IEventListener<T> listener) where T : IEvent
         {
-            var type = typeof(T);
+            Subscribe(typeof(T), listener);
+        }
+
+        public static void Unsubscribe<T>(IEventListener<T> listener) where T : IEvent
+        {
+            Unsubscribe(typeof(T), listener);
+        }
+
+        public static void Subscribe(Type type, IEventListener listener)
+        {
             var instance = Instance;
             if (!instance._listeners.ContainsKey(type))
             {
@@ -52,11 +62,10 @@ namespace Services
             instance._listeners[type].Add(listener);
         }
 
-        public static void Unsubscribe<T>(IEventListener<T> listener) where T : IEvent
+        public static void Unsubscribe(Type type, IEventListener listener)
         {
-            var type = typeof(T);
             if (Instance._listeners.ContainsKey(type))
-                Instance._listeners[typeof(T)]?.Remove(listener);
+                Instance._listeners[type]?.Remove(listener);
         }
     }
 }

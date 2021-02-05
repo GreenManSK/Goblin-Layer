@@ -3,7 +3,7 @@ using Objects.Golbin;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.Controllers
+namespace UI.Components.Date
 {
     public class EncounterBarController : MonoBehaviour
     {

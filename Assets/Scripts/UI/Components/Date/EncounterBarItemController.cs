@@ -1,4 +1,3 @@
-using System;
 using Data;
 using Events;
 using Objects.Golbin;
@@ -6,7 +5,7 @@ using Services;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.Controllers
+namespace UI.Components.Date
 {
     public class EncounterBarItemController : MonoBehaviour, IEventListener<SeductionChangeEvent>
     {

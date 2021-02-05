@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
@@ -15,8 +16,6 @@ namespace Controllers
         public GameObject player;
         public CinemachineVirtualCamera mainCamera;
         public float datingRestartTimeInS = 10;
-    
-        private HashSet<GameObject> activeGoblins = new HashSet<GameObject>();
 
         public GameController()
         {
@@ -26,6 +25,11 @@ namespace Controllers
         private void Awake()
         {
             _instance = this;
+        }
+
+        private void OnDestroy()
+        {
+            _input.Dispose();
         }
 
         public void SetCameraTarget(Transform target = null)
