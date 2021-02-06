@@ -2,6 +2,7 @@ using System;
 using Events;
 using Services;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Controllers.Date.Behaviours
 {
@@ -12,6 +13,17 @@ namespace Controllers.Date.Behaviours
         {
             base.OnTransitionIn(context);
             Context.StartDate();
+            GameController.Instance.Input.Player.Date.started += StopDate;
+        }
+
+        public override void OnTransitionOut()
+        {
+            GameController.Instance.Input.Player.Date.started -= StopDate;
+        }
+
+        private void StopDate(InputAction.CallbackContext obj)
+        {
+            Context.StateController.ChangeState(DateState.NonActive);
         }
 
         public override bool ProcessEvent(IEvent @event)
