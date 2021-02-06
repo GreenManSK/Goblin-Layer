@@ -1,6 +1,5 @@
 using System;
 using Events;
-using UnityEngine;
 
 namespace Controllers.Date.Behaviours
 {
@@ -10,6 +9,7 @@ namespace Controllers.Date.Behaviours
         public override void OnTransitionIn(DateController context)
         {
             base.OnTransitionIn(context);
+            context.started = true;
             Context.dialogBox.gameObject.SetActive(true);
         }
 

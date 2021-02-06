@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Constants;
 using Controllers;
 using Controllers.Goblin;
@@ -13,11 +14,17 @@ using UnityEngine.InputSystem;
 namespace UI.Controllers.Date
 {
     [RequireComponent(typeof(DateUiStateController))]
-    public class DateUiController : MonoBehaviour, IEventListener<DialogEvent>, IEventListener<DialogConfirmationEvent>
+    public class DateUiController : MonoBehaviour, IEventListener
     {
+        private static readonly ReadOnlyCollection<Type> ListenEvents = new List<Type>
+        {
+            typeof(DialogEvent),
+            typeof(DialogConfirmationEvent)
+        }.AsReadOnly();
+
         private static readonly Vector2 PrevVector = new Vector2(-1, 1);
         private static readonly Vector2 NextVector = new Vector2(1, -1);
-        
+
         public GoblinAvatarController avatar;
         public EncounterBarController encounterBar;
         public ActionBarController actionBar;
@@ -38,15 +45,13 @@ namespace UI.Controllers.Date
         private void OnEnable()
         {
             _stateController.ChangeState(DateUiState.Base);
-            GameEventSystem.Subscribe<DialogEvent>(this);
-            GameEventSystem.Subscribe<DialogConfirmationEvent>(this);
+            GameEventSystem.Subscribe(ListenEvents, this);
             GameController.Instance.Input.Player.Move.performed += ChangeActive;
         }
 
         private void OnDisable()
         {
-            GameEventSystem.Unsubscribe<DialogEvent>(this);
-            GameEventSystem.Unsubscribe<DialogConfirmationEvent>(this);
+            GameEventSystem.Unsubscribe(ListenEvents, this);
             GameController.Instance.Input.Player.Move.performed -= ChangeActive;
         }
 
@@ -85,7 +90,7 @@ namespace UI.Controllers.Date
         {
             _stateController.ChangeState(talk ? DateUiState.Talking : DateUiState.Base);
         }
-        
+
         public void Seduce(SeductionDataMonoBehaviour obj)
         {
             // TODO: Use player stats
@@ -99,7 +104,20 @@ namespace UI.Controllers.Date
             Debug.Log("Opening compendium");
         }
 
-        public void OnEvent(DialogEvent @event)
+        public void OnEvent(IEvent @event)
+        {
+            switch (@event)
+            {
+                case DialogEvent dialogEvent:
+                    OnDialogEvent(dialogEvent);
+                    break;
+                case DialogConfirmationEvent dialogConfirmationEvent:
+                    OnDialogConfirmationEvent(dialogConfirmationEvent);
+                    break;
+            }
+        }
+
+        private void OnDialogEvent(DialogEvent @event)
         {
             if (@event.Confirmational)
             {
@@ -107,7 +125,7 @@ namespace UI.Controllers.Date
             }
         }
 
-        public void OnEvent(DialogConfirmationEvent @event)
+        private void OnDialogConfirmationEvent(DialogConfirmationEvent @event)
         {
             _stateController.ChangeState(DateUiState.Base);
         }

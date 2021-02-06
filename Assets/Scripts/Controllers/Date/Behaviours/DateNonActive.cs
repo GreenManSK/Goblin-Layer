@@ -10,8 +10,9 @@ namespace Controllers.Date.Behaviours
         public override void OnTransitionIn(DateController context)
         {
             base.OnTransitionIn(context);
+            if (context.started)
+                GameEventSystem.Send(new DateEvent(false));
             Context.StopDate();
-            GameEventSystem.Send(new DateEvent(false));
         }
 
         public override bool ProcessEvent(IEvent @event)

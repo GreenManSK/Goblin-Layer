@@ -13,14 +13,7 @@ using UnityEngine;
 namespace Controllers.Date
 {
     [RequireComponent(typeof(DateStateController))]
-    public class DateController : MonoBehaviour,
-        IEventListener<GoblinActivationEvent>,
-        IEventListener<GoblinDeathEvent>,
-        IEventListener<DateEvent>,
-        IEventListener<DateActionEvent>,
-        IEventListener<ChangeActiveGoblin>,
-        IEventListener<DialogEvent>,
-        IEventListener<DialogConfirmationEvent>
+    public class DateController : MonoBehaviour, IEventListener
     {
         private const int MaxActions = Game.MaxActions; // TODO: Take from player stats
 
@@ -59,41 +52,32 @@ namespace Controllers.Date
 
         private void OnEnable()
         {
-            foreach (var listenEvent in ListenEvents)
-            {
-                GameEventSystem.Subscribe(listenEvent, this);
-            }
+            GameEventSystem.Subscribe(ListenEvents, this);
         }
 
         private void OnDisable()
         {
-            foreach (var listenEvent in ListenEvents)
+            GameEventSystem.Unsubscribe(ListenEvents, this);
+        }
+
+        public void OnEvent(IEvent @event)
+        {
+            switch (@event)
             {
-                GameEventSystem.Unsubscribe(listenEvent, this);
+                case DialogEvent dialog:
+                    OnDialogEvent(dialog);
+                    break;
+                case DateActionEvent dateAction:
+                    OnDateActionEvent(dateAction);
+                    break;
+                default:
+                    _stateController.ProcessEvent(@event);
+                    break;
             }
         }
 
-        public void OnEvent(GoblinActivationEvent @event)
-        {
-            _stateController.ProcessEvent(@event);
-        }
 
-        public void OnEvent(GoblinDeathEvent @event)
-        {
-            _stateController.ProcessEvent(@event);
-        }
-
-        public void OnEvent(DateEvent @event)
-        {
-            _stateController.ProcessEvent(@event);
-        }
-
-        public void OnEvent(ChangeActiveGoblin @event)
-        {
-            _stateController.ProcessEvent(@event);
-        }
-
-        public void OnEvent(DialogEvent @event)
+        private void OnDialogEvent(DialogEvent @event)
         {
             if (@event.Confirmational)
             {
@@ -101,12 +85,7 @@ namespace Controllers.Date
             }
         }
 
-        public void OnEvent(DialogConfirmationEvent @event)
-        {
-            _stateController.ProcessEvent(@event);
-        }
-
-        public void OnEvent(DateActionEvent @event)
+        private void OnDateActionEvent(DateActionEvent @event)
         {
             _availableActions--;
             dateUi.SetActions(_availableActions, MaxActions);

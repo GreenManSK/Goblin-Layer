@@ -6,24 +6,25 @@ using UnityEngine;
 
 namespace UI
 {
-    public class DatingBar : MonoBehaviour, IEventListener<DateEvent>
+    public class DatingBar : MonoBehaviour, IEventListener
     {
         public RectTransform bar;
         public float sizeUpdates = 10;
 
         private void OnEnable()
         {
-            GameEventSystem.Subscribe(this);
+            GameEventSystem.Subscribe(typeof(DateEvent), this);
         }
 
         private void OnDisable()
         {
-            GameEventSystem.Unsubscribe(this);
+            GameEventSystem.Unsubscribe(typeof(DateEvent), this);
         }
 
-        public void OnEvent(DateEvent @event)
+        public void OnEvent(IEvent @event)
         {
-            if (@event.Start)
+            if (!(@event is DateEvent dateEvent)) return;
+            if (dateEvent.Start)
             {
                 UpdateScaleX(0);
             }

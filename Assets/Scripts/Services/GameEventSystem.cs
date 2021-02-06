@@ -21,6 +21,9 @@ namespace Services
         private readonly Dictionary<Type, List<IEventListener>> _listeners =
             new Dictionary<Type, List<IEventListener>>();
 
+        private bool _isSending = false;
+        private Queue<IEvent> _queue = new Queue<IEvent>();
+
         private static void Init()
         {
             if (_instance != null) return;
@@ -31,24 +34,55 @@ namespace Services
 
         public static void Send<T>(T @event) where T : IEvent
         {
-            var type = @event.GetType();
-            var instance = Instance;
-            if (!instance._listeners.ContainsKey(type)) return;
-            var listeners = instance._listeners[type];
-            for (var i = listeners.Count - 1; i >= 0; i--)
+            if (_instance._isSending)
             {
-                (listeners[i] as IEventListener<T>)?.OnEvent(@event);
+                _instance._queue.Enqueue(@event);
+            }
+            else
+            {
+                _instance.SendEvent(@event);
+                _instance.MoveQueue();
             }
         }
 
-        public static void Subscribe<T>(IEventListener<T> listener) where T : IEvent
+        private void SendEvent<T>(T @event) where T : IEvent
         {
-            Subscribe(typeof(T), listener);
+            _isSending = true;
+            var type = @event.GetType();
+            if (_listeners.ContainsKey(type))
+            {
+                var listeners = _listeners[type];
+                for (var i = listeners.Count - 1; i >= 0; i--)
+                {
+                    listeners[i].OnEvent(@event);
+                }
+            }
+
+            _isSending = false;
         }
 
-        public static void Unsubscribe<T>(IEventListener<T> listener) where T : IEvent
+        private void MoveQueue()
         {
-            Unsubscribe(typeof(T), listener);
+            while (_queue.Count > 0 && !_isSending)
+            {
+                SendEvent(_queue.Dequeue());
+            }
+        }
+
+        public static void Subscribe(IEnumerable<Type> types, IEventListener listener)
+        {
+            foreach (var type in types)
+            {
+                Subscribe(type, listener);
+            }
+        }
+
+        public static void Unsubscribe(IEnumerable<Type> types, IEventListener listener)
+        {
+            foreach (var type in types)
+            {
+                Unsubscribe(type, listener);
+            }
         }
 
         public static void Subscribe(Type type, IEventListener listener)

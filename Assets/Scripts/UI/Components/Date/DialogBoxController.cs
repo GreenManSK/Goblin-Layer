@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace UI.Components.Date
 {
-    public class DialogBoxController : MonoBehaviour, IEventListener<DialogEvent>
+    public class DialogBoxController : MonoBehaviour, IEventListener
     {
         public TMP_Text text;
         public GameObject nextIndicator;
@@ -19,46 +19,58 @@ namespace UI.Components.Date
         private void Awake()
         {
             SetValues("");
-            GameEventSystem.Subscribe(this);
+            GameEventSystem.Subscribe(typeof(DialogEvent),this);
         }
 
         private void OnDestroy()
         {
-            GameEventSystem.Unsubscribe(this);
+            GameEventSystem.Unsubscribe(typeof(DialogEvent),this);
         }
 
-        private void OnEnable()
-        {
-            GameController.Instance.Input.Player.Fire.performed += Confirm;
-        }
+        // private void OnEnable()
+        // {
+        //     GameController.Instance.Input.Player.Fire.started += Confirm;
+        //     GameController.Instance.Input.Player.Date.started += Confirm;
+        // }
+        //
+        // private void OnDisable()
+        // {
+        //     GameController.Instance.Input.Player.Fire.started -= Confirm;
+        //     GameController.Instance.Input.Player.Date.started -= Confirm;
+        // }
 
-        private void OnDisable()
+        public void OnEvent(IEvent @event)
         {
-            GameController.Instance.Input.Player.Fire.performed += Confirm;
-        }
-
-        public void OnEvent(DialogEvent @event)
-        {
-            SetValues(@event.Text, @event.Confirmational);
+            if (@event is DialogEvent dialogEvent)
+            {
+                SetValues(dialogEvent.Text, dialogEvent.Confirmational);
+            }
         }
 
         private void SetValues([CanBeNull] string dialogText = null, bool needConfirmation = false)
         {
-            nextIndicator.SetActive(needConfirmation);
             if (dialogText != null)
             {
                 text.text = dialogText;
             }
 
-            _needsConfirmation = needConfirmation;
+            if (needConfirmation)
+            {
+                GameController.Instance.Input.Player.Fire.started += Confirm;
+                GameController.Instance.Input.Player.Date.started += Confirm;
+                nextIndicator.SetActive(needConfirmation);
+                _needsConfirmation = needConfirmation;
+            }
         }
 
         private void Confirm(InputAction.CallbackContext ctx)
         {
-            if (_needsConfirmation)
+            if (gameObject.activeSelf && _needsConfirmation)
             {
                 SetValues(needConfirmation: false);
                 GameEventSystem.Send(new DialogConfirmationEvent());
+                GameController.Instance.Input.Player.Fire.started -= Confirm;
+                GameController.Instance.Input.Player.Date.started -= Confirm;
             }
         }
     }

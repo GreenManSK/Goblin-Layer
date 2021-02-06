@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b3e987351b4aa68fccdaaf1ce5a53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  started: 1
+  started: 0
   arrowPrefab: {fileID: 8043723192860490177, guid: 02163e48c9297c94aa8eaf0239704a11, type: 3}
   goblins: []
   dateUi: {fileID: 0}

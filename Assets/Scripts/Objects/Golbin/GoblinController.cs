@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Constants;
 using Controllers.Weapon;
 using Data;
@@ -17,9 +19,15 @@ namespace Objects.Golbin
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Seeker))]
-    public class GoblinController : MonoBehaviour, IEventListener<DateEvent>, IEventListener<SeductionEvent>
+    public class GoblinController : MonoBehaviour, IEventListener
     {
         public delegate void UpdatedEvent();
+        
+        private static readonly ReadOnlyCollection<Type> ListenEvents = new List<Type>
+        {
+            typeof(DateEvent),
+            typeof(SeductionEvent)
+        }.AsReadOnly();
 
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public Animator Animator => _animator;
@@ -71,8 +79,7 @@ namespace Objects.Golbin
 
         private void OnDestroy()
         {
-            GameEventSystem.Unsubscribe<DateEvent>(this);
-            GameEventSystem.Unsubscribe<SeductionEvent>(this);
+            GameEventSystem.Unsubscribe(ListenEvents, this);
             if (!_goblinStateController.IsState(GoblinState.Idle))
             {
                 GameEventSystem.Send(new GoblinDeathEvent(this));
@@ -85,8 +92,7 @@ namespace Objects.Golbin
             GameEventSystem.Send(new GoblinActivationEvent(this));
             _goblinStateController.ChangeState(GoblinState.Chasing);
 
-            GameEventSystem.Subscribe<DateEvent>(this);
-            GameEventSystem.Subscribe<SeductionEvent>(this);
+            GameEventSystem.Subscribe(ListenEvents, this);
         }
 
         public bool CanAttack()
@@ -105,7 +111,20 @@ namespace Objects.Golbin
             _goblinStateController.ChangeState(GoblinState.Chasing);
         }
 
-        public void OnEvent(DateEvent @event)
+        public void OnEvent(IEvent @event)
+        {
+            switch (@event)
+            {
+                case DateEvent dateEvent:
+                    OnDateEvent(dateEvent);
+                    break;
+                case SeductionEvent seductionEvent:
+                    OnSeductionEvent(seductionEvent);
+                    break;
+            }
+        }
+
+        private void OnDateEvent(DateEvent @event)
         {
             if (@event.Start)
             {
@@ -117,7 +136,7 @@ namespace Objects.Golbin
             }
         }
 
-        public void OnEvent(SeductionEvent @event)
+        private void OnSeductionEvent(SeductionEvent @event)
         {
             var change = 0f;
             if (@event.Target == this)
@@ -128,7 +147,10 @@ namespace Objects.Golbin
                     change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.BeforeOthers);
                 }
 
-                SendDialogReaction(change);
+                if (@event.ByPlayer && @event.Type != SeductionType.Attack)
+                {
+                    SendDialogReaction(change);
+                }
             }
             else if (@event.Type.IsPositive())
             {
@@ -162,7 +184,8 @@ namespace Objects.Golbin
             if (Mathf.Approximately(change, 0))
             {
                 reaction = typeDefinition.RandomNeutralReactionText();
-            } else if (change < 0)
+            }
+            else if (change < 0)
             {
                 reaction = typeDefinition.RandomNegativeReactionText();
             }
@@ -170,6 +193,7 @@ namespace Objects.Golbin
             {
                 reaction = typeDefinition.RandomPositiveReactionText();
             }
+
             GameEventSystem.Send(new DialogEvent(reaction, true));
         }
 

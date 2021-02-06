@@ -7,12 +7,12 @@ using UnityEngine.UI;
 
 namespace UI.Components.Date
 {
-    public class EncounterBarItemController : MonoBehaviour, IEventListener<SeductionChangeEvent>
+    public class EncounterBarItemController : MonoBehaviour, IEventListener
     {
         public static readonly int GoblinAnimation = Animator.StringToHash("Goblin");
         public static readonly int HearthsAnimation = Animator.StringToHash("Hearths");
         public static readonly int BoltsAnimation = Animator.StringToHash("Bolts");
-        
+
         public GoblinController goblin;
         public GameObject activeBg;
         public Animator animator;
@@ -21,12 +21,12 @@ namespace UI.Components.Date
         private void OnEnable()
         {
             animator.SetTrigger(GoblinAnimation);
-            GameEventSystem.Subscribe(this);
+            GameEventSystem.Subscribe(typeof(SeductionChangeEvent), this);
         }
 
         private void OnDisable()
         {
-            GameEventSystem.Unsubscribe(this);
+            GameEventSystem.Unsubscribe(typeof(SeductionChangeEvent), this);
         }
 
         public void SetData(GoblinController data)
@@ -46,11 +46,12 @@ namespace UI.Components.Date
             animator.SetTrigger(GoblinAnimation);
         }
 
-        public void OnEvent(SeductionChangeEvent @event)
+        public void OnEvent(IEvent @event)
         {
-            if (@event.Target == goblin && !Mathf.Approximately(@event.Change, 0))
+            if (!(@event is SeductionChangeEvent seductionChangeEvent)) return;
+            if (seductionChangeEvent.Target == goblin && !Mathf.Approximately(seductionChangeEvent.Change, 0))
             {
-                animator.SetTrigger(@event.Change > 0 ? HearthsAnimation : BoltsAnimation);
+                animator.SetTrigger(seductionChangeEvent.Change > 0 ? HearthsAnimation : BoltsAnimation);
             }
         }
     }

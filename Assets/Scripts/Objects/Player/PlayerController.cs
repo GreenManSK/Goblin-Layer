@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Controllers;
 using Controllers.Weapon;
 using Events;
@@ -14,8 +17,14 @@ namespace Objects.Player
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Animator))]
-    public class PlayerController : MonoBehaviour, IEventListener<AttackEvent>, IEventListener<DateEvent>
+    public class PlayerController : MonoBehaviour, IEventListener
     {
+        private static readonly ReadOnlyCollection<Type> ListenEvents = new List<Type>
+        {
+            typeof(AttackEvent),
+            typeof(DateEvent)
+        }.AsReadOnly();
+
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public Animator Animator => _animator;
 
@@ -51,14 +60,12 @@ namespace Objects.Player
 
         private void OnEnable()
         {
-            GameEventSystem.Subscribe<AttackEvent>(this);
-            GameEventSystem.Subscribe<DateEvent>(this);
+            GameEventSystem.Subscribe(ListenEvents, this);
         }
 
         private void OnDisable()
         {
-            GameEventSystem.Unsubscribe<AttackEvent>(this);
-            GameEventSystem.Unsubscribe<DateEvent>(this);
+            GameEventSystem.Unsubscribe(ListenEvents, this);
         }
 
         private void RegisterInputs()
@@ -122,8 +129,21 @@ namespace Objects.Player
                 return;
             _playerStateController.ChangeState(movement != Vector2.zero ? PlayerState.Moving : PlayerState.Idle);
         }
-        
-        public void OnEvent(AttackEvent @event)
+
+        public void OnEvent(IEvent @event)
+        {
+            switch (@event)
+            {
+                case DateEvent dateEvent:
+                    OnDateEvent(dateEvent);
+                    break;
+                case AttackEvent attackEvent:
+                    OnAttackEvent(attackEvent);
+                    break;
+            }
+        }
+
+        private void OnAttackEvent(AttackEvent @event)
         {
             if (@event.Target != gameObject)
                 return;
@@ -135,7 +155,7 @@ namespace Objects.Player
             }
         }
 
-        public void OnEvent(DateEvent @event)
+        private void OnDateEvent(DateEvent @event)
         {
             canDate = false;
             if (@event.Start)
@@ -153,7 +173,7 @@ namespace Objects.Player
         {
             return !_playerStateController.IsState(PlayerState.Dating);
         }
-        
+
         private IEnumerator RestartDating(float waitTime)
         {
             yield return new WaitForSeconds(waitTime);

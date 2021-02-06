@@ -6,25 +6,28 @@ using UnityEngine;
 
 namespace UI
 {
-    public class AttackBar : MonoBehaviour, IEventListener<AttackBarEvent>
+    public class AttackBar : MonoBehaviour, IEventListener
     {
         public RectTransform bar;
         public float sizeUpdates = 10;
 
         private void OnEnable()
         {
-            GameEventSystem.Subscribe(this);
+            GameEventSystem.Subscribe(typeof(AttackBarEvent), this);
         }
 
         private void OnDisable()
         {
-            GameEventSystem.Unsubscribe(this);
+            GameEventSystem.Unsubscribe(typeof(AttackBarEvent), this);
         }
 
-        public void OnEvent(AttackBarEvent @event)
+        public void OnEvent(IEvent @event)
         {
-            UpdateScaleX(0);
-            StartCoroutine(UpdateSize(sizeUpdates, @event.WaitTimeInS));
+            if (@event is AttackBarEvent attackBarEvent)
+            {
+                UpdateScaleX(0);
+                StartCoroutine(UpdateSize(sizeUpdates, attackBarEvent.WaitTimeInS));
+            }
         }
 
         private IEnumerator UpdateSize(float updates, float waitTimeInS)
