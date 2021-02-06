@@ -49,7 +49,9 @@ namespace UI.Components.Date
         public void OnEvent(IEvent @event)
         {
             if (!(@event is SeductionChangeEvent seductionChangeEvent)) return;
-            if (seductionChangeEvent.Target == goblin && !Mathf.Approximately(seductionChangeEvent.Change, 0))
+            if (Mathf.Approximately(seductionChangeEvent.Change, 0))
+                return;
+            if (seductionChangeEvent.Target == goblin)
             {
                 animator.SetTrigger(seductionChangeEvent.Change > 0 ? HearthsAnimation : BoltsAnimation);
             }
