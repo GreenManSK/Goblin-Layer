@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace Objects.Golbin.Behaviours
 {
+    [Serializable]
     public class AttackingGoblin : AGoblinBehaviour
     {
         public static readonly int Animation = Animator.StringToHash("Idle");

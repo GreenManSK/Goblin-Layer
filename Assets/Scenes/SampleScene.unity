@@ -6809,14 +6809,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990840380}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1209725826}
   - {fileID: 1973796690}
-  m_Father: {fileID: 1752752547}
-  m_RootOrder: 5
+  m_Father: {fileID: 1926312330}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.15}
@@ -8885,7 +8885,6 @@ RectTransform:
   - {fileID: 1468218820}
   - {fileID: 771136378}
   - {fileID: 731566202}
-  - {fileID: 990840381}
   m_Father: {fileID: 1926312330}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8910,7 +8909,6 @@ MonoBehaviour:
   encounterBar: {fileID: 1468218824}
   actionBar: {fileID: 731566203}
   typeBar: {fileID: 771136379}
-  dialogBox: {fileID: 990840384}
   canMove: 1
   talkButtons:
   - {fileID: 1210736007}
@@ -9446,7 +9444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1776.7899, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1887535879
@@ -9763,6 +9761,7 @@ RectTransform:
   - {fileID: 1211329680}
   - {fileID: 1853543542}
   - {fileID: 1752752547}
+  - {fileID: 990840381}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10022,6 +10021,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &2054293182 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3611453451873614378, guid: 028caed8b91a69848baae3ccf01a6f44, type: 3}
+  m_PrefabInstance: {fileID: 5676051989405364800}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2054293183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054293182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e846538fa47468a8ec5b8444aa9d3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2060888047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10219,6 +10235,10 @@ PrefabInstance:
       propertyPath: dateUi
       value: 
       objectReference: {fileID: 1752752548}
+    - target: {fileID: 6092042357080645934, guid: 028caed8b91a69848baae3ccf01a6f44, type: 3}
+      propertyPath: dialogBox
+      value: 
+      objectReference: {fileID: 990840384}
     - target: {fileID: 7030955910251591434, guid: 028caed8b91a69848baae3ccf01a6f44, type: 3}
       propertyPath: m_RootOrder
       value: 1

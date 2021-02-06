@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace Objects.Player.Behaviours
 {
+    [Serializable]
     public class MovingPlayer : APlayerBehaviour
     {
         public static readonly int Animation = Animator.StringToHash("Move");

@@ -1,5 +1,8 @@
+using System;
+
 namespace UI.Controllers.Date.Behaviours
 {
+    [Serializable]
     public class DatingUiDialog : ADateUiBehaviour
     {
         public override void OnTransitionIn(DateUiController context)

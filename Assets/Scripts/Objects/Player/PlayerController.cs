@@ -137,13 +137,13 @@ namespace Objects.Player
 
         public void OnEvent(DateEvent @event)
         {
+            canDate = false;
             if (@event.Start)
             {
                 _playerStateController.ChangeState(PlayerState.Dating);
             }
             else
             {
-                canDate = false;
                 _playerStateController.ChangeState(PlayerState.Idle);
                 StartCoroutine(RestartDating(GameController.Instance.datingRestartTimeInS));
             }

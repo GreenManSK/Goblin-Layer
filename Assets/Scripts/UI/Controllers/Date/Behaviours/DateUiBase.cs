@@ -1,7 +1,8 @@
-using UnityEngine;
+using System;
 
 namespace UI.Controllers.Date.Behaviours
 {
+    [Serializable]
     public class DateUiBase : ADateUiBehaviour
     {
         public override void OnTransitionIn(DateUiController context)

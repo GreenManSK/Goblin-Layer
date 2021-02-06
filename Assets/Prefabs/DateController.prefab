@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7030955910251591434}
   - component: {fileID: 6092042357080645934}
+  - component: {fileID: 2054293183}
   m_Layer: 0
   m_Name: DateController
   m_TagString: Untagged
@@ -43,6 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b3e987351b4aa68fccdaaf1ce5a53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  started: 1
   arrowPrefab: {fileID: 8043723192860490177, guid: 02163e48c9297c94aa8eaf0239704a11, type: 3}
   goblins: []
   dateUi: {fileID: 0}
+  dialogBox: {fileID: 0}
+--- !u!114 &2054293183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3611453451873614378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e846538fa47468a8ec5b8444aa9d3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

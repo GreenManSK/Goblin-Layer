@@ -8,9 +8,12 @@ namespace Objects.StateMachine
     {
         private readonly Dictionary<TS, IBehaviour<TC, TS>> _behaviours = new Dictionary<TS, IBehaviour<TC, TS>>();
 
-        public IBehaviour<TC, TS> Behaviour { get; private set; }
+        public IBehaviour<TC, TS> Behaviour => _behaviour;
         protected TC Context;
 
+        [SerializeField]
+        private IBehaviour<TC, TS> _behaviour;
+        
         private void Awake()
         {
             SetContext();
@@ -24,22 +27,22 @@ namespace Objects.StateMachine
 
         private void Update()
         {
-            Behaviour?.OnUpdate();
+            _behaviour?.OnUpdate();
         }
 
         private void FixedUpdate()
         {
-            Behaviour?.OnFixedUpdate();
+            _behaviour?.OnFixedUpdate();
         }
 
         public bool IsState(TS state)
         {
-            return Behaviour != null && Behaviour.IsState(state);
+            return _behaviour != null && _behaviour.IsState(state);
         }
 
-        public void ChangeState(TS state)
+        public virtual void ChangeState(TS state)
         {
-            if (Behaviour != null && Behaviour.IsState(state))
+            if (_behaviour != null && _behaviour.IsState(state))
             {
                 return;
             }
@@ -49,9 +52,9 @@ namespace Objects.StateMachine
                 _behaviours.Add(state, CreateBehaviour(state));
             }
 
-            Behaviour?.OnTransitionOut();
-            Behaviour = _behaviours[state];
-            Behaviour.OnTransitionIn(Context ?? GetContext());
+            _behaviour?.OnTransitionOut();
+            _behaviour = _behaviours[state];
+            _behaviour.OnTransitionIn(Context ?? GetContext());
         }
 
         protected abstract TC GetContext();
