@@ -79,6 +79,21 @@ MonoBehaviour:
       attackPlayer: 1
       envy: 0
       pride: 1
+      dateStartTexts:
+      - I want to live inside your skin.
+      - The moment I saw you, I knew we will either live or die together.
+      - You are so cute. I want to take you home and lock you, so you never leave.
+      positiveReactionTexts:
+      - Thank you, I will remember this until you die.
+      - Wow. I will never let anyone else to have you.
+      - Thanks. I will take this to the grave with me.
+      negativeReactionTexts:
+      - You want to die right now?
+      - Do that one more time, and I will send you to the girl that once said I'm
+        ugly.
+      neutralReactionTexts:
+      - What was that?
+      - Ehm?
     - color: {r: 1, g: 0, b: 0.42356968, a: 1}
       compliment: 1
       flirt: 0
@@ -89,6 +104,21 @@ MonoBehaviour:
       attackPlayer: 1
       envy: -1
       pride: 0
+      dateStartTexts:
+      - It's not like I want to speak with you!
+      - W-What are you doing here?!
+      - I didn't wait here for you!
+      positiveReactionTexts:
+      - It's not like I wanted that! But thanks...
+      - What are you doing?! I guess I will let you do that...
+      - You can't do that to me! I will get embarrassed. Baka...
+      negativeReactionTexts:
+      - What was that?! You want to die?
+      - Baka! Do that one more time, and I will punch you!
+      - '*She kicked you in your guts.*'
+      neutralReactionTexts:
+      - What was that?
+      - Ehm?
     - color: {r: 0.6414924, g: 0.8207547, b: 0.4219918, a: 1}
       compliment: -1
       flirt: -1
@@ -99,6 +129,10 @@ MonoBehaviour:
       attackPlayer: 1
       envy: 0
       pride: 0
+      dateStartTexts: []
+      positiveReactionTexts: []
+      negativeReactionTexts: []
+      neutralReactionTexts: []
     - color: {r: 0.67817116, g: 0, b: 1, a: 1}
       compliment: -1
       flirt: -1
@@ -109,6 +143,22 @@ MonoBehaviour:
       attackPlayer: 0
       envy: 1
       pride: 1
+      dateStartTexts:
+      - Hello master. I was waiting for you.
+      - What does master want from me?
+      - How can I serve you?
+      positiveReactionTexts:
+      - More! Make me yours, master.
+      - Yes, master!
+      - As you wish, master!
+      negativeReactionTexts:
+      - I'm not into this kind of play.
+      - That's not something my master would do.
+      - That's not what I want!
+      neutralReactionTexts:
+      - I do not understand you, master.
+      - Ehm?
+      - What?
     - color: {r: 0, g: 1, b: 0.87342286, a: 1}
       compliment: 1
       flirt: 0
@@ -119,6 +169,10 @@ MonoBehaviour:
       attackPlayer: 0
       envy: -1
       pride: 0
+      dateStartTexts: []
+      positiveReactionTexts: []
+      negativeReactionTexts: []
+      neutralReactionTexts: []
     - color: {r: 1, g: 0.524942, b: 0, a: 1}
       compliment: 1
       flirt: 1
@@ -129,3 +183,7 @@ MonoBehaviour:
       attackPlayer: 0
       envy: -1
       pride: -1
+      dateStartTexts: []
+      positiveReactionTexts: []
+      negativeReactionTexts: []
+      neutralReactionTexts: []
