@@ -22,7 +22,6 @@ namespace UI.Controllers.Date
         public EncounterBarController encounterBar;
         public ActionBarController actionBar;
         public TypeBarController typeBar;
-        public DialogBoxController dialogBox;
         public bool canMove = true;
 
         public List<GameObject> talkButtons = new List<GameObject>();
@@ -63,7 +62,6 @@ namespace UI.Controllers.Date
 
         public void SetGoblin(GoblinController goblin)
         {
-            // TODO: Disable when dialog
             _target = goblin;
             encounterBar.SetActive(goblin);
             typeBar.SetData(goblin);

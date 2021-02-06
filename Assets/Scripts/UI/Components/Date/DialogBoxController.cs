@@ -1,3 +1,4 @@
+using System;
 using Controllers;
 using Events;
 using JetBrains.Annotations;
@@ -15,19 +16,25 @@ namespace UI.Components.Date
 
         private bool _needsConfirmation = false;
 
+        private void Awake()
+        {
+            SetValues("");
+            GameEventSystem.Subscribe(this);
+        }
+
+        private void OnDestroy()
+        {
+            GameEventSystem.Unsubscribe(this);
+        }
+
         private void OnEnable()
         {
-            GameEventSystem.Subscribe(this);
             GameController.Instance.Input.Player.Fire.performed += Confirm;
-            GameController.Instance.Input.Player.Date.performed += Confirm;
-            SetValues("");
         }
 
         private void OnDisable()
         {
-            GameEventSystem.Unsubscribe(this);
             GameController.Instance.Input.Player.Fire.performed += Confirm;
-            GameController.Instance.Input.Player.Date.performed += Confirm;
         }
 
         public void OnEvent(DialogEvent @event)

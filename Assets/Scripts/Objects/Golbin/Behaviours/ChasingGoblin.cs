@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Objects.Golbin.Behaviours
 {
+    [Serializable]
     public class ChasingGoblin : AGoblinBehaviour
     {
         public static readonly int Animation = Animator.StringToHash("Move");
