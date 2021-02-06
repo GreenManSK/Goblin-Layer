@@ -23,7 +23,7 @@ namespace UI.Controllers.Date
         public ActionBarController actionBar;
         public TypeBarController typeBar;
         public DialogBoxController dialogBox;
-        public bool CanMove = true;
+        public bool canMove = true;
 
         public List<GameObject> talkButtons = new List<GameObject>();
         public List<GameObject> actionButtons = new List<GameObject>();
@@ -73,7 +73,7 @@ namespace UI.Controllers.Date
 
         private void ChangeActive(InputAction.CallbackContext ctx)
         {
-            if (!CanMove)
+            if (!canMove)
                 return;
             var input = ctx.ReadValue<Vector2>();
             if (input.magnitude < 1)

@@ -5,12 +5,12 @@ namespace UI.Controllers.Date.Behaviours
         public override void OnTransitionIn(DateUiController context)
         {
             base.OnTransitionIn(context);
-            context.CanMove = false;
+            context.canMove = false;
         }
 
         public override void OnTransitionOut()
         {
-            Context.CanMove = true;
+            Context.canMove = true;
         }
 
         public override bool IsState(DateUiState state)

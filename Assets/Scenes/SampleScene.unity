@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: type
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8119938740869711914, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_RootOrder
@@ -6735,7 +6735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: type
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8119938740869711914, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_RootOrder
@@ -7328,7 +7328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
+  m_sendNavigationEvents: 0
   m_DragThreshold: 10
 --- !u!4 &1044866082
 Transform:
@@ -8018,6 +8018,10 @@ PrefabInstance:
     - target: {fileID: 4217182549281233305, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_Name
       value: Goblin (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
+      propertyPath: type
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8119938740869711914, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_RootOrder
@@ -8907,7 +8911,7 @@ MonoBehaviour:
   actionBar: {fileID: 731566203}
   typeBar: {fileID: 771136379}
   dialogBox: {fileID: 990840384}
-  CanMove: 1
+  canMove: 1
   talkButtons:
   - {fileID: 1210736007}
   - {fileID: 365921596}
@@ -9356,7 +9360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: type
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8119938740869711914, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_RootOrder
@@ -10031,7 +10035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8119938740869711914, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_RootOrder

@@ -128,8 +128,7 @@ namespace Objects.Golbin
                     change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.BeforeOthers);
                 }
 
-                GameEventSystem.Send(new DialogEvent(
-                    change > 0 ? "Positive" : (Mathf.Approximately(change, 0) ? "neutral" : "Negative"), true));
+                SendDialogReaction(change);
             }
             else if (@event.Type.IsPositive())
             {
@@ -154,6 +153,24 @@ namespace Objects.Golbin
                 GameEventSystem.Send(new GoblinDeathEvent(this));
                 Destroy(gameObject);
             }
+        }
+
+        private void SendDialogReaction(float change)
+        {
+            var typeDefinition = GoblinTypesConfig.GetDefinition(type);
+            string reaction;
+            if (Mathf.Approximately(change, 0))
+            {
+                reaction = typeDefinition.RandomNeutralReactionText();
+            } else if (change < 0)
+            {
+                reaction = typeDefinition.RandomNegativeReactionText();
+            }
+            else
+            {
+                reaction = typeDefinition.RandomPositiveReactionText();
+            }
+            GameEventSystem.Send(new DialogEvent(reaction, true));
         }
 
         private Blush GetBlush(float seduction)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Data;
 using Events;
 using Objects.Golbin;
 using Services;
@@ -167,7 +168,7 @@ namespace Controllers
             goblin.Updated += UpdateGoblin;
             _arrow.transform.position = goblins[_activeIndex].transform.position;
             GameController.Instance.SetCameraTarget(goblin.transform);
-            GameEventSystem.Send(new DialogEvent(goblin.type.ToString()));
+            GameEventSystem.Send(new DialogEvent(GoblinTypesConfig.GetDefinition(goblin.type).RandomDateStartText()));
             UpdateGoblin();
         }
 

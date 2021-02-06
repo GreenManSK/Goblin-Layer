@@ -1,11 +1,15 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Entities
 {
     [Serializable]
     public class TypeDefinition
     {
+        private static Random _random = new Random();
+
         public Color color;
         public float compliment = 1f;
         public float flirt = 1f;
@@ -16,5 +20,38 @@ namespace Entities
         public float attackPlayer = 1f;
         public float envy = 1f;
         public float pride = 1f;
+
+        public List<string> dateStartTexts = new List<string>();
+        public List<string> positiveReactionTexts = new List<string>();
+        public List<string> negativeReactionTexts = new List<string>();
+        public List<string> neutralReactionTexts = new List<string>();
+
+        public string RandomDateStartText()
+        {
+            return RandomText(dateStartTexts) ?? "Date start text placeholder";
+        }
+
+        public string RandomPositiveReactionText()
+        {
+            return RandomText(positiveReactionTexts) ?? "Positive reaction placeholder";
+        }
+
+        public string RandomNegativeReactionText()
+        {
+            return RandomText(negativeReactionTexts) ?? "Negative reaction placeholder";
+        }
+
+        public string RandomNeutralReactionText()
+        {
+            return RandomText(neutralReactionTexts) ?? "Neutral reaction placeholder";
+        }
+
+        private string RandomText(IReadOnlyList<string> texts)
+        {
+            if (texts.Count == 0)
+                return null;
+            var index = _random.Next(0, texts.Count);
+            return texts[index];
+        }
     }
 }
