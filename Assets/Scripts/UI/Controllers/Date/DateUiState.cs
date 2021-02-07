@@ -4,6 +4,7 @@ namespace UI.Controllers.Date
     {
         Base,
         Dialog,
-        Talking
+        Talking,
+        Presents
     }
 }

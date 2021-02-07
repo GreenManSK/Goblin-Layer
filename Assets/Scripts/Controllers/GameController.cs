@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Cinemachine;
+using Objects.Player;
 using UnityEngine;
 
 namespace Controllers
@@ -13,7 +14,7 @@ namespace Controllers
         public PlayerControlls Input => _input ??= new PlayerControlls();
         private PlayerControlls _input;
 
-        public GameObject player;
+        public PlayerController player;
         public CinemachineVirtualCamera mainCamera;
         public float datingRestartTimeInS = 10;
 

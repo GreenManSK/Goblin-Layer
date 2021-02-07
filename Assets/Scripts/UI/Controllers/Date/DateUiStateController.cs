@@ -20,6 +20,7 @@ namespace UI.Controllers.Date
                 DateUiState.Base => new DateUiBase(),
                 DateUiState.Dialog => new DatingUiDialog(),
                 DateUiState.Talking => new DateUiTalking(),
+                DateUiState.Presents => new DateUiPresents(),
                 _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
             };
         }

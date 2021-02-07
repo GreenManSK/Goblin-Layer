@@ -8,6 +8,7 @@ using Events;
 using Objects.Golbin;
 using Services;
 using UI.Components.Date;
+using UI.Components.Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,6 +30,8 @@ namespace UI.Controllers.Date
         public EncounterBarController encounterBar;
         public ActionBarController actionBar;
         public TypeBarController typeBar;
+        public GameObject presentsUi;
+        public InventoryGridController inventoryGrid;
         public bool canMove = true;
 
         public List<GameObject> talkButtons = new List<GameObject>();
@@ -40,6 +43,11 @@ namespace UI.Controllers.Date
         private void Awake()
         {
             _stateController = GetComponent<DateUiStateController>();
+        }
+
+        private void Start()
+        {
+            presentsUi.SetActive(false);
         }
 
         private void OnEnable()
@@ -96,6 +104,11 @@ namespace UI.Controllers.Date
             // TODO: Use player stats
             GameEventSystem.Send(new SeductionEvent(_target, obj.type, Game.BaseSeduction));
             GameEventSystem.Send(new DateActionEvent());
+        }
+
+        public void TogglePresents(bool open)
+        {
+            _stateController.ChangeState(open ? DateUiState.Presents : DateUiState.Base);
         }
 
         public void OpenCompendium()

@@ -35,6 +35,7 @@ namespace Objects.Player
         public float health = 100f;
         public bool canDate = true;
         public PlayerWeaponController weapon;
+        public InventoryController inventory;
 
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _sprite;
@@ -54,6 +55,8 @@ namespace Objects.Player
             _sprite = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
 
+            inventory = GetComponent<InventoryController>();
+            
             RegisterInputs();
             _playerStateController.ChangeState(PlayerState.Idle);
         }
