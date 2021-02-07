@@ -152,7 +152,7 @@ namespace Objects.Golbin
                 }
 
                 SendDialogReaction(change);
-            } else if (SeductionType.Present.IsPositive())
+            } else if (GoblinTypesConfig.IsPositiveSeduction(type, SeductionType.Present))
             {
                 change += @event.Present.strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.SeeOthers);
             }
@@ -166,7 +166,7 @@ namespace Objects.Golbin
             if (@event.Target == this)
             {
                 change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, @event.Type);
-                if (@event.Type.IsPositive())
+                if (GoblinTypesConfig.IsPositiveSeduction(type, @event.Type))
                 {
                     change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.BeforeOthers);
                 }
@@ -176,7 +176,7 @@ namespace Objects.Golbin
                     SendDialogReaction(change);
                 }
             }
-            else if (@event.Type.IsPositive())
+            else if (GoblinTypesConfig.IsPositiveSeduction(type, @event.Type))
             {
                 change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.SeeOthers);
             }

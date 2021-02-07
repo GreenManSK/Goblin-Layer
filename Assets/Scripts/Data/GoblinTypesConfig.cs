@@ -52,6 +52,15 @@ namespace Data
         {
             return Instance.definitions[type];
         }
+
+        public static bool IsPositiveSeduction(GoblinType type, SeductionType seductionType)
+        {
+            var multiplier = GetMultiplier(type, seductionType);
+            if (seductionType == SeductionType.Present)
+                multiplier -= 1;
+
+            return multiplier > 0;
+        }
     }
 
     [Serializable]
