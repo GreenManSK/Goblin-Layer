@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 332099580458033749}
   - component: {fileID: 2209721123218114205}
   - component: {fileID: 4692351754914319453}
+  - component: {fileID: 163654347452450973}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -273,6 +274,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterCollider: {fileID: 8476582001863451206}
   characterBlockerCollider: {fileID: 6486807398643626632}
+--- !u!114 &163654347452450973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8476582001863451579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764ee5c1fc354bb6a71464f7d405adca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - present:
+      name: Knife
+      description: Good for stabbing. Great for getting rid of other girls.
+      icon: K
+      likedBy: 01000000
+    quantity: 1
+  - present:
+      name: Rope
+      description: Looks like it can be used to tie someone of average goblin proportions.
+      icon: R
+      likedBy: 03000000
+    quantity: 1
+  - present:
+      name: Book
+      description: A book about learning how to express your emotions.
+      icon: B
+      likedBy: 00000000
+    quantity: 1
+  - present:
+      name: Rock
+      description: Just a rock.
+      icon: Ro
+      likedBy: 
+    quantity: 64
 --- !u!1001 &1053929437540523976
 PrefabInstance:
   m_ObjectHideFlags: 0
