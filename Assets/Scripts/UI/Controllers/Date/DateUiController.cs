@@ -32,6 +32,7 @@ namespace UI.Controllers.Date
         public ActionBarController actionBar;
         public TypeBarController typeBar;
         public GameObject presentsUi;
+        public GameObject compendiumUi;
         public InventoryGridController inventoryGrid;
         public bool canMove = true;
 
@@ -49,6 +50,7 @@ namespace UI.Controllers.Date
         private void Start()
         {
             presentsUi.SetActive(false);
+            compendiumUi.SetActive(false);
         }
 
         private void OnEnable()
@@ -112,10 +114,9 @@ namespace UI.Controllers.Date
             _stateController.ChangeState(open ? DateUiState.Presents : DateUiState.Base);
         }
 
-        public void OpenCompendium()
+        public void ToggleCompendium(bool open)
         {
-            // TODO: Open
-            Debug.Log("Opening compendium");
+            _stateController.ChangeState(open ? DateUiState.Compendium : DateUiState.Base);
         }
 
         public void OnEvent(IEvent @event)

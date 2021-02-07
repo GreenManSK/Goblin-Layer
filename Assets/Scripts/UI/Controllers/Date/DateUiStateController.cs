@@ -18,9 +18,10 @@ namespace UI.Controllers.Date
             return state switch
             {
                 DateUiState.Base => new DateUiBase(),
-                DateUiState.Dialog => new DatingUiDialog(),
+                DateUiState.Dialog => new DateUiDialog(),
                 DateUiState.Talking => new DateUiTalking(),
                 DateUiState.Presents => new DateUiPresents(),
+                DateUiState.Compendium => new DateUiCompendium(),
                 _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
             };
         }

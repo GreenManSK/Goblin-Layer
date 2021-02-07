@@ -5,6 +5,7 @@ namespace UI.Controllers.Date
         Base,
         Dialog,
         Talking,
-        Presents
+        Presents,
+        Compendium
     }
 }
