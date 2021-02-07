@@ -2,13 +2,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Entities;
+using Events;
+using Services;
 using UnityEngine;
 
 namespace Controllers
 {
-    public class InventoryController : MonoBehaviour
+    public class InventoryController : MonoBehaviour, IEventListener
     {
         public List<InventoryItem> items = new List<InventoryItem>();
+
+        private void OnEnable()
+        {
+            GameEventSystem.Subscribe(typeof(PresentEvent), this);
+        }
+
+        private void OnDisable()
+        {
+            GameEventSystem.Unsubscribe(typeof(PresentEvent), this);
+        }
+
+        public void OnEvent(IEvent @event)
+        {
+            if (@event is PresentEvent presentEvent)
+            {
+                Remove(presentEvent.Present);
+            }
+        }
 
         public void Add(Present present)
         {

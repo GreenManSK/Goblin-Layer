@@ -20,7 +20,8 @@ namespace UI.Controllers.Date
         private static readonly ReadOnlyCollection<Type> ListenEvents = new List<Type>
         {
             typeof(DialogEvent),
-            typeof(DialogConfirmationEvent)
+            typeof(DialogConfirmationEvent),
+            typeof(PresentSelectEvent),
         }.AsReadOnly();
 
         private static readonly Vector2 PrevVector = new Vector2(-1, 1);
@@ -127,6 +128,9 @@ namespace UI.Controllers.Date
                 case DialogConfirmationEvent dialogConfirmationEvent:
                     OnDialogConfirmationEvent(dialogConfirmationEvent);
                     break;
+                case PresentSelectEvent presentSelectEvent:
+                    OnPresentSelectEvent(presentSelectEvent);
+                    break;
             }
         }
 
@@ -141,6 +145,13 @@ namespace UI.Controllers.Date
         private void OnDialogConfirmationEvent(DialogConfirmationEvent @event)
         {
             _stateController.ChangeState(DateUiState.Base);
+        }
+
+        private void OnPresentSelectEvent(PresentSelectEvent presentSelectEvent)
+        {
+            TogglePresents(false);
+            GameEventSystem.Send(new PresentEvent(presentSelectEvent.Present, _target));
+            GameEventSystem.Send(new DateActionEvent());
         }
     }
 }

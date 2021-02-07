@@ -1,4 +1,6 @@
 using Controllers;
+using Events;
+using Services;
 using TMPro;
 using UnityEngine;
 
@@ -26,6 +28,11 @@ namespace UI.Components.Inventory
             }
 
             button.SetActive(item != null);
+        }
+
+        public void OnClick()
+        {
+            GameEventSystem.Send(new PresentSelectEvent(_item.present));
         }
 
         public void OnPointerEnter()
