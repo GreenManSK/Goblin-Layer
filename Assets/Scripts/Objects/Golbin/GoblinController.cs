@@ -75,7 +75,15 @@ namespace Objects.Golbin
 
             _goblinStateController.ChangeState(GoblinState.Idle);
 
-            data = GoblinGenerator.Generate(blushes: GoblinGenerator.NoBlushes);
+            var typeDefinition = GoblinTypesConfig.GetDefinition(type);
+            data = GoblinGenerator.Generate(
+                blushes: GoblinGenerator.NoBlushes,
+                glasses: typeDefinition.glasseses,
+                accessories: typeDefinition.accessories,
+                costumes: typeDefinition.costumes,
+                hairstyles: typeDefinition.hairs,
+                expressions: typeDefinition.expressions
+            );
         }
 
         private void OnDestroy()
@@ -152,7 +160,8 @@ namespace Objects.Golbin
                 }
 
                 SendDialogReaction(change);
-            } else if (GoblinTypesConfig.IsPositiveSeduction(type, SeductionType.Present))
+            }
+            else if (GoblinTypesConfig.IsPositiveSeduction(type, SeductionType.Present))
             {
                 change += @event.Present.strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.SeeOthers);
             }

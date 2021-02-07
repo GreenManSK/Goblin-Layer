@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Entities;
 using Entities.Types;
+using RotaryHeart.Lib.SerializableDictionary;
 
 namespace Services
 {
@@ -16,18 +17,18 @@ namespace Services
         public static readonly Costume[] AllCostumes = GetArrayValues<Costume>();
         public static readonly HairColor[] AllColors = GetArrayValues<HairColor>();
 
-        public static readonly Dictionary<Accessory, float> DefaultAccessories = new Dictionary<Accessory, float>()
+        public static readonly AccessoryDictionary DefaultAccessories = new AccessoryDictionary()
         {
             {Accessory.Choker, 0.5f},
             {Accessory.Flower, 0.5f}
         };
 
-        public static readonly (HairFront, HairBack)[] AllHairstyles =
+        public static readonly HairStyle[] AllHairstyles =
         {
-            (HairFront.Long, HairBack.Long),
-            (HairFront.Hime, HairBack.Short),
-            (HairFront.Short, HairBack.ShortBot),
-            (HairFront.TwinTails, HairBack.TwinTails)
+            new HairStyle(HairFront.Long, HairBack.Long),
+            new HairStyle(HairFront.Hime, HairBack.Short),
+            new HairStyle(HairFront.Short, HairBack.ShortBot),
+            new HairStyle(HairFront.TwinTails, HairBack.TwinTails)
         };
 
         private static Random _random = new Random();
@@ -39,8 +40,8 @@ namespace Services
             Expression[] expressions = null,
             Costume[] costumes = null,
             HairColor[] hairColors = null,
-            Dictionary<Accessory, float> accessories = null,
-            (HairFront, HairBack)[] hairstyles = null
+            AccessoryDictionary accessories = null,
+            HairStyle[] hairstyles = null
         )
         {
             glasses ??= AllGlasses;
@@ -62,8 +63,8 @@ namespace Services
                 accessories = randomAccessories.ToList(),
                 costume = GetRandom(costumes),
                 hairColor = GetRandom(hairColors),
-                hairFront = hairstyle.Item1,
-                hairBack = hairstyle.Item2,
+                hairFront = hairstyle.front,
+                hairBack = hairstyle.back,
                 expression = GetRandom(expressions)
             };
         }
@@ -79,4 +80,20 @@ namespace Services
             return Enum.GetValues(typeof(T)).Cast<T>().ToArray();
         }
     }
+
+    [Serializable]
+    public class HairStyle
+    {
+        public HairFront front;
+        public HairBack back;
+
+        public HairStyle(HairFront front, HairBack back)
+        {
+            this.front = front;
+            this.back = back;
+        }
+    }
+    
+    [System.Serializable]
+    public class AccessoryDictionary: SerializableDictionaryBase<Accessory, float> {}
 }

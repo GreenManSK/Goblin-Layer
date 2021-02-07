@@ -79,6 +79,42 @@ MonoBehaviour:
       attackPlayer: 1
       envy: 0
       pride: 1
+      glasseses: 03000000
+      accessories:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 0
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 0
+        _keyValues: 
+        _keys: 
+        _values: []
+      costumes: 00000000010000000800000007000000
+      hairs:
+      - front: 1
+        back: 0
+      - front: 0
+        back: 2
+      - front: 2
+        back: 1
+      expressions: 0200000003000000050000000800000009000000
       dateStartTexts:
       - I want to live inside your skin.
       - The moment I saw you, I knew we will either live or die together.
@@ -104,6 +140,43 @@ MonoBehaviour:
       attackPlayer: 1
       envy: -1
       pride: 0
+      glasseses: 03000000
+      accessories:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 0
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 0
+        _keyValues: 00000000
+        _keys: 00000000
+        _values:
+        - 0.4
+      costumes: 03000000040000000600000002000000
+      hairs:
+      - front: 1
+        back: 0
+      - front: 3
+        back: 3
+      - front: 0
+        back: 0
+      expressions: 000000000100000008000000
       dateStartTexts:
       - It's not like I want to speak with you!
       - W-What are you doing here?!
@@ -129,6 +202,44 @@ MonoBehaviour:
       attackPlayer: 1
       envy: 0
       pride: 0
+      glasseses: 03000000
+      accessories:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 0
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 0
+        _keyValues: 
+        _keys: 
+        _values: []
+      costumes: 000000000100000002000000030000000400000005000000060000000700000008000000
+      hairs:
+      - front: 1
+        back: 0
+      - front: 0
+        back: 2
+      - front: 2
+        back: 1
+      - front: 3
+        back: 3
+      expressions: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a000000
       dateStartTexts: []
       positiveReactionTexts: []
       negativeReactionTexts: []
@@ -143,6 +254,45 @@ MonoBehaviour:
       attackPlayer: 0
       envy: 1
       pride: 1
+      glasseses: 0000000002000000
+      accessories:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 1
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 1
+        _keyValues: 00000000
+        _keys: 00000000
+        _values:
+        - 0.8
+      costumes: 02000000050000000700000001000000
+      hairs:
+      - front: 1
+        back: 0
+      - front: 0
+        back: 2
+      - front: 2
+        back: 1
+      - front: 3
+        back: 3
+      expressions: 040000000500000006000000
       dateStartTexts:
       - Hello master. I was waiting for you.
       - What does master want from me?
@@ -169,6 +319,44 @@ MonoBehaviour:
       attackPlayer: 0
       envy: -1
       pride: 0
+      glasseses: 03000000
+      accessories:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 0
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 0
+        _keyValues: 
+        _keys: 
+        _values: []
+      costumes: 000000000100000002000000030000000400000005000000060000000700000008000000
+      hairs:
+      - front: 1
+        back: 0
+      - front: 0
+        back: 2
+      - front: 2
+        back: 1
+      - front: 3
+        back: 3
+      expressions: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a000000
       dateStartTexts: []
       positiveReactionTexts: []
       negativeReactionTexts: []
@@ -183,6 +371,44 @@ MonoBehaviour:
       attackPlayer: 0
       envy: -1
       pride: -1
+      glasseses: 03000000
+      accessories:
+        reorderableList:
+          canAdd: 1
+          canRemove: 1
+          draggable: 1
+          expandable: 1
+          multipleSelection: 1
+          isExpanded: 0
+          label:
+            m_Text: Keys
+            m_Image: {fileID: 0}
+            m_Tooltip: 
+          headerHeight: 18
+          footerHeight: 13
+          slideEasing: 0.15
+          verticalSpacing: 2
+          showDefaultBackground: 1
+          elementDisplayType: 0
+          elementNameProperty: 
+          elementNameOverride: 
+          elementIcon: {fileID: 0}
+        reqReferences: {fileID: 0}
+        isExpanded: 0
+        _keyValues: 
+        _keys: 
+        _values: []
+      costumes: 000000000100000002000000030000000400000005000000060000000700000008000000
+      hairs:
+      - front: 1
+        back: 0
+      - front: 0
+        back: 2
+      - front: 2
+        back: 1
+      - front: 3
+        back: 3
+      expressions: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a000000
       dateStartTexts: []
       positiveReactionTexts: []
       negativeReactionTexts: []

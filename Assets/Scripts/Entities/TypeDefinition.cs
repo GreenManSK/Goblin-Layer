@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Entities.Types;
+using Services;
 using UnityEngine;
 using Random = System.Random;
 
@@ -21,6 +23,12 @@ namespace Entities
         public float envy = 1f;
         public float pride = 1f;
 
+        public Glasses[] glasseses = GoblinGenerator.NoGlasses;
+        public AccessoryDictionary accessories = new AccessoryDictionary();
+        public Costume[] costumes = GoblinGenerator.AllCostumes;
+        public HairStyle[] hairs = GoblinGenerator.AllHairstyles;
+        public Expression[] expressions = GoblinGenerator.AllExpressions;
+        
         public List<string> dateStartTexts = new List<string>();
         public List<string> positiveReactionTexts = new List<string>();
         public List<string> negativeReactionTexts = new List<string>();
