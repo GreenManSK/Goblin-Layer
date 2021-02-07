@@ -22,11 +22,12 @@ namespace Objects.Golbin
     public class GoblinController : MonoBehaviour, IEventListener
     {
         public delegate void UpdatedEvent();
-        
+
         private static readonly ReadOnlyCollection<Type> ListenEvents = new List<Type>
         {
             typeof(DateEvent),
-            typeof(SeductionEvent)
+            typeof(SeductionEvent),
+            typeof(PresentEvent)
         }.AsReadOnly();
 
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
@@ -121,6 +122,9 @@ namespace Objects.Golbin
                 case SeductionEvent seductionEvent:
                     OnSeductionEvent(seductionEvent);
                     break;
+                case PresentEvent presentEvent:
+                    OnPresentEvent(presentEvent);
+                    break;
             }
         }
 
@@ -134,6 +138,26 @@ namespace Objects.Golbin
             {
                 _goblinStateController.ChangeState(GoblinState.Chasing);
             }
+        }
+
+        private void OnPresentEvent(PresentEvent @event)
+        {
+            var change = 0f;
+
+            if (@event.Target == this)
+            {
+                if (@event.Present.likedBy.Contains(type))
+                {
+                    change += @event.Present.strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.Present);
+                }
+
+                SendDialogReaction(change);
+            } else if (SeductionType.Present.IsPositive())
+            {
+                change += @event.Present.strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.SeeOthers);
+            }
+
+            UpdateSeduction(change);
         }
 
         private void OnSeductionEvent(SeductionEvent @event)
@@ -157,6 +181,11 @@ namespace Objects.Golbin
                 change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.SeeOthers);
             }
 
+            UpdateSeduction(change);
+        }
+
+        private void UpdateSeduction(float change)
+        {
             seduction += change;
             data.blush = GetBlush(seduction);
             if (change > 0)
@@ -168,7 +197,7 @@ namespace Objects.Golbin
                 Instantiate(BoltsPrefab, transform);
             }
 
-            GameEventSystem.Send(new SeductionChangeEvent(this, seduction));
+            GameEventSystem.Send(new SeductionChangeEvent(this, change));
             Updated?.Invoke();
             if (seduction >= 100)
             {

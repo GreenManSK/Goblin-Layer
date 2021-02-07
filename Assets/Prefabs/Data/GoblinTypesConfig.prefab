@@ -73,7 +73,7 @@ MonoBehaviour:
       compliment: 0
       flirt: 1
       insult: 0
-      present: 1
+      present: 1.5
       attack: 1
       ask: 0
       attackPlayer: 1
@@ -98,7 +98,7 @@ MonoBehaviour:
       compliment: 1
       flirt: 0
       insult: -1
-      present: 1
+      present: 1.5
       attack: 0
       ask: 1
       attackPlayer: 1
@@ -123,7 +123,7 @@ MonoBehaviour:
       compliment: -1
       flirt: -1
       insult: 0
-      present: 1
+      present: 1.5
       attack: 0
       ask: -1
       attackPlayer: 1
@@ -137,7 +137,7 @@ MonoBehaviour:
       compliment: -1
       flirt: -1
       insult: 1
-      present: -1
+      present: 0.5
       attack: 1
       ask: 0
       attackPlayer: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
       compliment: 1
       flirt: 0
       insult: -1
-      present: 0
+      present: 1
       attack: -1
       ask: 1
       attackPlayer: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
       compliment: 1
       flirt: 1
       insult: -1
-      present: 0
+      present: 1
       attack: -1
       ask: 1
       attackPlayer: 0

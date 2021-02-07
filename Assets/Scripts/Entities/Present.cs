@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Constants;
 using Entities.Types;
 
 namespace Entities
@@ -11,6 +12,7 @@ namespace Entities
         public string description;
         public string icon;
         public List<GoblinType> likedBy;
+        public float strength = Game.BaseSeduction;
 
         protected bool Equals(Present other)
         {
