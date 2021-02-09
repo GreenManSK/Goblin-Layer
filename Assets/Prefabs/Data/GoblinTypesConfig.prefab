@@ -115,6 +115,9 @@ MonoBehaviour:
       - front: 2
         back: 1
       expressions: 0200000003000000050000000800000009000000
+      description: You need to be careful around these goblins. Their idea of expressing
+        affection is a bit... fatal. Do you know the phrase "love until death do
+        us part"?  Well, they will rather see you dead than not being loved by you.
       dateStartTexts:
       - I want to live inside your skin.
       - The moment I saw you, I knew we will either live or die together.
@@ -130,7 +133,7 @@ MonoBehaviour:
       neutralReactionTexts:
       - What was that?
       - Ehm?
-    - color: {r: 1, g: 0, b: 0.42356968, a: 1}
+    - color: {r: 0, g: 0.7445183, b: 1, a: 1}
       compliment: 1
       flirt: 0
       insult: -1
@@ -177,6 +180,9 @@ MonoBehaviour:
       - front: 0
         back: 0
       expressions: 000000000100000008000000
+      description: This goblin has a problem with expressing their emotions. Often
+        ends up being aggressive and angry to hide embarrassment and affection. Don't
+        worry; they like you even if they sound a bit aggressive while doing so.
       dateStartTexts:
       - It's not like I want to speak with you!
       - W-What are you doing here?!
@@ -240,6 +246,7 @@ MonoBehaviour:
       - front: 3
         back: 3
       expressions: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a000000
+      description: 
       dateStartTexts: []
       positiveReactionTexts: []
       negativeReactionTexts: []
@@ -293,6 +300,10 @@ MonoBehaviour:
       - front: 3
         back: 3
       expressions: 040000000500000006000000
+      description: "The world can be split into two kinds of creatures\u2014ones
+        that dominate and ones that are dominated. M really enjoys being the second
+        type. Probably a little too much. Don't get scared when they moan after you
+        attack them."
       dateStartTexts:
       - Hello master. I was waiting for you.
       - What does master want from me?
@@ -357,6 +368,7 @@ MonoBehaviour:
       - front: 3
         back: 3
       expressions: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a000000
+      description: 
       dateStartTexts: []
       positiveReactionTexts: []
       negativeReactionTexts: []
@@ -409,6 +421,7 @@ MonoBehaviour:
       - front: 3
         back: 3
       expressions: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a000000
+      description: 
       dateStartTexts: []
       positiveReactionTexts: []
       negativeReactionTexts: []
