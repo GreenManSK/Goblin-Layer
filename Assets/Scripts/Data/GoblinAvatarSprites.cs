@@ -31,6 +31,7 @@ namespace Data
         public CostumeSprites costumes = new CostumeSprites();
         public BlushSprites blushes = new BlushSprites();
         public GlassesSprites glasses = new GlassesSprites();
+        public AccessoryToSprites accessories = new AccessoryToSprites();
     }
     
     [System.Serializable]
@@ -50,6 +51,9 @@ namespace Data
     
     [System.Serializable]
     public class GlassesSprites: SerializableDictionaryBase<Glasses, Sprite> {}
+    
+    [System.Serializable]
+    public class AccessoryToSprites: SerializableDictionaryBase<Accessory, Sprite> {}
     
     [System.Serializable]
     public class ColorToHair: SerializableDictionaryBase<HairColor, Hair> {}

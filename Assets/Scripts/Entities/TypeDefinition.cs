@@ -28,7 +28,8 @@ namespace Entities
         public Costume[] costumes = GoblinGenerator.AllCostumes;
         public HairStyle[] hairs = GoblinGenerator.AllHairstyles;
         public Expression[] expressions = GoblinGenerator.AllExpressions;
-        
+
+        public string description = null;
         public List<string> dateStartTexts = new List<string>();
         public List<string> positiveReactionTexts = new List<string>();
         public List<string> negativeReactionTexts = new List<string>();

@@ -1,3 +1,5 @@
+using Entities.Types;
+
 namespace Constants
 {
     public static class Game
@@ -7,5 +9,7 @@ namespace Constants
         public const int MaxActions = 3;
         public const int InventoryRows = 2;
         public const int InventoryColumns = 5;
+        
+        public static readonly GoblinType[] UnlockedTypes = new[] {GoblinType.Tsundere, GoblinType.Yandere, GoblinType.M};
     }
 }
