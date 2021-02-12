@@ -1,5 +1,4 @@
 using System.Collections;
-using Controllers;
 using Events;
 using Services;
 using UnityEngine;
@@ -25,7 +24,7 @@ namespace UI
         {
             if (@event is AttackBarEvent attackBarEvent)
             {
-                UpdateScaleX(0);
+                UpdateScale(0);
                 StartCoroutine(UpdateSize(sizeUpdates, attackBarEvent.WaitTimeInS));
             }
         }
@@ -34,17 +33,17 @@ namespace UI
         {
             var timeDelta = waitTimeInS / updates;
             var sizeDelta = 1 / updates;
-            while (!Mathf.Approximately(bar.localScale.x, 1))
+            while (!Mathf.Approximately(bar.localScale.y, 1))
             {
-                UpdateScaleX(bar.localScale.x + sizeDelta);
+                UpdateScale(bar.localScale.y + sizeDelta);
                 yield return new WaitForSeconds(timeDelta);
             }
         }
 
-        private void UpdateScaleX(float x)
+        private void UpdateScale(float y)
         {
             var localScale = bar.localScale;
-            bar.localScale = new Vector3(x, localScale.y, localScale.z);
+            bar.localScale = new Vector3(localScale.x, y, localScale.z);
         }
     }
 }
