@@ -56,7 +56,7 @@ namespace Objects.Player
             _animator = GetComponent<Animator>();
 
             inventory = GetComponent<InventoryController>();
-            
+
             RegisterInputs();
             _playerStateController.ChangeState(PlayerState.Idle);
         }
@@ -111,7 +111,7 @@ namespace Objects.Player
 
         private void ToggleDate(InputAction.CallbackContext ctx)
         {
-            if (!canDate)
+            if (!canDate || !GameController.PlayerAbilities.startDate)
                 return;
             var start = !_playerStateController.IsState(PlayerState.Dating);
             GameEventSystem.Send(new DateEvent(start));
@@ -119,7 +119,8 @@ namespace Objects.Player
 
         private void Attack(InputAction.CallbackContext ctx)
         {
-            if (!_canAttack || !CanMove() || _playerStateController.IsState(PlayerState.Attacking))
+            if (!_canAttack || !CanMove() || _playerStateController.IsState(PlayerState.Attacking) ||
+                !GameController.PlayerAbilities.attack)
                 return;
             _canAttack = false;
             _playerStateController.ChangeState(PlayerState.Attacking);

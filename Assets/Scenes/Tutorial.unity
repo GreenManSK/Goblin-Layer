@@ -697,7 +697,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fee8b18db943acae2232ab6362c2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   goblins: []
   spikes:
   - {fileID: 778937313}
@@ -722,6 +721,21 @@ MonoBehaviour:
   - {fileID: 1419764611}
   - {fileID: 1094153640}
   - {fileID: 480552740}
+  triggers:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 696320659}
+        m_TargetAssemblyTypeName: UnityEngine.Component, UnityEngine
+        m_MethodName: BroadcastMessage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &332452037
 GameObject:
   m_ObjectHideFlags: 0
@@ -5381,6 +5395,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 768776616}
+    - target: {fileID: 8046450759108593940, guid: 121cf0f1f30af864e96d969c30fc556d, type: 3}
+      propertyPath: playerAbilities.startDate
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8046450759108594154, guid: 121cf0f1f30af864e96d969c30fc556d, type: 3}
       propertyPath: m_Name
       value: GameController
