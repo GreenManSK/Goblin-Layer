@@ -20,7 +20,6 @@ namespace Objects.Enviroment
         private static readonly int OpenAnimation = Animator.StringToHash("Open");
         
         public DoorState state = DoorState.NeedKey;
-
         public Collider2D collider;
 
         private Rigidbody2D _rigidbody;

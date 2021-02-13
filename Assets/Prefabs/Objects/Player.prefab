@@ -213,10 +213,11 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   direction: {x: 0, y: 0}
   moveSpeed: 5
-  attackWait: 10
+  attackWait: 6
   health: 100
   canDate: 1
   weapon: {fileID: 6506541928685748962}
+  inventory: {fileID: 0}
 --- !u!95 &4171275456034840302
 Animator:
   serializedVersion: 3
@@ -292,24 +293,28 @@ MonoBehaviour:
       description: Good for stabbing. Great for getting rid of other girls.
       icon: K
       likedBy: 01000000
+      strength: 20
     quantity: 1
   - present:
       name: Rope
       description: Looks like it can be used to tie someone of average goblin proportions.
       icon: R
       likedBy: 03000000
+      strength: 20
     quantity: 1
   - present:
       name: Book
       description: A book about learning how to express your emotions.
       icon: B
       likedBy: 00000000
+      strength: 20
     quantity: 1
   - present:
       name: Rock
       description: Just a rock.
       icon: Ro
       likedBy: 
+      strength: 20
     quantity: 64
 --- !u!1001 &1053929437540523976
 PrefabInstance:
