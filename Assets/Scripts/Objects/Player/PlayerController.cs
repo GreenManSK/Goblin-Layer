@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using Controllers;
 using Controllers.Weapon;
 using Events;
+using Events.Goblin;
+using Events.Player;
 using Services;
 using UnityEngine;
 using UnityEngine.InputSystem;

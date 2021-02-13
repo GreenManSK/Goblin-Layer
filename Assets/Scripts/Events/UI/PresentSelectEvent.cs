@@ -1,6 +1,6 @@
 using Entities;
 
-namespace Events
+namespace Events.UI
 {
     public class PresentSelectEvent : IEvent
     {

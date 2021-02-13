@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using Constants;
 using Data;
 using Events;
+using Events.Goblin;
+using Events.UI;
 using Objects.Golbin;
 using Services;
 using UI.Components.Date;

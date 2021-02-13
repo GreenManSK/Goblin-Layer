@@ -1,6 +1,6 @@
 using Objects.Golbin;
 
-namespace Events
+namespace Events.Goblin
 {
     public class SeductionChangeEvent : IEvent
     {

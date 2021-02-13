@@ -1,4 +1,4 @@
-namespace Events
+namespace Events.Player
 {
     public class AttackBarEvent : IEvent
     {

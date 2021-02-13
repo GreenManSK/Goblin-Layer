@@ -1,5 +1,6 @@
 using Data;
 using Events;
+using Events.Goblin;
 using Objects.Golbin;
 using Services;
 using UnityEngine;

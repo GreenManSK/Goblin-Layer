@@ -1,7 +1,6 @@
 using Objects.Golbin;
-using UnityEngine;
 
-namespace Events
+namespace Events.Goblin
 {
     public class GoblinActivationEvent : IEvent
     {

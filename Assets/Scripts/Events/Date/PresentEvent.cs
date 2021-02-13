@@ -1,7 +1,7 @@
 using Entities;
 using Objects.Golbin;
 
-namespace Events
+namespace Events.Date
 {
     public class PresentEvent : IEvent
     {

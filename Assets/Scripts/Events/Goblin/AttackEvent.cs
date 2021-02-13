@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Events
+namespace Events.Goblin
 {
     public class AttackEvent : IEvent
     {

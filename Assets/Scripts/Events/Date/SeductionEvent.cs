@@ -1,7 +1,7 @@
 using Entities.Types;
 using Objects.Golbin;
 
-namespace Events
+namespace Events.Date
 {
     public class SeductionEvent : IEvent
     {

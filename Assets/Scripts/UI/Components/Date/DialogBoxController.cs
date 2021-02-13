@@ -1,6 +1,7 @@
 using System;
 using Controllers;
 using Events;
+using Events.UI;
 using JetBrains.Annotations;
 using Services;
 using TMPro;

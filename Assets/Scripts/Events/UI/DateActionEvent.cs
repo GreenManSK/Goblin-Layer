@@ -1,4 +1,4 @@
-namespace Events
+namespace Events.UI
 {
     public class DateActionEvent : IEvent
     {
