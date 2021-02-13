@@ -7,7 +7,7 @@ namespace Events
         public string Text { get; }
         public bool Confirmational { get; }
 
-        public DialogEvent(string text, bool confirmational = false)
+        public DialogEvent(string text, bool confirmational = true)
         {
             Text = text;
             Confirmational = confirmational;

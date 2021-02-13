@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Goblin
+  - Destroyable
+  - Collectible
   layers:
   - Default
   - TransparentFX

@@ -131,7 +131,7 @@ namespace Controllers.Date
             goblin.Updated += UpdateGoblin;
             _arrow.transform.position = goblins[_activeIndex].transform.position;
             GameController.Instance.SetCameraTarget(goblin.transform);
-            GameEventSystem.Send(new DialogEvent(GoblinTypesConfig.GetDefinition(goblin.type).RandomDateStartText()));
+            GameEventSystem.Send(new DialogEvent(GoblinTypesConfig.GetDefinition(goblin.type).RandomDateStartText(), false));
             UpdateGoblin();
         }
 
