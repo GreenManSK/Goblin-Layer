@@ -1,8 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using Events;
 using Events.Player;
 using Services;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -11,6 +13,9 @@ namespace UI
         public RectTransform bar;
         public float sizeUpdates = 10;
 
+        public GameObject icon;
+        public Image barSprite;
+        
         private void OnEnable()
         {
             GameEventSystem.Subscribe(typeof(AttackBarEvent), this);
@@ -19,6 +24,14 @@ namespace UI
         private void OnDisable()
         {
             GameEventSystem.Unsubscribe(typeof(AttackBarEvent), this);
+        }
+
+        public void SetVisibility(bool visible)
+        {
+            var color = barSprite.color;
+            color.a = visible ? 1 : 0;
+            barSprite.color = color;
+            icon.SetActive(visible);
         }
 
         public void OnEvent(IEvent @event)

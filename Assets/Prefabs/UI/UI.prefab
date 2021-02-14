@@ -3996,6 +3996,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bar: {fileID: 5262409791058461762}
   sizeUpdates: 100
+  icon: {fileID: 6913344425426351183}
+  barSprite: {fileID: 5262409791058461760}
 --- !u!1 &5262409791060990803
 GameObject:
   m_ObjectHideFlags: 0
@@ -5693,6 +5695,7 @@ MonoBehaviour:
   compendiumUi: {fileID: 5262409791125783160}
   inventoryGrid: {fileID: 5262409791766338679}
   canMove: 1
+  compendiumButton: {fileID: 0}
   talkButtons:
   - {fileID: 5262409791057884501}
   - {fileID: 5262409789931990510}
@@ -6086,6 +6089,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bar: {fileID: 5262409791633521828}
   sizeUpdates: 10
+  icon: {fileID: 5534049259879638513}
+  barSprite: {fileID: 5262409791633521834}
 --- !u!1 &5262409791667999374
 GameObject:
   m_ObjectHideFlags: 0

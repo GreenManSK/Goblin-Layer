@@ -8,8 +8,8 @@ using Events.Player;
 using Events.UI;
 using Objects.Enviroment;
 using Services;
+using UI;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Controllers
 {
@@ -19,22 +19,24 @@ namespace Controllers
         {
             typeof(CollectibleEvent),
             typeof(PlayerHealthChange),
-            typeof(PlayerAttackEvent)
+            typeof(PlayerAttackEvent),
+            typeof(DateEvent)
         }.AsReadOnly();
 
-        public GameObject attackBar;
-        public GameObject dateBar;
+        public AttackBar attackBar;
+        public DatingBar dateBar;
 
         public DoorController door;
 
         public GameObject datePrompt;
 
         private bool _attacked = false;
+        private bool _dated = false;
 
         private void Start()
         {
-            attackBar.SetActive(false);
-            dateBar.SetActive(false);
+            attackBar.SetVisibility(false);
+            dateBar.SetVisibility(false);
         }
 
         private void OnEnable()
@@ -60,7 +62,18 @@ namespace Controllers
                 case PlayerAttackEvent _:
                     OnPlayerAttackEvent();
                     break;
+                case DateEvent dateEvent:
+                    OnDateEvent(dateEvent);
+                    break;
             }
+        }
+
+        private void OnDateEvent(DateEvent @event)
+        {
+            if (_dated || !@event.Start)
+                return;
+            _dated = true;
+            dateBar.SetVisibility(true);
         }
 
         private void OnPlayerAttackEvent()
@@ -75,7 +88,7 @@ namespace Controllers
         {
             yield return new WaitForSeconds(0.5f);
             GameEventSystem.Send(new DialogEvent("Swinging a sword is hard! I can't do this too often.", true));
-            attackBar.SetActive(true);
+            attackBar.SetVisibility(true);
         }
 
         private void OnPlayerHealthChangeEvent(PlayerHealthChange @event)

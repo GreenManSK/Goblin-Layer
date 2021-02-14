@@ -38,6 +38,7 @@ namespace UI.Controllers.Date
         public InventoryGridController inventoryGrid;
         public bool canMove = true;
 
+        public GameObject compendiumButton;
         public List<GameObject> talkButtons = new List<GameObject>();
         public List<GameObject> actionButtons = new List<GameObject>();
 
@@ -61,6 +62,7 @@ namespace UI.Controllers.Date
             _stateController.ChangeState(DateUiState.Base);
             GameEventSystem.Subscribe(ListenEvents, this);
             GameController.Instance.Input.Player.Move.performed += ChangeActive;
+            EnableAbilities();
         }
 
         private void OnDisable()
@@ -123,6 +125,11 @@ namespace UI.Controllers.Date
             _stateController.ChangeState(open ? DateUiState.Compendium : DateUiState.Base);
         }
 
+        private void EnableAbilities()
+        {
+            compendiumButton.SetActive(GameController.PlayerAbilities.compendium);
+        }
+        
         public void OnEvent(IEvent @event)
         {
             switch (@event)

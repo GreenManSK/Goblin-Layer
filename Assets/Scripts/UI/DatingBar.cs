@@ -3,6 +3,7 @@ using Controllers;
 using Events;
 using Services;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -11,6 +12,9 @@ namespace UI
         public RectTransform bar;
         public float sizeUpdates = 10;
 
+        public GameObject icon;
+        public Image barSprite;
+        
         private void OnEnable()
         {
             GameEventSystem.Subscribe(typeof(DateEvent), this);
@@ -19,6 +23,14 @@ namespace UI
         private void OnDisable()
         {
             GameEventSystem.Unsubscribe(typeof(DateEvent), this);
+        }
+
+        public void SetVisibility(bool visible)
+        {
+            var color = barSprite.color;
+            color.a = visible ? 1 : 0;
+            barSprite.color = color;
+            icon.SetActive(visible);
         }
 
         public void OnEvent(IEvent @event)
