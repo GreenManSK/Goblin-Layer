@@ -154,6 +154,7 @@ namespace Objects.Player
             if (@event.Target != gameObject)
                 return;
             health -= @event.Damage;
+            GameEventSystem.Send(new PlayerHealthChange(health));
             _sprite.color = Color.Lerp(Color.red, Color.white, Mathf.Max(0, health / 100));
             if (health < 0)
             {

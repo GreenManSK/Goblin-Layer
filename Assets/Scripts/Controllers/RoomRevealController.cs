@@ -7,7 +7,7 @@ namespace Controllers
     {
         public GameObject room;
 
-        private void Start()
+        private void Awake()
         {
             room.SetActive(false);
         }

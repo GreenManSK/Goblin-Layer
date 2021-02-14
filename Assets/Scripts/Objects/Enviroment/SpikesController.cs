@@ -30,7 +30,6 @@ namespace Objects.Enviroment
         public void ChangeState(SpikesState spikesState)
         {
             state = spikesState;
-            Debug.Log("test" + state);
             _animator.SetTrigger(spikesState == SpikesState.Down ? DownAnimation : UpAnimation);
         }
 

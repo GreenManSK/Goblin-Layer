@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Constants;
+using Controllers;
 using Controllers.Weapon;
 using Data;
 using Entities;
@@ -174,6 +175,8 @@ namespace Objects.Golbin
 
         private void OnSeductionEvent(SeductionEvent @event)
         {
+            if (!GameController.Mechanics.seduction)
+                return;
             var change = 0f;
             if (@event.Target == this)
             {

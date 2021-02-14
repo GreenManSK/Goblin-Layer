@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Entities.Types;
 using Events;
+using Events.Player;
 using Events.UI;
 using Objects.Enviroment;
 using Services;
@@ -15,7 +16,8 @@ namespace Controllers
     {
         private static readonly ReadOnlyCollection<Type> ListenEvents = new List<Type>
         {
-            typeof(CollectibleEvent)
+            typeof(CollectibleEvent),
+            typeof(PlayerHealthChange)
         }.AsReadOnly();
         
         public GameObject attackBar;

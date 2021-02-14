@@ -8,6 +8,7 @@ namespace Controllers
     public class GameController : MonoBehaviour
     {
         public static PlayerAbilities PlayerAbilities => _instance.playerAbilities;
+        public static Mechanics Mechanics => _instance.mechanics;
         public static GameController Instance => _instance;
         private static GameController _instance;
 
@@ -15,6 +16,7 @@ namespace Controllers
         private PlayerControlls _input;
 
         public PlayerAbilities playerAbilities = new PlayerAbilities();
+        public Mechanics mechanics = new Mechanics();
         
         public PlayerController player;
         public CinemachineVirtualCamera mainCamera;
