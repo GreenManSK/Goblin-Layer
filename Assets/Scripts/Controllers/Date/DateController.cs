@@ -5,6 +5,7 @@ using Constants;
 using Data;
 using Events;
 using Events.Goblin;
+using Events.Input;
 using Events.UI;
 using Objects.Golbin;
 using Services;
@@ -27,7 +28,8 @@ namespace Controllers.Date
             typeof(DateActionEvent),
             typeof(ChangeActiveGoblin),
             typeof(DialogEvent),
-            typeof(DialogConfirmationEvent)
+            typeof(DialogConfirmationEvent),
+            typeof(DateButtonEvent)
         }.AsReadOnly();
 
         public int ActiveIndex => _activeIndex;

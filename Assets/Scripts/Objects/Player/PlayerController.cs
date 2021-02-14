@@ -7,6 +7,7 @@ using Controllers.Weapon;
 using Events;
 using Events.Game;
 using Events.Goblin;
+using Events.Input;
 using Events.Player;
 using Services;
 using UnityEngine;
@@ -16,7 +17,6 @@ using UnityEngine.SceneManagement;
 namespace Objects.Player
 {
     [RequireComponent(typeof(PlayerStateController))]
-    [RequireComponent(typeof(PlayerInputController))]
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Animator))]
@@ -27,7 +27,9 @@ namespace Objects.Player
             typeof(AttackEvent),
             typeof(DateEvent),
             typeof(StopEvent),
-            typeof(ResumeEvent)
+            typeof(ResumeEvent),
+            typeof(DateButtonEvent),
+            typeof(AttackButtonEvent)
         }.AsReadOnly();
 
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
@@ -47,14 +49,12 @@ namespace Objects.Player
         private Animator _animator;
 
         private PlayerStateController _playerStateController;
-        private PlayerInputController _playerInputController;
 
         private bool _canAttack = true;
 
         private void Start()
         {
             _playerStateController = GetComponent<PlayerStateController>();
-            _playerInputController = GetComponent<PlayerInputController>();
 
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _sprite = GetComponent<SpriteRenderer>();
@@ -62,26 +62,21 @@ namespace Objects.Player
 
             inventory = GetComponent<InventoryController>();
 
-            RegisterInputs();
             _playerStateController.ChangeState(PlayerState.Idle);
         }
 
         private void OnEnable()
         {
             GameEventSystem.Subscribe(ListenEvents, this);
+            GameController.Instance.Input.Player.Move.performed += Move;
+            GameController.Instance.Input.Player.Move.canceled += Stop;
         }
 
         private void OnDisable()
         {
             GameEventSystem.Unsubscribe(ListenEvents, this);
-        }
-
-        private void RegisterInputs()
-        {
-            _playerInputController.AddAction(_playerInputController.Actions.Move, ActionType.Performed, Move);
-            _playerInputController.AddAction(_playerInputController.Actions.Move, ActionType.Canceled, Stop);
-            _playerInputController.AddAction(_playerInputController.Actions.Date, ActionType.Started, ToggleDate);
-            _playerInputController.AddAction(_playerInputController.Actions.Fire, ActionType.Started, Attack);
+            GameController.Instance.Input.Player.Move.performed -= Move;
+            GameController.Instance.Input.Player.Move.canceled -= Stop;
         }
 
         public void FixFlip()
@@ -114,7 +109,7 @@ namespace Objects.Player
             }
         }
 
-        private void ToggleDate(InputAction.CallbackContext ctx)
+        private void ToggleDate()
         {
             if (!canDate || !GameController.PlayerAbilities.startDate)
                 return;
@@ -122,7 +117,7 @@ namespace Objects.Player
             GameEventSystem.Send(new DateEvent(start));
         }
 
-        private void Attack(InputAction.CallbackContext ctx)
+        private void Attack()
         {
             if (!_canAttack || !CanMove() || _playerStateController.IsState(PlayerState.Attacking) ||
                 !GameController.PlayerAbilities.attack)
@@ -154,6 +149,12 @@ namespace Objects.Player
                     break;
                 case ResumeEvent _:
                     OnResumeEvent();
+                    break;
+                case DateButtonEvent _:
+                    ToggleDate();
+                    break;
+                case AttackButtonEvent _:
+                    Attack();
                     break;
             }
         }
@@ -194,12 +195,15 @@ namespace Objects.Player
         private void OnResumeEvent()
         {
             if (_playerStateController.IsState(PlayerState.Stopped))
-                _playerStateController.ChangeState(_playerStateController.LastState == PlayerState.Moving ? PlayerState.Idle : _playerStateController.LastState);
+                _playerStateController.ChangeState(_playerStateController.LastState == PlayerState.Moving
+                    ? PlayerState.Idle
+                    : _playerStateController.LastState);
         }
 
         private bool CanMove()
         {
-            return !_playerStateController.IsState(PlayerState.Dating) && !_playerStateController.IsState(PlayerState.Stopped);
+            return !_playerStateController.IsState(PlayerState.Dating) &&
+                   !_playerStateController.IsState(PlayerState.Stopped);
         }
 
         private IEnumerator RestartDating(float waitTime)

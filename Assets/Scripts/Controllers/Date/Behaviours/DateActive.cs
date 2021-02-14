@@ -1,10 +1,10 @@
 using System;
 using Events;
 using Events.Goblin;
+using Events.Input;
 using Events.UI;
 using Services;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Controllers.Date.Behaviours
 {
@@ -15,15 +15,9 @@ namespace Controllers.Date.Behaviours
         {
             base.OnTransitionIn(context);
             Context.StartDate();
-            GameController.Instance.Input.Player.Date.started += StopDate;
         }
 
-        public override void OnTransitionOut()
-        {
-            GameController.Instance.Input.Player.Date.started -= StopDate;
-        }
-
-        private void StopDate(InputAction.CallbackContext obj)
+        private void StopDate()
         {
             Context.StateController.ChangeState(DateState.NonActive);
         }
@@ -43,6 +37,9 @@ namespace Controllers.Date.Behaviours
                     break;
                 case ChangeActiveGoblin change:
                     OnEvent(change);
+                    break;
+                case DateButtonEvent _:
+                    StopDate();
                     break;
                 default:
                     return false;

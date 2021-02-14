@@ -1,7 +1,10 @@
 using Cinemachine;
 using Data;
+using Events.Input;
 using Objects.Player;
+using Services;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Controllers
 {
@@ -17,7 +20,7 @@ namespace Controllers
 
         public PlayerAbilities playerAbilities = new PlayerAbilities();
         public Mechanics mechanics = new Mechanics();
-        
+
         public PlayerController player;
         public CinemachineVirtualCamera mainCamera;
         public float datingRestartTimeInS = 10;
@@ -40,6 +43,30 @@ namespace Controllers
         public void SetCameraTarget(Transform target = null)
         {
             mainCamera.Follow = target ?? player.transform;
+        }
+
+        private void OnEnable()
+        {
+            Input.Player.Enable();
+            Input.Player.Fire.started += OnFireButton;
+            Input.Player.Date.started += OnDateButton;
+        }
+
+        private void OnDisable()
+        {
+            Input.Player.Fire.started -= OnFireButton;
+            Input.Player.Date.started -= OnDateButton;
+            Input.Player.Disable();
+        }
+
+        private static void OnFireButton(InputAction.CallbackContext obj)
+        {
+            GameEventSystem.Send(new AttackButtonEvent());
+        }
+
+        private static void OnDateButton(InputAction.CallbackContext obj)
+        {
+            GameEventSystem.Send(new DateButtonEvent());
         }
     }
 }

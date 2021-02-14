@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Controllers;
 using Events;
 using Events.Game;
+using Events.Input;
 using Events.UI;
 using JetBrains.Annotations;
 using Services;
@@ -13,6 +16,12 @@ namespace UI.Components.Date
 {
     public class DialogBoxController : MonoBehaviour, IEventListener
     {
+        private static readonly ReadOnlyCollection<Type> ConfirmationInputEvents = new List<Type>
+        {
+            typeof(AttackButtonEvent),
+            typeof(DateButtonEvent)
+        }.AsReadOnly();
+
         public TMP_Text text;
         public GameObject nextIndicator;
 
@@ -21,24 +30,22 @@ namespace UI.Components.Date
         private void Awake()
         {
             SetValues("");
-            GameEventSystem.Subscribe(typeof(DialogEvent),this);
+            GameEventSystem.Subscribe(typeof(DialogEvent), this);
         }
 
         private void OnDestroy()
         {
-            GameEventSystem.Unsubscribe(typeof(DialogEvent),this);
+            GameEventSystem.Unsubscribe(typeof(DialogEvent), this);
         }
 
         private void EnableControls()
         {
-            GameController.Instance.Input.Player.Fire.started += Confirm;
-            GameController.Instance.Input.Player.Date.started += Confirm;
+            GameEventSystem.Subscribe(ConfirmationInputEvents, this);
         }
 
         private void DisableControls()
         {
-            GameController.Instance.Input.Player.Fire.started -= Confirm;
-            GameController.Instance.Input.Player.Date.started -= Confirm;
+            GameEventSystem.Subscribe(ConfirmationInputEvents, this);
         }
 
         public void OnEvent(IEvent @event)
@@ -46,6 +53,9 @@ namespace UI.Components.Date
             if (@event is DialogEvent dialogEvent)
             {
                 SetValues(dialogEvent.Text, dialogEvent.Confirmational);
+            } else if (ConfirmationInputEvents.Contains(@event.GetType()))
+            {
+                Confirm();
             }
         }
 
@@ -63,10 +73,11 @@ namespace UI.Components.Date
                 nextIndicator.SetActive(needConfirmation);
                 _needsConfirmation = needConfirmation;
             }
+
             nextIndicator.SetActive(_needsConfirmation);
         }
 
-        private void Confirm(InputAction.CallbackContext ctx)
+        private void Confirm()
         {
             if (gameObject.activeSelf && _needsConfirmation)
             {
