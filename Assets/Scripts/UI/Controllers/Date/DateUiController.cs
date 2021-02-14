@@ -13,6 +13,7 @@ using UI.Components.Date;
 using UI.Components.Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace UI.Controllers.Date
 {
@@ -128,8 +129,18 @@ namespace UI.Controllers.Date
         private void EnableAbilities()
         {
             compendiumButton.SetActive(GameController.PlayerAbilities.compendium);
+
+            talkButtons[0].GetComponent<Button>().interactable = GameController.PlayerAbilities.compliment;
+            talkButtons[1].GetComponent<Button>().interactable = GameController.PlayerAbilities.flirt;
+            talkButtons[2].GetComponent<Button>().interactable = GameController.PlayerAbilities.insult;
+
+            actionButtons[0].GetComponent<Button>().interactable = GameController.PlayerAbilities.compliment ||
+                                                                    GameController.PlayerAbilities.flirt ||
+                                                                    GameController.PlayerAbilities.insult;
+            actionButtons[1].GetComponent<Button>().interactable = GameController.PlayerAbilities.present;
+            actionButtons[2].GetComponent<Button>().interactable = GameController.PlayerAbilities.ask;
         }
-        
+
         public void OnEvent(IEvent @event)
         {
             switch (@event)
