@@ -1,4 +1,6 @@
 using System;
+using Events.Player;
+using Services;
 using UnityEngine;
 
 namespace Objects.Player.Behaviours
@@ -15,6 +17,7 @@ namespace Objects.Player.Behaviours
             Context.weapon.SetRotation(Context.direction);
             Context.weapon.SwingFinish += Finish;
             Context.weapon.gameObject.SetActive(true);
+            GameEventSystem.Send(new PlayerAttackEvent());
         }
 
         private void Finish()

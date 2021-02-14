@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Objects.Player.Behaviours
 {
     [Serializable]
-    public class DatingPlayer: APlayerBehaviour
+    public class StoppedPlayer: APlayerBehaviour
     {
         public static readonly int Animation = Animator.StringToHash("Idle");
 
@@ -16,7 +16,7 @@ namespace Objects.Player.Behaviours
         
         public override bool IsState(PlayerState state)
         {
-            return state == PlayerState.Dating;
+            return state == PlayerState.Stopped;
         }
     }
 }

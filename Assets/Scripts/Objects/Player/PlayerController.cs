@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using Controllers;
 using Controllers.Weapon;
 using Events;
+using Events.Game;
 using Events.Goblin;
 using Events.Player;
 using Services;
@@ -24,7 +25,9 @@ namespace Objects.Player
         private static readonly ReadOnlyCollection<Type> ListenEvents = new List<Type>
         {
             typeof(AttackEvent),
-            typeof(DateEvent)
+            typeof(DateEvent),
+            typeof(StopEvent),
+            typeof(ResumeEvent)
         }.AsReadOnly();
 
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
@@ -146,6 +149,12 @@ namespace Objects.Player
                 case AttackEvent attackEvent:
                     OnAttackEvent(attackEvent);
                     break;
+                case StopEvent _:
+                    OnStopEvent();
+                    break;
+                case ResumeEvent _:
+                    OnResumeEvent();
+                    break;
             }
         }
 
@@ -176,9 +185,21 @@ namespace Objects.Player
             }
         }
 
-        public bool CanMove()
+        private void OnStopEvent()
         {
-            return !_playerStateController.IsState(PlayerState.Dating);
+            if (!_playerStateController.IsState(PlayerState.Stopped))
+                _playerStateController.ChangeState(PlayerState.Stopped);
+        }
+
+        private void OnResumeEvent()
+        {
+            if (_playerStateController.IsState(PlayerState.Stopped))
+                _playerStateController.ChangeState(_playerStateController.LastState);
+        }
+
+        private bool CanMove()
+        {
+            return !_playerStateController.IsState(PlayerState.Dating) && !_playerStateController.IsState(PlayerState.Stopped);
         }
 
         private IEnumerator RestartDating(float waitTime)

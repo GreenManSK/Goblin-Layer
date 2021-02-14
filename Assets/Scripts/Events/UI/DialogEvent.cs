@@ -2,8 +2,6 @@ namespace Events.UI
 {
     public class DialogEvent : IEvent
     {
-        public delegate void ConfirmationDelegate();
-
         public string Text { get; }
         public bool Confirmational { get; }
 

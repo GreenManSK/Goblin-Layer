@@ -1,6 +1,7 @@
 using System;
 using Controllers;
 using Events;
+using Events.Game;
 using Events.UI;
 using JetBrains.Annotations;
 using Services;
@@ -28,17 +29,17 @@ namespace UI.Components.Date
             GameEventSystem.Unsubscribe(typeof(DialogEvent),this);
         }
 
-        // private void OnEnable()
-        // {
-        //     GameController.Instance.Input.Player.Fire.started += Confirm;
-        //     GameController.Instance.Input.Player.Date.started += Confirm;
-        // }
-        //
-        // private void OnDisable()
-        // {
-        //     GameController.Instance.Input.Player.Fire.started -= Confirm;
-        //     GameController.Instance.Input.Player.Date.started -= Confirm;
-        // }
+        private void EnableControls()
+        {
+            GameController.Instance.Input.Player.Fire.started += Confirm;
+            GameController.Instance.Input.Player.Date.started += Confirm;
+        }
+
+        private void DisableControls()
+        {
+            GameController.Instance.Input.Player.Fire.started -= Confirm;
+            GameController.Instance.Input.Player.Date.started -= Confirm;
+        }
 
         public void OnEvent(IEvent @event)
         {
@@ -57,21 +58,23 @@ namespace UI.Components.Date
 
             if (needConfirmation)
             {
-                GameController.Instance.Input.Player.Fire.started += Confirm;
-                GameController.Instance.Input.Player.Date.started += Confirm;
+                EnableControls();
+                GameEventSystem.Send(new StopEvent());
                 nextIndicator.SetActive(needConfirmation);
                 _needsConfirmation = needConfirmation;
             }
+            nextIndicator.SetActive(_needsConfirmation);
         }
 
         private void Confirm(InputAction.CallbackContext ctx)
         {
             if (gameObject.activeSelf && _needsConfirmation)
             {
+                _needsConfirmation = false;
                 SetValues(needConfirmation: false);
                 GameEventSystem.Send(new DialogConfirmationEvent());
-                GameController.Instance.Input.Player.Fire.started -= Confirm;
-                GameController.Instance.Input.Player.Date.started -= Confirm;
+                DisableControls();
+                GameEventSystem.Send(new ResumeEvent());
             }
         }
     }

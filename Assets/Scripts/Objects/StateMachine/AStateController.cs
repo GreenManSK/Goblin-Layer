@@ -8,9 +8,12 @@ namespace Objects.StateMachine
     {
         private readonly Dictionary<TS, IBehaviour<TC, TS>> _behaviours = new Dictionary<TS, IBehaviour<TC, TS>>();
 
+        public TS CurrentState => _currentState;
         public IBehaviour<TC, TS> Behaviour => _behaviour;
         protected TC Context;
 
+        private TS _currentState;
+        
         [SerializeField]
         private IBehaviour<TC, TS> _behaviour;
         
@@ -54,6 +57,7 @@ namespace Objects.StateMachine
 
             _behaviour?.OnTransitionOut();
             _behaviour = _behaviours[state];
+            _currentState = state;
             _behaviour.OnTransitionIn(Context ?? GetContext());
         }
 

@@ -2135,6 +2135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin
       objectReference: {fileID: 0}
+    - target: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
+      propertyPath: attackSpeedInS
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8119938740869711914, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -5458,6 +5462,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 768776616}
+    - target: {fileID: 8046450759108593940, guid: 121cf0f1f30af864e96d969c30fc556d, type: 3}
+      propertyPath: mechanics.seduction
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8046450759108593940, guid: 121cf0f1f30af864e96d969c30fc556d, type: 3}
       propertyPath: playerAbilities.startDate
       value: 0

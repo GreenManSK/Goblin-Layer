@@ -5,6 +5,7 @@ namespace Objects.Player
         Idle,
         Moving,
         Dating,
-        Attacking
+        Attacking,
+        Stopped
     }
 }
