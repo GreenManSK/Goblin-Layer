@@ -43,6 +43,7 @@ namespace UI.Controllers.Date
 
         private GoblinController _target;
         private DateUiStateController _stateController;
+        private List<GoblinController> _goblins;
 
         private void Awake()
         {
@@ -70,6 +71,7 @@ namespace UI.Controllers.Date
 
         public void SetData(List<GoblinController> goblins)
         {
+            _goblins = goblins;
             encounterBar.SetData(goblins);
         }
 
@@ -89,7 +91,7 @@ namespace UI.Controllers.Date
 
         private void ChangeActive(InputAction.CallbackContext ctx)
         {
-            if (!canMove)
+            if (!canMove || _goblins.Count <= 1)
                 return;
             var input = ctx.ReadValue<Vector2>();
             if (input.magnitude < 1)
