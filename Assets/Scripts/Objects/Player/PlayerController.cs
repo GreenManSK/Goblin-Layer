@@ -80,8 +80,8 @@ namespace Objects.Player
         {
             _playerInputController.AddAction(_playerInputController.Actions.Move, ActionType.Performed, Move);
             _playerInputController.AddAction(_playerInputController.Actions.Move, ActionType.Canceled, Stop);
-            _playerInputController.AddAction(_playerInputController.Actions.Date, ActionType.Performed, ToggleDate);
-            _playerInputController.AddAction(_playerInputController.Actions.Fire, ActionType.Performed, Attack);
+            _playerInputController.AddAction(_playerInputController.Actions.Date, ActionType.Started, ToggleDate);
+            _playerInputController.AddAction(_playerInputController.Actions.Fire, ActionType.Started, Attack);
         }
 
         public void FixFlip()
@@ -194,7 +194,7 @@ namespace Objects.Player
         private void OnResumeEvent()
         {
             if (_playerStateController.IsState(PlayerState.Stopped))
-                _playerStateController.ChangeState(_playerStateController.LastState);
+                _playerStateController.ChangeState(_playerStateController.LastState == PlayerState.Moving ? PlayerState.Idle : _playerStateController.LastState);
         }
 
         private bool CanMove()

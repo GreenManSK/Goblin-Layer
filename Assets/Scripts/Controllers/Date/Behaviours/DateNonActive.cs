@@ -3,6 +3,7 @@ using Events;
 using Events.Goblin;
 using Events.UI;
 using Services;
+using UnityEngine;
 
 namespace Controllers.Date.Behaviours
 {
@@ -13,7 +14,10 @@ namespace Controllers.Date.Behaviours
         {
             base.OnTransitionIn(context);
             if (context.started)
+            {
                 GameEventSystem.Send(new DateEvent(false));
+            }
+
             Context.StopDate();
         }
 

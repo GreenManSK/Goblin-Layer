@@ -1,6 +1,7 @@
 using System;
 using Events;
 using Events.UI;
+using UnityEngine;
 
 namespace Controllers.Date.Behaviours
 {
@@ -10,14 +11,14 @@ namespace Controllers.Date.Behaviours
         public override void OnTransitionIn(DateController context)
         {
             base.OnTransitionIn(context);
-            context.started = true;
+            // context.started = true;
             Context.dialogBox.gameObject.SetActive(true);
         }
 
         public override bool ProcessEvent(IEvent @event)
         {
             if (!(@event is DialogConfirmationEvent)) return false;
-            Context.StateController.ChangeState(Context.AvailableActions <= 0 || Context.goblins.Count <= 0
+            Context.StateController.ChangeState(Context.AvailableActions <= 0 || Context.goblins.Count <= 0 || !Context.started
                 ? DateState.NonActive
                 : DateState.Active);
             return true;

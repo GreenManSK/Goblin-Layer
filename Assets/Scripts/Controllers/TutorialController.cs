@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Entities.Types;
@@ -25,6 +26,8 @@ namespace Controllers
         public GameObject dateBar;
 
         public DoorController door;
+
+        public GameObject datePrompt;
 
         private bool _attacked = false;
 
@@ -65,17 +68,26 @@ namespace Controllers
             if (_attacked)
                 return;
             _attacked = true;
+            StartCoroutine(AttackPrompt());
+        }
+
+        private IEnumerator AttackPrompt()
+        {
+            yield return new WaitForSeconds(0.5f);
             GameEventSystem.Send(new DialogEvent("Swinging a sword is hard! I can't do this too often.", true));
             attackBar.SetActive(true);
         }
 
         private void OnPlayerHealthChangeEvent(PlayerHealthChange @event)
         {
-            if (GameController.Mechanics.seduction)
+            if (GameController.PlayerAbilities.startDate)
                 return;
             if (@event.Health < 20f)
             {
-                GameEventSystem.Send(new DialogEvent("Oh fek"));
+                GameEventSystem.Send(new DialogEvent("I'm too weak to kill it. Maybe I can do something to save my life..."));
+                datePrompt.SetActive(true);
+                GameController.Mechanics.seduction = true;
+                GameController.PlayerAbilities.startDate = true;
             }
         }
 

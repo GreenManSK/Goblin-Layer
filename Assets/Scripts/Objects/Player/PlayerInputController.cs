@@ -59,6 +59,9 @@ namespace Objects.Player
                 case ActionType.Performed:
                     inputAction.performed += callback;
                     break;
+                case ActionType.Started:
+                    inputAction.started += callback;
+                    break;
                 case ActionType.Canceled:
                     inputAction.canceled += callback;
                     break;
@@ -71,6 +74,7 @@ namespace Objects.Player
     public enum ActionType
     {
         Performed,
-        Canceled
+        Canceled,
+        Started
     }
 }
