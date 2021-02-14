@@ -1,5 +1,6 @@
 using Cinemachine;
 using Data;
+using Events;
 using Events.Input;
 using Objects.Player;
 using Services;
@@ -67,6 +68,11 @@ namespace Controllers
         private static void OnDateButton(InputAction.CallbackContext obj)
         {
             GameEventSystem.Send(new DateButtonEvent());
+        }
+
+        public static bool IsInputEvent(IEvent @event)
+        {
+            return @event is AttackButtonEvent || @event is DateButtonEvent;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Constants;
@@ -24,7 +25,6 @@ namespace Controllers.Date
         {
             typeof(GoblinActivationEvent),
             typeof(GoblinDeathEvent),
-            typeof(DateEvent),
             typeof(DateActionEvent),
             typeof(ChangeActiveGoblin),
             typeof(DialogEvent),
@@ -36,6 +36,7 @@ namespace Controllers.Date
         public int AvailableActions => _availableActions;
         public DateStateController StateController => _stateController;
 
+        public bool canDate = true;
         public bool started = false;
         public GameObject arrowPrefab;
         public List<GoblinController> goblins = new List<GoblinController>();
@@ -99,6 +100,7 @@ namespace Controllers.Date
         {
             if (started)
                 return;
+            canDate = false;
             started = true;
             _availableActions = MaxActions;
             dateUi.SetActions(_availableActions, MaxActions);
@@ -149,6 +151,17 @@ namespace Controllers.Date
             var aPos = a.gameObject.transform.position;
             var bPos = b.gameObject.transform.position;
             return Mathf.Approximately(aPos.x, bPos.x) ? aPos.y.CompareTo(bPos.y) : aPos.x.CompareTo(bPos.x);
+        }
+
+        public void EnableDating()
+        {
+            StartCoroutine(RestartDating(GameController.Instance.datingRestartTimeInS));
+        }
+        
+        private IEnumerator RestartDating(float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);
+            canDate = true;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Controllers.Date
     public class DateStateController : AStateController<DateController, DateState>
     {
         private List<IEvent> _events = new List<IEvent>();
-        
+
         public override void ChangeState(DateState state)
         {
             base.ChangeState(state);
@@ -20,7 +20,7 @@ namespace Controllers.Date
 
         public void ProcessEvent(IEvent @event)
         {
-            if ((Behaviour as ADateBehaviour)?.ProcessEvent(@event) ?? false)
+            if (((Behaviour as ADateBehaviour)?.ProcessEvent(@event) ?? false) || GameController.IsInputEvent(@event))
                 return;
             _events.Add(@event);
         }
@@ -29,7 +29,7 @@ namespace Controllers.Date
         {
             return GetComponent<DateController>();
         }
-        
+
         protected override IBehaviour<DateController, DateState> CreateBehaviour(DateState state)
         {
             return state switch

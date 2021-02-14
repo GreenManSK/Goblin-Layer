@@ -28,7 +28,6 @@ namespace Objects.Player
             typeof(DateEvent),
             typeof(StopEvent),
             typeof(ResumeEvent),
-            typeof(DateButtonEvent),
             typeof(AttackButtonEvent)
         }.AsReadOnly();
 
@@ -40,7 +39,6 @@ namespace Objects.Player
         public float moveSpeed = 1f;
         public float attackWait = 10f;
         public float health = 100f;
-        public bool canDate = true;
         public PlayerWeaponController weapon;
         public InventoryController inventory;
 
@@ -109,14 +107,6 @@ namespace Objects.Player
             }
         }
 
-        private void ToggleDate()
-        {
-            if (!canDate || !GameController.PlayerAbilities.startDate)
-                return;
-            var start = !_playerStateController.IsState(PlayerState.Dating);
-            GameEventSystem.Send(new DateEvent(start));
-        }
-
         private void Attack()
         {
             if (!_canAttack || !CanMove() || _playerStateController.IsState(PlayerState.Attacking) ||
@@ -150,9 +140,6 @@ namespace Objects.Player
                 case ResumeEvent _:
                     OnResumeEvent();
                     break;
-                case DateButtonEvent _:
-                    ToggleDate();
-                    break;
                 case AttackButtonEvent _:
                     Attack();
                     break;
@@ -174,16 +161,7 @@ namespace Objects.Player
 
         private void OnDateEvent(DateEvent @event)
         {
-            canDate = false;
-            if (@event.Start)
-            {
-                _playerStateController.ChangeState(PlayerState.Dating);
-            }
-            else
-            {
-                _playerStateController.ChangeState(PlayerState.Idle);
-                StartCoroutine(RestartDating(GameController.Instance.datingRestartTimeInS));
-            }
+            _playerStateController.ChangeState(@event.Start ? PlayerState.Dating : PlayerState.Idle);
         }
 
         private void OnStopEvent()
@@ -204,12 +182,6 @@ namespace Objects.Player
         {
             return !_playerStateController.IsState(PlayerState.Dating) &&
                    !_playerStateController.IsState(PlayerState.Stopped);
-        }
-
-        private IEnumerator RestartDating(float waitTime)
-        {
-            yield return new WaitForSeconds(waitTime);
-            canDate = true;
         }
 
         private IEnumerator RestartAttack(float waitTime)

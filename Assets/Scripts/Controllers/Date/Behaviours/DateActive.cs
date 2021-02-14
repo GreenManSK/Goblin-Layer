@@ -19,7 +19,9 @@ namespace Controllers.Date.Behaviours
 
         private void StopDate()
         {
+            Context.EnableDating();
             Context.StateController.ChangeState(DateState.NonActive);
+            GameEventSystem.Send(new DateEvent(false));
         }
 
         public override bool ProcessEvent(IEvent @event)
@@ -32,9 +34,6 @@ namespace Controllers.Date.Behaviours
                 case GoblinDeathEvent death:
                     OnEvent(death);
                     break;
-                case DateEvent date:
-                    OnEvent(date);
-                    break;
                 case ChangeActiveGoblin change:
                     OnEvent(change);
                     break;
@@ -46,14 +45,6 @@ namespace Controllers.Date.Behaviours
             }
 
             return true;
-        }
-
-        private void OnEvent(DateEvent @event)
-        {
-            if (!@event.Start)
-            {
-                Context.StateController.ChangeState(DateState.NonActive);
-            }
         }
 
         private void OnEvent(GoblinActivationEvent activation)

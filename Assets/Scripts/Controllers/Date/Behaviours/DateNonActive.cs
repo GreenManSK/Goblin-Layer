@@ -1,6 +1,7 @@
 using System;
 using Events;
 using Events.Goblin;
+using Events.Input;
 using Events.UI;
 using Services;
 using UnityEngine;
@@ -31,8 +32,8 @@ namespace Controllers.Date.Behaviours
                 case GoblinDeathEvent death:
                     OnEvent(death);
                     break;
-                case DateEvent date:
-                    OnEvent(date);
+                case DateButtonEvent _:
+                    StartDate();
                     break;
                 default:
                     return false;
@@ -41,13 +42,14 @@ namespace Controllers.Date.Behaviours
             return true;
         }
 
-        private void OnEvent(DateEvent @event)
+        private void StartDate()
         {
-            if (!@event.Start)
+            if (!Context.canDate || !GameController.PlayerAbilities.startDate)
                 return;
             if (Context.goblins.Count > 0)
             {
                 Context.StateController.ChangeState(DateState.Active);
+                GameEventSystem.Send(new DateEvent(true));
             }
             else
             {

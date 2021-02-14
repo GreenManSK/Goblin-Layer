@@ -6430,7 +6430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8046450759108593940, guid: 121cf0f1f30af864e96d969c30fc556d, type: 3}
       propertyPath: playerAbilities.startDate
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8046450759108593940, guid: 121cf0f1f30af864e96d969c30fc556d, type: 3}
       propertyPath: playerAbilities.compendium
