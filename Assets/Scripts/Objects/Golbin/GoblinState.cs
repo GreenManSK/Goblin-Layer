@@ -5,6 +5,7 @@ namespace Objects.Golbin
         Idle,
         Chasing,
         Attacking,
-        Dating
+        Dating,
+        Stopped
     }
 }

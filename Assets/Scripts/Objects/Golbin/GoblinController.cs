@@ -10,6 +10,7 @@ using Entities;
 using Entities.Types;
 using Events;
 using Events.Date;
+using Events.Game;
 using Events.Goblin;
 using Events.UI;
 using Pathfinding;
@@ -31,7 +32,9 @@ namespace Objects.Golbin
         {
             typeof(DateEvent),
             typeof(SeductionEvent),
-            typeof(PresentEvent)
+            typeof(PresentEvent),
+            typeof(StopEvent),
+            typeof(ResumeEvent)
         }.AsReadOnly();
 
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
@@ -137,6 +140,12 @@ namespace Objects.Golbin
                 case PresentEvent presentEvent:
                     OnPresentEvent(presentEvent);
                     break;
+                case StopEvent _:
+                    OnStopEvent();
+                    break;
+                case ResumeEvent _:
+                    OnResumeEvent();
+                    break;
             }
         }
 
@@ -197,6 +206,18 @@ namespace Objects.Golbin
             }
 
             UpdateSeduction(change);
+        }
+
+        private void OnStopEvent()
+        {
+            if (!_goblinStateController.IsState(GoblinState.Stopped))
+                _goblinStateController.ChangeState(GoblinState.Stopped);
+        }
+
+        private void OnResumeEvent()
+        {
+            if (_goblinStateController.IsState(GoblinState.Stopped))
+                _goblinStateController.ChangeState(_goblinStateController.LastState);
         }
 
         private void UpdateSeduction(float change)

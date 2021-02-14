@@ -8,9 +8,18 @@ namespace Objects.Golbin
     [RequireComponent(typeof(GoblinController))]
     public class GoblinStateController : AStateController<GoblinController, GoblinState>
     {
+        public GoblinState LastState => _lastState;
+        private GoblinState _lastState;
+
         protected override GoblinController GetContext()
         {
             return GetComponent<GoblinController>();
+        }
+
+        public override void ChangeState(GoblinState state)
+        {
+            _lastState = CurrentState;
+            base.ChangeState(state);
         }
 
         protected override IBehaviour<GoblinController, GoblinState> CreateBehaviour(GoblinState state)
@@ -21,6 +30,7 @@ namespace Objects.Golbin
                 GoblinState.Chasing => new ChasingGoblin(),
                 GoblinState.Attacking => new AttackingGoblin(),
                 GoblinState.Dating => new DatingGoblin(),
+                GoblinState.Stopped => new StopedGoblin(),
                 _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
             };
         }
