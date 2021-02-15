@@ -7,6 +7,7 @@ using Events;
 using Events.Player;
 using Events.UI;
 using Objects.Enviroment;
+using Objects.Golbin;
 using Services;
 using UI;
 using UnityEngine;
@@ -27,6 +28,7 @@ namespace Controllers
         public DatingBar dateBar;
 
         public DoorController door;
+        public GoblinController firstGoblin;
 
         public GameObject datePrompt;
 
@@ -74,6 +76,7 @@ namespace Controllers
                 return;
             _dated = true;
             dateBar.SetVisibility(true);
+            GameEventSystem.Send(new DialogEvent("You", "Maybe a compliment will convince it to spare my life?", false));
         }
 
         private void OnPlayerAttackEvent()
@@ -99,6 +102,7 @@ namespace Controllers
             {
                 GameEventSystem.Send(new DialogEvent("You",
                     "I'm too weak to kill it. Maybe I can do something to save my life..."));
+                firstGoblin.attackSpeedInS = float.MaxValue;
                 datePrompt.SetActive(true);
                 GameController.Mechanics.seduction = true;
                 GameController.PlayerAbilities.startDate = true;

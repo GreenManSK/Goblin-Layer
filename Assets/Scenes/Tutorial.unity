@@ -2616,7 +2616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5262409791054358153, guid: ae37f2c3a1776e04eb7b9b0ab485d957, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 208.39
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5262409791054358153, guid: ae37f2c3a1776e04eb7b9b0ab485d957, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2824,7 +2824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5262409791453604820, guid: ae37f2c3a1776e04eb7b9b0ab485d957, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1776.7899
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5262409791453604820, guid: ae37f2c3a1776e04eb7b9b0ab485d957, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3709,6 +3709,7 @@ MonoBehaviour:
   attackBar: {fileID: 880273281}
   dateBar: {fileID: 1153567469}
   door: {fileID: 960751026}
+  firstGoblin: {fileID: 589490443}
   datePrompt: {fileID: 615600132}
 --- !u!4 &721584587 stripped
 Transform:
