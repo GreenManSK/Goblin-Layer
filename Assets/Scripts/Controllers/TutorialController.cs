@@ -87,7 +87,7 @@ namespace Controllers
         private IEnumerator AttackPrompt()
         {
             yield return new WaitForSeconds(0.5f);
-            GameEventSystem.Send(new DialogEvent("Swinging a sword is hard! I can't do this too often.", true));
+            GameEventSystem.Send(new DialogEvent("You", "Swinging a sword is hard! I can't do this too often.", true));
             attackBar.SetVisibility(true);
         }
 
@@ -97,7 +97,8 @@ namespace Controllers
                 return;
             if (@event.Health < 20f)
             {
-                GameEventSystem.Send(new DialogEvent("I'm too weak to kill it. Maybe I can do something to save my life..."));
+                GameEventSystem.Send(new DialogEvent("You",
+                    "I'm too weak to kill it. Maybe I can do something to save my life..."));
                 datePrompt.SetActive(true);
                 GameController.Mechanics.seduction = true;
                 GameController.PlayerAbilities.startDate = true;
@@ -108,7 +109,7 @@ namespace Controllers
         {
             if (@event.Collectible.type == CollectibleType.Key)
             {
-                GameEventSystem.Send(new DialogEvent("Key! Now I can open the door.", true));
+                GameEventSystem.Send(new DialogEvent("You", "Key! Now I can open the door.", true));
                 door.ChangeState(DoorState.Close);
             }
         }

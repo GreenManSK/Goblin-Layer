@@ -261,7 +261,7 @@ namespace Objects.Golbin
                 reaction = typeDefinition.RandomPositiveReactionText();
             }
 
-            GameEventSystem.Send(new DialogEvent(reaction, true));
+            GameEventSystem.Send(new DialogEvent("Goblin",reaction, true));
         }
 
         private Blush GetBlush(float seduction)

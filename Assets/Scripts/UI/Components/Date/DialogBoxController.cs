@@ -52,7 +52,7 @@ namespace UI.Components.Date
         {
             if (@event is DialogEvent dialogEvent)
             {
-                SetValues(dialogEvent.Text, dialogEvent.Confirmational);
+                SetValues($"<b>{dialogEvent.Name.ToUpper()}</b>\n{dialogEvent.Text}", dialogEvent.Confirmational);
             } else if (ConfirmationInputEvents.Contains(@event.GetType()))
             {
                 Confirm();
