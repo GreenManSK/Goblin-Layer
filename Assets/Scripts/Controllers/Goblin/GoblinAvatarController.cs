@@ -23,6 +23,9 @@ namespace Controllers.Goblin
         public Image glasses;
         public AccessoryDictionary accessories = new AccessoryDictionary();
 
+        public GameObject body;
+        public GameObject hiddenBody;
+
         private void Start()
         {
             UpdateDesign();
@@ -31,12 +34,18 @@ namespace Controllers.Goblin
         public void UpdateDesign()
         {
             var sprites = GoblinAvatarSprites.Instance;
+
+            SetHidden(!data.hide);
             
-            beard.SetActive(data.beard);
             foreach (var accessoryObject in accessories.Values)
             {
                 accessoryObject.SetActive(false);
             }
+            
+            if (data.hide)
+                return;
+            
+            beard.SetActive(data.beard);
             data.accessories.ForEach(accessory => accessories[accessory].SetActive(true));
             
             expression.sprite = sprites.expressions[data.expression];
@@ -57,6 +66,21 @@ namespace Controllers.Goblin
             var hair = sprites.hair[data.hairColor];
             hairBehind.sprite = hair.hairBack[data.hairBack];
             hairFront.sprite = hair.hairFront[data.hairFront];
+        }
+
+        private void SetHidden(bool show)
+        {
+            hiddenBody.SetActive(!show);
+            body.SetActive(show);
+            
+            hairBehind.gameObject.SetActive(show);
+            hairFront.gameObject.SetActive(show);
+            expression.gameObject.SetActive(show);
+            costume.gameObject.SetActive(show);
+            blush.gameObject.SetActive(show);
+            glasses.gameObject.SetActive(show);
+            
+            beard.SetActive(show);
         }
     }
     

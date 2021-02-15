@@ -83,6 +83,7 @@ namespace Objects.Golbin
             _goblinStateController.ChangeState(GoblinState.Idle);
 
             var typeDefinition = GoblinTypesConfig.GetDefinition(type);
+            var hide = data.hide;
             data = GoblinGenerator.Generate(
                 blushes: GoblinGenerator.NoBlushes,
                 glasses: typeDefinition.glasseses,
@@ -91,6 +92,7 @@ namespace Objects.Golbin
                 hairstyles: typeDefinition.hairs,
                 expressions: typeDefinition.expressions
             );
+            data.hide = hide;
         }
 
         private void OnDestroy()

@@ -7,6 +7,7 @@ namespace Entities
     [Serializable]
     public class Goblin
     {
+        public bool hide = false;
         public Glasses glasses;
         public Blush blush;
         public bool beard;

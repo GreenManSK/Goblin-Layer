@@ -2131,6 +2131,10 @@ PrefabInstance:
       value: Goblin
       objectReference: {fileID: 0}
     - target: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
+      propertyPath: data.hide
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
       propertyPath: attackSpeedInS
       value: 1
       objectReference: {fileID: 0}
