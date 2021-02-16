@@ -1332,7 +1332,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 858a3d83fb6a7bc47b7ef7ae8aeb19c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2189,7 +2189,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6131196648658499441, guid: 8ce144e2394810b43b954de653d17571, type: 3}
   m_PrefabInstance: {fileID: 589490442}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 602923000}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5826252d23944c38ba8d60c0f67f41f9, type: 3}
@@ -2616,7 +2616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5262409791054358153, guid: ae37f2c3a1776e04eb7b9b0ab485d957, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 208.39
       objectReference: {fileID: 0}
     - target: {fileID: 5262409791054358153, guid: ae37f2c3a1776e04eb7b9b0ab485d957, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2824,7 +2824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5262409791453604820, guid: ae37f2c3a1776e04eb7b9b0ab485d957, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1776.7899
       objectReference: {fileID: 0}
     - target: {fileID: 5262409791453604820, guid: ae37f2c3a1776e04eb7b9b0ab485d957, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3032,6 +3032,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae37f2c3a1776e04eb7b9b0ab485d957, type: 3}
+--- !u!1 &602923000 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4217182549281233305, guid: 8ce144e2394810b43b954de653d17571, type: 3}
+  m_PrefabInstance: {fileID: 589490442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &602923001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602923000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acfa071bff4b44bab59d6cff47c53e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drop: {fileID: 3387886882410813643, guid: fcfa14e62b157fa47b2df667265970df, type: 3}
 --- !u!1 &607889532
 GameObject:
   m_ObjectHideFlags: 0
@@ -3673,6 +3691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 696320658}
   - component: {fileID: 696320659}
+  - component: {fileID: 696320660}
   m_Layer: 0
   m_Name: TutorialController
   m_TagString: Untagged
@@ -3711,6 +3730,21 @@ MonoBehaviour:
   door: {fileID: 960751026}
   firstGoblin: {fileID: 589490443}
   datePrompt: {fileID: 615600132}
+--- !u!114 &696320660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696320657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0bc2de6443489e90ded689e2f07198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  step: 0
+  goblin: {fileID: 589490443}
+  dateUi: {fileID: 404277830}
 --- !u!4 &721584587 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 751843364315867891, guid: 8e6b74f6d39a92542abf4e8af66938af, type: 3}
@@ -6606,6 +6640,82 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[0].quantity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[1].quantity
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[2].quantity
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[0].present.icon
+      value: Ro
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[0].present.name
+      value: Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[1].present.icon
+      value: Ro
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[1].present.name
+      value: Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[2].present.icon
+      value: Ro
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[2].present.name
+      value: Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[0].present.strength
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[0].present.description
+      value: Just a rock.
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[1].present.description
+      value: Just a rock.
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[2].present.description
+      value: Just a rock.
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[0].present.likedBy.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[1].present.likedBy.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[2].present.likedBy.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[0].present.likedBy.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 163654347452450973, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
+      propertyPath: items.Array.data[1].present.likedBy.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8476582001863451576, guid: f82724171a6e11a43807d7ea1ad36b48, type: 3}
       propertyPath: m_FlipX
       value: 1
@@ -7186,6 +7296,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1271216391237526674, guid: 776a1a7d773cbdd42818f0b4563988ba, type: 3}
+      propertyPath: drop
+      value: 
+      objectReference: {fileID: 1183179997748511594, guid: 15c2443c5632b2840a71420caa7fa892, type: 3}
+    - target: {fileID: 6370249112596886877, guid: 776a1a7d773cbdd42818f0b4563988ba, type: 3}
       propertyPath: drop
       value: 
       objectReference: {fileID: 1183179997748511594, guid: 15c2443c5632b2840a71420caa7fa892, type: 3}

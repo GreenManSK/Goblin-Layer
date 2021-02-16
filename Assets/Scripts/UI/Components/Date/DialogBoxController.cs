@@ -28,7 +28,8 @@ namespace UI.Components.Date
 
         private bool _controlsEnabled = false;
         private bool _needsConfirmation = false;
-        private Queue<DialogEvent> dialogs = new Queue<DialogEvent>();
+        private readonly Queue<DialogEvent> _dialogs = new Queue<DialogEvent>();
+        private DialogEvent _lastNonConfirmation = new DialogEvent("", "", false);
 
         private void Awake()
         {
@@ -60,11 +61,12 @@ namespace UI.Components.Date
             {
                 if (dialogEvent.Confirmational)
                 {
-                    dialogs.Enqueue(dialogEvent);
-                    DisplayDialog(dialogs.Peek());
+                    _dialogs.Enqueue(dialogEvent);
+                    DisplayDialog(_dialogs.Peek());
                 }
                 else
                 {
+                    _lastNonConfirmation = dialogEvent;
                     DisplayDialog(dialogEvent);
                 }
             } else if (ConfirmationInputEvents.Contains(@event.GetType()))
@@ -90,13 +92,14 @@ namespace UI.Components.Date
         {
             if (!_needsConfirmation)
                 return;
-            dialogs.Dequeue();
-            if (dialogs.Count > 0)
+            _dialogs.Dequeue();
+            if (_dialogs.Count > 0)
             {
-                DisplayDialog(dialogs.Peek());
+                DisplayDialog(_dialogs.Peek());
             }
             else
             {
+                DisplayDialog(_lastNonConfirmation);
                 _needsConfirmation = false;
                 DisableControls();
                 GameEventSystem.Send(new DialogConfirmationEvent());
