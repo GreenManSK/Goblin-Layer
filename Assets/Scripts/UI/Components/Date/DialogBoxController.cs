@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Controllers;
 using Events;
 using Events.Game;
@@ -25,11 +26,12 @@ namespace UI.Components.Date
         public TMP_Text text;
         public GameObject nextIndicator;
 
+        private bool _controlsEnabled = false;
         private bool _needsConfirmation = false;
+        private Queue<DialogEvent> dialogs = new Queue<DialogEvent>();
 
         private void Awake()
         {
-            SetValues("");
             GameEventSystem.Subscribe(typeof(DialogEvent), this);
         }
 
@@ -40,51 +42,64 @@ namespace UI.Components.Date
 
         private void EnableControls()
         {
+            if (_controlsEnabled)
+                return;
+            _controlsEnabled = true;
             GameEventSystem.Subscribe(ConfirmationInputEvents, this);
         }
 
         private void DisableControls()
         {
-            GameEventSystem.Subscribe(ConfirmationInputEvents, this);
+            GameEventSystem.Unsubscribe(ConfirmationInputEvents, this);
+            _controlsEnabled = false;
         }
 
         public void OnEvent(IEvent @event)
         {
             if (@event is DialogEvent dialogEvent)
             {
-                SetValues($"<b>{dialogEvent.Name.ToUpper()}</b>\n{dialogEvent.Text}", dialogEvent.Confirmational);
+                if (dialogEvent.Confirmational)
+                {
+                    dialogs.Enqueue(dialogEvent);
+                    DisplayDialog(dialogs.Peek());
+                }
+                else
+                {
+                    DisplayDialog(dialogEvent);
+                }
             } else if (ConfirmationInputEvents.Contains(@event.GetType()))
             {
                 Confirm();
             }
         }
 
-        private void SetValues([CanBeNull] string dialogText = null, bool needConfirmation = false)
+        private void DisplayDialog(DialogEvent dialog)
         {
-            if (dialogText != null)
-            {
-                text.text = dialogText;
-            }
+            text.text = $"<b>{dialog.Name.ToUpper()}</b>\n{dialog.Text}";
 
-            if (needConfirmation)
+            if (dialog.Confirmational)
             {
                 EnableControls();
                 GameEventSystem.Send(new StopEvent());
-                nextIndicator.SetActive(needConfirmation);
-                _needsConfirmation = needConfirmation;
+                _needsConfirmation = true;
             }
-
             nextIndicator.SetActive(_needsConfirmation);
         }
 
         private void Confirm()
         {
-            if (gameObject.activeSelf && _needsConfirmation)
+            if (!_needsConfirmation)
+                return;
+            dialogs.Dequeue();
+            if (dialogs.Count > 0)
+            {
+                DisplayDialog(dialogs.Peek());
+            }
+            else
             {
                 _needsConfirmation = false;
-                SetValues(needConfirmation: false);
-                GameEventSystem.Send(new DialogConfirmationEvent());
                 DisableControls();
+                GameEventSystem.Send(new DialogConfirmationEvent());
                 GameEventSystem.Send(new ResumeEvent());
             }
         }
