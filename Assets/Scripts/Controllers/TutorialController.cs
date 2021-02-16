@@ -29,6 +29,7 @@ namespace Controllers
 
         public DoorController door;
         public GoblinController firstGoblin;
+        public List<SpikesController> spikes = new List<SpikesController>();
 
         public GameObject datePrompt;
 
@@ -49,6 +50,11 @@ namespace Controllers
         private void OnDisable()
         {
             GameEventSystem.Unsubscribe(ListenEvents, this);
+        }
+
+        public void ToggleSpikes()
+        {
+            spikes.ForEach(s => s.ChangeState(s.state == SpikesState.Down ? SpikesState.Up : SpikesState.Down));
         }
 
         public void OnEvent(IEvent @event)
@@ -115,6 +121,12 @@ namespace Controllers
             {
                 GameEventSystem.Send(new DialogEvent("You", "Key! Now I can open the door.", true));
                 door.ChangeState(DoorState.Close);
+            } else if (@event.Collectible.type == CollectibleType.Compendium)
+            {
+                GameEventSystem.Send(new DialogEvent("You", "\"Compendium: Guide to seducing goblins\" What degenerate would write something like this? And who would read it?"));
+                GameEventSystem.Send(new HealEvent(640f));
+                GameController.PlayerAbilities.die = true;
+                ToggleSpikes();
             }
         }
     }

@@ -10,8 +10,6 @@ namespace Controllers
     public class ActivationPointController : MonoBehaviour
     {
         public List<GoblinController> goblins = new List<GoblinController>();
-        public List<SpikesController> spikes = new List<SpikesController>();
-
         public UnityEvent triggers;
         
         private void OnTriggerEnter2D(Collider2D other)
@@ -19,15 +17,9 @@ namespace Controllers
             if (other.gameObject.CompareTag(Tags.Player))
             {
                 ActivateGoblins(other.gameObject);
-                ActivateSpikes();
                 triggers?.Invoke();
                 Destroy(gameObject);
             }
-        }
-
-        private void ActivateSpikes()
-        {
-            spikes.ForEach(s => s.ChangeState(SpikesState.Up));
         }
 
         private void ActivateGoblins(GameObject player)

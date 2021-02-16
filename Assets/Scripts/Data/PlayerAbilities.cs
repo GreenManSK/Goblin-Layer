@@ -7,6 +7,7 @@ namespace Data
     {
         public bool attack = true;
         public bool startDate = true;
+        public bool die = true;
 
         // Dating
         public bool compendium = true;

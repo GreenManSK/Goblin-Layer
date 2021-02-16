@@ -28,7 +28,8 @@ namespace Objects.Player
             typeof(DateEvent),
             typeof(StopEvent),
             typeof(ResumeEvent),
-            typeof(AttackButtonEvent)
+            typeof(AttackButtonEvent),
+            typeof(HealEvent)
         }.AsReadOnly();
 
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
@@ -143,17 +144,23 @@ namespace Objects.Player
                 case AttackButtonEvent _:
                     Attack();
                     break;
+                case HealEvent healEvent:
+                    OnHealEvent(healEvent);
+                    break;
             }
+        }
+
+        private void OnHealEvent(HealEvent @event)
+        {
+            ChangHealth(+@event.Health);
         }
 
         private void OnAttackEvent(AttackEvent @event)
         {
             if (@event.Target != gameObject)
                 return;
-            health -= @event.Damage;
-            GameEventSystem.Send(new PlayerHealthChange(health));
-            _sprite.color = Color.Lerp(Color.red, Color.white, Mathf.Max(0, health / 100));
-            if (health < 0)
+            ChangHealth(-@event.Damage);
+            if (health <= 0 && GameController.PlayerAbilities.die)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
@@ -176,6 +183,14 @@ namespace Objects.Player
                 _playerStateController.ChangeState(_playerStateController.LastState == PlayerState.Moving
                     ? PlayerState.Idle
                     : _playerStateController.LastState);
+        }
+
+        private void ChangHealth(float change)
+        {
+            health += change;
+            health = Mathf.Min(health, 100f);
+            GameEventSystem.Send(new PlayerHealthChange(health));
+            _sprite.color = Color.Lerp(Color.red, Color.white, Mathf.Max(0, health / 100));
         }
 
         private bool CanMove()
