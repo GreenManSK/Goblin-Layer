@@ -89,6 +89,8 @@ namespace Objects.Golbin.Behaviours
             {
                 foreach (var near in Context.goblinsNear)
                 {
+                    if (near == null || near.transform == null)
+                        continue;
                     avoidanceDirection += (position - (Vector2)near.transform.position).normalized;
                 }
                 avoidanceDirection /= Context.goblinsNear.Count;

@@ -202,7 +202,7 @@ namespace Objects.Golbin
                     SendDialogReaction(change);
                 }
             }
-            else if (GoblinTypesConfig.IsPositiveSeduction(type, @event.Type))
+            else if (@event.ByPlayer && GoblinTypesConfig.IsPositiveSeduction(type, @event.Type))
             {
                 change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.SeeOthers);
             }
