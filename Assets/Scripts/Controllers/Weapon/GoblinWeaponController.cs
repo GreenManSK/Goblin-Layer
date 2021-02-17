@@ -28,7 +28,11 @@ namespace Controllers.Weapon
             if (go.CompareTag(TargetTag) && !_alreadyHit)
             {
                 GameEventSystem.Send(new AttackEvent(goblin.Player, Game.BaseGoblinAttack));
-                GameEventSystem.Send(new SeductionEvent(goblin, SeductionType.AttackPlayer, Game.BaseSeduction, false));
+                if (GameController.Mechanics.attackSeduction)
+                {
+                    GameEventSystem.Send(new SeductionEvent(goblin, SeductionType.AttackPlayer, Game.BaseSeduction,
+                        false));
+                }
             }
         }
     }

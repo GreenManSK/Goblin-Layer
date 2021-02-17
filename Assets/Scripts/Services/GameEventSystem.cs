@@ -34,7 +34,7 @@ namespace Services
 
         public static void Send<T>(T @event) where T : IEvent
         {
-            if (_instance._isSending)
+            if (Instance._isSending)
             {
                 _instance._queue.Enqueue(@event);
             }

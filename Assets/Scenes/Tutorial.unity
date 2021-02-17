@@ -3332,7 +3332,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5262409791054358153, guid: ae37f2c3a1776e04eb7b9b0ab485d957, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 208.39
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5262409791054358153, guid: ae37f2c3a1776e04eb7b9b0ab485d957, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3540,7 +3540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5262409791453604820, guid: ae37f2c3a1776e04eb7b9b0ab485d957, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1776.7899
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5262409791453604820, guid: ae37f2c3a1776e04eb7b9b0ab485d957, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8922,6 +8922,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8046450759108593940, guid: 121cf0f1f30af864e96d969c30fc556d, type: 3}
       propertyPath: playerAbilities.present
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8046450759108593940, guid: 121cf0f1f30af864e96d969c30fc556d, type: 3}
+      propertyPath: mechanics.attackSeduction
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8046450759108593940, guid: 121cf0f1f30af864e96d969c30fc556d, type: 3}

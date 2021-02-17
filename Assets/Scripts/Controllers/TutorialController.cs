@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Constants;
+using Data;
 using Entities.Types;
 using Events;
 using Events.Goblin;
@@ -174,6 +175,7 @@ namespace Controllers
                         "\"Compendium: Guide to seducing goblins\" What degenerate would write something like this? And who would read it?"));
                     GameEventSystem.Send(new HealEvent(640f));
                     GameController.PlayerAbilities.die = true;
+                    GameController.Mechanics.attackSeduction = true;
                     ToggleSpikes();
                     break;
             }

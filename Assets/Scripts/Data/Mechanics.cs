@@ -6,5 +6,6 @@ namespace Data
     public class Mechanics
     {
         public bool seduction = true;
+        public bool attackSeduction = true;
     }
 }
