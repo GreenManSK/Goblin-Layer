@@ -15,6 +15,10 @@ namespace Controllers.Date.Behaviours
         {
             base.OnTransitionIn(context);
             Context.StartDate();
+            if (Context.AvailableActions <= 0)
+            {
+                StopDate();
+            }
         }
 
         private void StopDate()
@@ -66,7 +70,7 @@ namespace Controllers.Date.Behaviours
             Context.goblins.RemoveAt(index);
             if (Context.goblins.Count <= 0)
             {
-                GameEventSystem.Send(new DateEvent(false));
+                StopDate();
             }
             else
             {
