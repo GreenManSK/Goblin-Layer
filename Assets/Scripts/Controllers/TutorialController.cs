@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Constants;
 using Entities.Types;
 using Events;
 using Events.Goblin;
@@ -12,6 +13,8 @@ using Objects.Golbin;
 using Services;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Scene = Constants.Scene;
 
 namespace Controllers
 {
@@ -32,8 +35,10 @@ namespace Controllers
         public DoorController door;
         public GoblinController firstGoblin;
         public List<SpikesController> spikes = new List<SpikesController>();
+        public TrapdoorController trapdoor;
 
         public GameObject datePrompt;
+        public Scene nextScene;
 
         private bool _attacked = false;
         private int _date = 0;
@@ -65,6 +70,11 @@ namespace Controllers
             _date++;
         }
 
+        public void NextLevel()
+        {
+            SceneManager.LoadScene(nextScene.GetName());
+        }
+
         public void OnEvent(IEvent @event)
         {
             switch (@event)
@@ -92,7 +102,7 @@ namespace Controllers
             _deadGoblins++;
             if (_deadGoblins >= 3)
             {
-                GameEventSystem.Send(new DialogEvent("GreenCat", "Congratz man, you won the tutorial. Nice dating skilzz!"));
+                trapdoor.SetState(TrapdoorState.Open);
             }
         }
 

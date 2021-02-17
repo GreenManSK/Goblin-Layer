@@ -5695,7 +5695,7 @@ MonoBehaviour:
   compendiumUi: {fileID: 5262409791125783160}
   inventoryGrid: {fileID: 5262409791766338679}
   canMove: 1
-  compendiumButton: {fileID: 0}
+  compendiumButton: {fileID: 5262409791453604823}
   talkButtons:
   - {fileID: 5262409791057884501}
   - {fileID: 5262409789931990510}
