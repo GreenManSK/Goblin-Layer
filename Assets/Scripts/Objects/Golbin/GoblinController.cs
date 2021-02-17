@@ -98,7 +98,7 @@ namespace Objects.Golbin
         private void OnDestroy()
         {
             GameEventSystem.Unsubscribe(ListenEvents, this);
-            if (!_goblinStateController.IsState(GoblinState.Idle))
+            if (_goblinStateController && !_goblinStateController.IsState(GoblinState.Idle))
             {
                 GameEventSystem.Send(new GoblinDeathEvent(this));
             }
@@ -239,7 +239,6 @@ namespace Objects.Golbin
             Updated?.Invoke();
             if (seduction >= 100)
             {
-                GameEventSystem.Send(new GoblinDeathEvent(this));
                 Destroy(gameObject);
             }
         }

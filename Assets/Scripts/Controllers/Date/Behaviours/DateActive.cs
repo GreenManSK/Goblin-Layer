@@ -19,7 +19,6 @@ namespace Controllers.Date.Behaviours
 
         private void StopDate()
         {
-            Context.EnableDating();
             Context.StateController.ChangeState(DateState.NonActive);
             GameEventSystem.Send(new DateEvent(false));
         }

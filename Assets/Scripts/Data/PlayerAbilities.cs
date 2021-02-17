@@ -10,6 +10,7 @@ namespace Data
         public bool die = true;
 
         // Dating
+        public bool changeActive = true;
         public bool compendium = true;
         public bool compliment = true;
         public bool flirt = true;

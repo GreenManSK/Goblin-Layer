@@ -99,8 +99,8 @@ namespace UI.Components.Date
             }
             else
             {
-                DisplayDialog(_lastNonConfirmation);
                 _needsConfirmation = false;
+                DisplayDialog(_lastNonConfirmation);
                 DisableControls();
                 GameEventSystem.Send(new DialogConfirmationEvent());
                 GameEventSystem.Send(new ResumeEvent());

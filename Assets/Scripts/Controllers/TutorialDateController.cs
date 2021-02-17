@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Controllers.Date;
 using Entities.Types;
 using Events;
 using Events.Date;
@@ -18,16 +19,22 @@ namespace Controllers
         private static readonly ReadOnlyCollection<Type> ListenEvents = new List<Type>
         {
             typeof(SeductionEvent),
-            typeof(PresentEvent)
+            typeof(PresentEvent),
+            typeof(ChangeActiveGoblin),
+            typeof(DateUiStateChangeEvent)
         }.AsReadOnly();
 
         public int step = 0;
         // 0 compliment
         // 1 insult
         // 2 present
+        // 3 switching
+        // 4 first compliment
+        // 5 compendium
 
         public GoblinController goblin;
         public DateUiController dateUi;
+        public DateController date;
 
         private void OnEnable()
         {
@@ -41,13 +48,49 @@ namespace Controllers
 
         public void OnEvent(IEvent @event)
         {
-            if (@event is SeductionEvent seductionEvent)
+            switch (@event)
             {
-                OnSeductionEvent(seductionEvent);
+                case SeductionEvent seductionEvent:
+                    OnSeductionEvent(seductionEvent);
+                    break;
+                case PresentEvent presentEvent:
+                    OnPresentEvent(presentEvent);
+                    break;
+                case ChangeActiveGoblin changeEvent:
+                    OnChangeEvent(changeEvent);
+                    break;
+                case DateUiStateChangeEvent dateUiStateEvent:
+                    OnDateUiStateEvent(dateUiStateEvent);
+                    break;
             }
-            else if (@event is PresentEvent presentEvent)
+        }
+
+        private void OnDateUiStateEvent(DateUiStateChangeEvent dateUiStateEvent)
+        {
+            if (step == 5 && dateUiStateEvent.State == DateUiState.Compendium)
             {
-                OnPresentEvent(presentEvent);
+                GameController.Instance.playerAbilities.changeActive = true;
+                GameController.Instance.playerAbilities.compendium = true;
+                GameController.Instance.playerAbilities.compliment = true;
+                GameController.Instance.playerAbilities.flirt = true;
+                GameController.Instance.playerAbilities.insult = true;
+                GameController.Instance.playerAbilities.present = true;
+                GameController.Instance.playerAbilities.ask = true;
+                GameEventSystem.Send(new AbilityChangeEvent());
+                step++;
+            }
+        }
+
+        private void OnChangeEvent(ChangeActiveGoblin changeEvent)
+        {
+            if (step == 3 && date.ActiveGoblin.type == GoblinType.Yandere)
+            {
+                GameEventSystem.Send(new DialogEvent("You",
+                    "They look and act really different. I thought all goblins are the same. Time for compliments!"));
+                GameController.Instance.playerAbilities.changeActive = false;
+                GameController.Instance.playerAbilities.compliment = true;
+                GameEventSystem.Send(new AbilityChangeEvent());
+                step++;
             }
         }
 
@@ -83,6 +126,16 @@ namespace Controllers
                 GameController.Instance.playerAbilities.insult = false;
                 GameController.Instance.playerAbilities.present = true;
                 GameEventSystem.Send(new AbilityChangeEvent());
+            }
+            else if (step == 4 && seductionEvent.Type == SeductionType.Compliment)
+            {
+                GameEventSystem.Send(new DialogEvent("You",
+                    "The other goblin didn't seem to like I complimented this one. Maybe I should take a look at the book I picked up... Mom, please forgive me."));
+                GameController.Instance.playerAbilities.compliment = false;
+                GameController.Instance.playerAbilities.changeActive = true;
+                GameController.Instance.playerAbilities.compendium = true;
+                GameEventSystem.Send(new AbilityChangeEvent());
+                step++;
             }
         }
     }

@@ -1,5 +1,7 @@
 using System;
+using Events.Date;
 using Objects.StateMachine;
+using Services;
 using UI.Controllers.Date.Behaviours;
 using UnityEngine;
 
@@ -11,6 +13,12 @@ namespace UI.Controllers.Date
         protected override DateUiController GetContext()
         {
             return GetComponent<DateUiController>();
+        }
+
+        public override void ChangeState(DateUiState state)
+        {
+            base.ChangeState(state);
+            GameEventSystem.Send(new DateUiStateChangeEvent(state));
         }
 
         protected override IBehaviour<DateUiController, DateUiState> CreateBehaviour(DateUiState state)

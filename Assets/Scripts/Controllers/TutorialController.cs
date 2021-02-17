@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Entities.Types;
 using Events;
+using Events.Goblin;
 using Events.Player;
 using Events.UI;
 using Objects.Enviroment;
@@ -21,7 +22,8 @@ namespace Controllers
             typeof(CollectibleEvent),
             typeof(PlayerHealthChange),
             typeof(PlayerAttackEvent),
-            typeof(DateEvent)
+            typeof(DateEvent),
+            typeof(GoblinDeathEvent)
         }.AsReadOnly();
 
         public AttackBar attackBar;
@@ -34,7 +36,8 @@ namespace Controllers
         public GameObject datePrompt;
 
         private bool _attacked = false;
-        private bool _dated = false;
+        private int _date = 0;
+        private int _deadGoblins = 0;
 
         private void Start()
         {
@@ -57,6 +60,11 @@ namespace Controllers
             spikes.ForEach(s => s.ChangeState(s.state == SpikesState.Down ? SpikesState.Up : SpikesState.Down));
         }
 
+        public void PrepareSecondEncounter()
+        {
+            _date++;
+        }
+
         public void OnEvent(IEvent @event)
         {
             switch (@event)
@@ -73,16 +81,44 @@ namespace Controllers
                 case DateEvent dateEvent:
                     OnDateEvent(dateEvent);
                     break;
+                case GoblinDeathEvent _:
+                    OnGoblinDeathEvent();
+                    break;
+            }
+        }
+
+        private void OnGoblinDeathEvent()
+        {
+            _deadGoblins++;
+            if (_deadGoblins >= 3)
+            {
+                GameEventSystem.Send(new DialogEvent("GreenCat", "Congratz man, you won the tutorial. Nice dating skilzz!"));
             }
         }
 
         private void OnDateEvent(DateEvent @event)
         {
-            if (_dated || !@event.Start)
+            if (_date == 3 && !@event.Start)
+            {
+                GameEventSystem.Send(new DialogEvent("You",
+                    "It's so embarrassing! I need some time before I speak with them again. Maybe I should run, so they don't kill me in the meantime."));
+                _date++;
+            }
+
+            if (!@event.Start)
                 return;
-            _dated = true;
-            dateBar.SetVisibility(true);
-            GameEventSystem.Send(new DialogEvent("You", "Maybe a compliment will convince it to spare my life?", false));
+            if (_date == 0)
+            {
+                dateBar.SetVisibility(true);
+                GameEventSystem.Send(new DialogEvent("You", "Maybe a compliment will convince it to spare my life?",
+                    false));
+                _date++;
+            }
+            else if (_date == 2)
+            {
+                GameEventSystem.Send(new DialogEvent("You", "Now there are two of them. I should check out both."));
+                _date++;
+            }
         }
 
         private void OnPlayerAttackEvent()
@@ -117,16 +153,19 @@ namespace Controllers
 
         private void OnCollectibleEvent(CollectibleEvent @event)
         {
-            if (@event.Collectible.type == CollectibleType.Key)
+            switch (@event.Collectible.type)
             {
-                GameEventSystem.Send(new DialogEvent("You", "Key! Now I can open the door.", true));
-                door.ChangeState(DoorState.Close);
-            } else if (@event.Collectible.type == CollectibleType.Compendium)
-            {
-                GameEventSystem.Send(new DialogEvent("You", "\"Compendium: Guide to seducing goblins\" What degenerate would write something like this? And who would read it?"));
-                GameEventSystem.Send(new HealEvent(640f));
-                GameController.PlayerAbilities.die = true;
-                ToggleSpikes();
+                case CollectibleType.Key:
+                    GameEventSystem.Send(new DialogEvent("You", "Key! Now I can open the door.", true));
+                    door.ChangeState(DoorState.Close);
+                    break;
+                case CollectibleType.Compendium:
+                    GameEventSystem.Send(new DialogEvent("You",
+                        "\"Compendium: Guide to seducing goblins\" What degenerate would write something like this? And who would read it?"));
+                    GameEventSystem.Send(new HealEvent(640f));
+                    GameController.PlayerAbilities.die = true;
+                    ToggleSpikes();
+                    break;
             }
         }
     }

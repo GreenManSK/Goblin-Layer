@@ -35,6 +35,7 @@ namespace Controllers.Date
         public int ActiveIndex => _activeIndex;
         public int AvailableActions => _availableActions;
         public DateStateController StateController => _stateController;
+        public GoblinController ActiveGoblin => goblins[_activeIndex];
 
         public bool canDate = true;
         public bool started = false;
@@ -124,6 +125,7 @@ namespace Controllers.Date
             dialogBox.gameObject.SetActive(false);
             dateUi.gameObject.SetActive(false);
             GameController.Instance.SetCameraTarget();
+            EnableDating();
         }
 
         public void SetActiveGoblin(int index)

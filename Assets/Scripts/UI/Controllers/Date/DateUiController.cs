@@ -96,7 +96,7 @@ namespace UI.Controllers.Date
 
         private void ChangeActive(InputAction.CallbackContext ctx)
         {
-            if (!canMove || _goblins.Count <= 1)
+            if (!GameController.PlayerAbilities.changeActive || !canMove || _goblins.Count <= 1)
                 return;
             var input = ctx.ReadValue<Vector2>();
             if (input.magnitude < 1)
