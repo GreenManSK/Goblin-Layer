@@ -37,6 +37,7 @@ namespace Controllers
         public GoblinController firstGoblin;
         public List<SpikesController> spikes = new List<SpikesController>();
         public TrapdoorController trapdoor;
+        public GameObject blocker;
 
         public GameObject datePrompt;
         public Scene nextScene;
@@ -64,6 +65,7 @@ namespace Controllers
         public void ToggleSpikes()
         {
             spikes.ForEach(s => s.ChangeState(s.state == SpikesState.Down ? SpikesState.Up : SpikesState.Down));
+            blocker.SetActive(!blocker.activeSelf);
         }
 
         public void PrepareSecondEncounter()
