@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Constants;
@@ -14,9 +15,11 @@ namespace UI.Components.Compendium
         public GameObject typeButtonPrefab;
         public GameObject typeButtonsContainer;
 
+        public TMP_Text closeButtonText;
         public TMP_Text title;
         public TMP_Text description;
         public TMP_Text likes;
+        public List<TMP_Text> subTitles;
 
         public HairSectionController hairSection;
         public CostumeSectionController costumeSection;
@@ -24,10 +27,13 @@ namespace UI.Components.Compendium
         public AccessorySectionController accessorySection;
 
         private List<TypeButtonController> _typeButtons = new List<TypeButtonController>();
+        private bool _buttonFontSizeSet = false;
 
         private void Start()
         {
             PrepareTypeButtons();
+            closeButtonText.fontSize = closeButtonText.fontSizeMin;
+            closeButtonText.enableAutoSizing = true;
         }
 
         private void OnDestroy()
@@ -54,6 +60,33 @@ namespace UI.Components.Compendium
             SelectType(Game.UnlockedTypes[0]);
         }
 
+        private void Update()
+        {
+            if (!_buttonFontSizeSet && !Mathf.Approximately(closeButtonText.fontSize, closeButtonText.fontSizeMin))
+            {
+                closeButtonText.enableAutoSizing = false;
+                var size = closeButtonText.fontSize;
+                SetFontSizes(size);
+                _typeButtons.ForEach(b => b.SetFontSize(size));
+                _buttonFontSizeSet = true;
+            }
+        }
+
+        private void SetFontSizes(float baseSize)
+        {
+            _typeButtons.ForEach(b => b.SetFontSize(baseSize));
+            
+            title.fontSize = 2 * baseSize;
+            description.fontSize = baseSize;
+            likes.fontSize = baseSize;
+            subTitles.ForEach(t => t.fontSize = 1.5f * baseSize);
+
+            hairSection.title.fontSize = baseSize;
+            costumeSection.title.fontSize = baseSize;
+            glassesSection.title.fontSize = baseSize;
+            accessorySection.title.fontSize = baseSize;
+        }
+
         private void SelectType(GoblinType type)
         {
             _typeButtons.ForEach(b => b.SetActive(b.type == type));
@@ -66,7 +99,7 @@ namespace UI.Components.Compendium
                          (definition.envy > 0 ? "\nIs envious of other girls" : "");
 
             hairSection.SetItems(definition.hairs);
-            
+
             var hasCostumes = definition.costumes.Length > 0;
             costumeSection.gameObject.SetActive(hasCostumes);
             costumeSection.SetItems(definition.costumes);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace UI.Components.Compendium
@@ -7,7 +8,7 @@ namespace UI.Components.Compendium
     public abstract class AppearanceSectionController<T> : MonoBehaviour
     {
         public GameObject itemPrefab;
-        public GameObject title;
+        public TMP_Text title;
 
         private readonly List<GameObject> _items = new List<GameObject>();
 

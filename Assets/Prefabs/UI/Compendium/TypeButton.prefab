@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
-  m_VerticalFit: 2
+  m_VerticalFit: 0
 --- !u!114 &4609390040782145282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,3 +438,4 @@ MonoBehaviour:
   button: {fileID: 3603879857980977006}
   title: {fileID: 3603879857746640398}
   indicator: {fileID: 3603879857723837094}
+  type: 0
