@@ -89,7 +89,7 @@ namespace UI.Controllers.Date
         {
             _target = goblin;
             encounterBar.SetActive(goblin);
-            typeBar.SetData(goblin);
+            typeBar.SetData(goblin, actionBar.fontSize);
             avatar.data = goblin.data;
             avatar.UpdateDesign();
         }

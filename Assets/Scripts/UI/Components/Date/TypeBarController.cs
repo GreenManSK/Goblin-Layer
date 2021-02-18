@@ -7,9 +7,9 @@ namespace UI.Components.Date
     {
         public TypeBarItemController item;
 
-        public void SetData(GoblinController goblin)
+        public void SetData(GoblinController goblin, float fontSize)
         {
-            item.SetData(goblin);
+            item.SetData(goblin, fontSize);
         }
     }
 }
