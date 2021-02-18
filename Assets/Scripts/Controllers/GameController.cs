@@ -34,6 +34,20 @@ namespace Controllers
         private void Awake()
         {
             _instance = this;
+            FindDependencies();
+        }
+
+        private void FindDependencies()
+        {
+            if (player == null)
+            {
+                player = FindObjectOfType<PlayerController>();
+            }
+
+            if (mainCamera == null)
+            {
+                mainCamera = FindObjectOfType<CinemachineVirtualCamera>();
+            }
         }
 
         private void OnDestroy()

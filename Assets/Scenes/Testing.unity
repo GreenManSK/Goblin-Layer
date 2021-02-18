@@ -6171,23 +6171,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &2054293182 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3611453451873614378, guid: 028caed8b91a69848baae3ccf01a6f44, type: 3}
-  m_PrefabInstance: {fileID: 5676051989405364800}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2054293183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054293182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e846538fa47468a8ec5b8444aa9d3ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2060888047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6682,6 +6665,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5608734155129690670, guid: bb3076e998d3a19479ca1af9278e141c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6692716832454230354, guid: bb3076e998d3a19479ca1af9278e141c, type: 3}
+      propertyPath: definitions.isExpanded
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6692716832454230354, guid: bb3076e998d3a19479ca1af9278e141c, type: 3}
+      propertyPath: definitions.reorderableList.isExpanded
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

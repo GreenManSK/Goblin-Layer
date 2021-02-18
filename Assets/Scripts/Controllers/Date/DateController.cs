@@ -50,6 +50,23 @@ namespace Controllers.Date
 
         private DateStateController _stateController;
 
+        private void Awake()
+        {
+            FindDependencies();
+        }
+
+        private void FindDependencies()
+        {
+            if (dateUi == null)
+            {
+                dateUi = FindObjectOfType<DateUiController>();
+            }
+            if (dialogBox == null)
+            {
+                dialogBox = FindObjectOfType<DialogBoxController>();
+            }
+        }
+
         private void Start()
         {
             _stateController = GetComponent<DateStateController>();
