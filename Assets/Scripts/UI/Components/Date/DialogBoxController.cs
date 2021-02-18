@@ -1,17 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using Controllers;
 using Events;
 using Events.Game;
 using Events.Input;
 using Events.UI;
-using JetBrains.Annotations;
 using Services;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace UI.Components.Date
 {
@@ -23,6 +19,7 @@ namespace UI.Components.Date
             typeof(DateButtonEvent)
         }.AsReadOnly();
 
+        public GameObject box;
         public TMP_Text text;
         public GameObject nextIndicator;
 
@@ -39,6 +36,11 @@ namespace UI.Components.Date
         private void OnDestroy()
         {
             GameEventSystem.Unsubscribe(typeof(DialogEvent), this);
+        }
+
+        public void SetActive(bool active)
+        {
+            box.SetActive(active);
         }
 
         private void EnableControls()

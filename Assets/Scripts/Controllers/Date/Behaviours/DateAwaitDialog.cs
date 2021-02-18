@@ -12,7 +12,7 @@ namespace Controllers.Date.Behaviours
         {
             base.OnTransitionIn(context);
             // context.started = true;
-            Context.dialogBox.gameObject.SetActive(true);
+            Context.dialogBox.SetActive(true);
         }
 
         public override bool ProcessEvent(IEvent @event)

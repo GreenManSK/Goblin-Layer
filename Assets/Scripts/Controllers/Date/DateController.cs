@@ -109,7 +109,7 @@ namespace Controllers.Date
             _arrow = Instantiate(arrowPrefab, transform);
             dateUi.SetData(goblins);
             dateUi.gameObject.SetActive(true);
-            dialogBox.gameObject.SetActive(true);
+            dialogBox.SetActive(true);
             SetActiveGoblin(0);
         }
 
@@ -122,7 +122,7 @@ namespace Controllers.Date
                 _arrow = null;
             }
 
-            dialogBox.gameObject.SetActive(false);
+            dialogBox.SetActive(false);
             dateUi.gameObject.SetActive(false);
             GameController.Instance.SetCameraTarget();
             EnableDating();
