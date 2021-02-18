@@ -4048,11 +4048,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel
-    mollis turpis. Proin eget justo eu leo porta vulputate. Vestibulum vel mollis
-    turpis. Proin eget justo eu leo porta vulputate.Lorem ipsum dolor sit amet, consectetur
-    adipiscing elit. Vestibulum vel mollis turpis. Proin eget justo eu leo porta
-    vulputate. Vestibulum vel mollis turpis. Proin eget justo eu leo porta vulputate.vulputate.
+  m_text: '<b>YOU:</b>
+
+    Nobody is here. Who am I supposed to seduce? You?!
+
+    Nobody
+    is here. Who am I supposed to seduce? You?!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4079,12 +4080,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
+  m_fontSize: 18.4
   m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 12
-  m_fontSizeMax: 32
+  m_fontSizeMax: 64
   m_fontStyle: 0
   m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
@@ -5351,11 +5352,11 @@ RectTransform:
   m_Father: {fileID: 5262409790238207727}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 50}
-  m_Pivot: {x: 1, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &5262409791535650695
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5411,15 +5412,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 18.4
+  m_fontSizeBase: 18.4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 17
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 4
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -5447,7 +5448,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 10, w: 10}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7318,6 +7319,7 @@ MonoBehaviour:
   box: {fileID: 5262409790238207726}
   text: {fileID: 5262409791060990801}
   nextIndicator: {fileID: 5262409791535650691}
+  displayLines: 3
 --- !u!1001 &5262409790318714135
 PrefabInstance:
   m_ObjectHideFlags: 0

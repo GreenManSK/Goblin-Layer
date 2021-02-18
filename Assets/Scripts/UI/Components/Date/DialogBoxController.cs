@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Events;
 using Events.Game;
 using Events.Input;
@@ -22,6 +23,7 @@ namespace UI.Components.Date
         public GameObject box;
         public TMP_Text text;
         public GameObject nextIndicator;
+        public int displayLines = 3;
 
         private bool _controlsEnabled = false;
         private bool _needsConfirmation = false;
@@ -31,6 +33,21 @@ namespace UI.Components.Date
         private void Awake()
         {
             GameEventSystem.Subscribe(typeof(DialogEvent), this);
+            ComputeFontSize();
+        }
+
+        private void ComputeFontSize()
+        {
+            var startedActive = box.activeSelf;
+            box.SetActive(true);
+            
+            text.enableAutoSizing = true;
+            text.text = string.Concat(Enumerable.Repeat("text\n", displayLines));
+            text.ForceMeshUpdate();
+            text.enableAutoSizing = false;
+            nextIndicator.GetComponent<TMP_Text>().fontSize = text.fontSize;
+            
+            box.SetActive(startedActive);
         }
 
         private void OnDestroy()
