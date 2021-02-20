@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Constants;
 using Controllers;
-using Objects.Player;
 using TMPro;
 using UnityEngine;
 
@@ -14,10 +13,19 @@ namespace UI.Components.Inventory
         public GameObject itemSpotPrefab;
 
         public GameObject description;
-        public TMP_Text descriptionTitle;
         public TMP_Text descriptionText;
+        
+        public TMP_Text closeButtonText;
 
         private List<InventorySpotController> _items = new List<InventorySpotController>();
+        private bool _descriptionFontSizeSet = false;
+        private bool _closeButtonFontSizeSet = false;
+
+        private void Start()
+        {
+            closeButtonText.fontSize = closeButtonText.fontSizeMin;
+            closeButtonText.enableAutoSizing = true;
+        }
 
         private void OnEnable()
         {
@@ -31,6 +39,15 @@ namespace UI.Components.Inventory
         private void OnDestroy()
         {
             _items.ForEach(i => i.OnPointer -= OnPointer);
+        }
+
+        private void Update()
+        {
+            if (!_closeButtonFontSizeSet && !Mathf.Approximately(closeButtonText.fontSize, closeButtonText.fontSizeMin))
+            {
+                closeButtonText.enableAutoSizing = false;
+                _closeButtonFontSizeSet = true;
+            }
         }
 
         private void CreateItems()
@@ -60,10 +77,22 @@ namespace UI.Components.Inventory
         {
             if (item != null && enter)
             {
-                descriptionTitle.text = item.present.name;
-                descriptionText.text = item.present.description;
+                SetDescriptionFontSize();
+                descriptionText.text = $"<b>{item.present.name}</b>\n{item.present.description}";
             }
             description.SetActive(item != null && enter);
+        }
+
+        private void SetDescriptionFontSize()
+        {
+            if (_descriptionFontSizeSet)
+                return;
+            description.SetActive(true);
+            descriptionText.enableAutoSizing = true;
+            descriptionText.ForceMeshUpdate();
+            descriptionText.enableAutoSizing = false;
+            description.SetActive(false);
+            _descriptionFontSizeSet = true;
         }
     }
 }
