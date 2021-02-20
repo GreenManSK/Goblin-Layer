@@ -1,36 +1,27 @@
-using System.Collections;
-using Controllers;
+using Data;
 using Events;
+using Events.Game;
 using Services;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI.Bars
 {
     public class DatingBar : AUIBar, IEventListener
     {
-        public float sizeUpdates = 10;
-
         private void OnEnable()
         {
-            GameEventSystem.Subscribe(typeof(DateEvent), this);
+            GameEventSystem.Subscribe(typeof(CooldownUpdateEvent), this);
         }
 
         private void OnDisable()
         {
-            GameEventSystem.Unsubscribe(typeof(DateEvent), this);
+            GameEventSystem.Unsubscribe(typeof(CooldownUpdateEvent), this);
         }
 
         public void OnEvent(IEvent @event)
         {
-            if (!(@event is DateEvent dateEvent)) return;
-            if (dateEvent.Start)
+            if (@event is CooldownUpdateEvent cooldown && cooldown.Type == CooldownType.Date)
             {
-                UpdateScale(0);
-            }
-            else
-            {
-                StartCoroutine(UpdateSize(sizeUpdates, GameController.Instance.datingRestartTimeInS));
+                UpdateScale(cooldown.Value);
             }
         }
     }

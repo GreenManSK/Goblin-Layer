@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using Constants;
 using Controllers;
 using Controllers.Weapon;
+using Data;
 using Events;
 using Events.Game;
 using Events.Goblin;
@@ -30,7 +31,8 @@ namespace Objects.Player
             typeof(StopEvent),
             typeof(ResumeEvent),
             typeof(AttackButtonEvent),
-            typeof(HealEvent)
+            typeof(HealEvent),
+            typeof(CooldownUpdateEvent)
         }.AsReadOnly();
 
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
@@ -116,7 +118,7 @@ namespace Objects.Player
                 return;
             _canAttack = false;
             _playerStateController.ChangeState(PlayerState.Attacking);
-            StartCoroutine(RestartAttack(attackWait));
+            GameEventSystem.Send(new CooldownResetEvent(CooldownType.Attack, attackWait));
         }
 
         public void FinishAttack()
@@ -147,6 +149,9 @@ namespace Objects.Player
                     break;
                 case HealEvent healEvent:
                     OnHealEvent(healEvent);
+                    break;
+                case CooldownUpdateEvent cooldownUpdateEvent:
+                    OnCooldownUpdateEvent(cooldownUpdateEvent);
                     break;
             }
         }
@@ -186,6 +191,14 @@ namespace Objects.Player
                     : _playerStateController.LastState);
         }
 
+        private void OnCooldownUpdateEvent(CooldownUpdateEvent @event)
+        {
+            if (@event.Type == CooldownType.Attack && @event.Charged)
+            {
+                _canAttack = true;
+            }
+        }
+
         private void ChangHealth(float change)
         {
             health += change;
@@ -198,13 +211,6 @@ namespace Objects.Player
         {
             return !_playerStateController.IsState(PlayerState.Dating) &&
                    !_playerStateController.IsState(PlayerState.Stopped);
-        }
-
-        private IEnumerator RestartAttack(float waitTime)
-        {
-            GameEventSystem.Send(new AttackBarEvent(waitTime));
-            yield return new WaitForSeconds(waitTime);
-            _canAttack = true;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using Constants;
 using Data;
 using Events;
+using Events.Game;
 using Events.Goblin;
 using Events.Input;
 using Events.UI;
@@ -29,7 +30,8 @@ namespace Controllers.Date
             typeof(ChangeActiveGoblin),
             typeof(DialogEvent),
             typeof(DialogConfirmationEvent),
-            typeof(DateButtonEvent)
+            typeof(DateButtonEvent),
+            typeof(CooldownUpdateEvent)
         }.AsReadOnly();
 
         public int ActiveIndex => _activeIndex;
@@ -61,6 +63,7 @@ namespace Controllers.Date
             {
                 dateUi = FindObjectOfType<DateUiController>();
             }
+
             if (dialogBox == null)
             {
                 dialogBox = FindObjectOfType<DialogBoxController>();
@@ -93,12 +96,14 @@ namespace Controllers.Date
                 case DateActionEvent dateAction:
                     OnDateActionEvent(dateAction);
                     break;
+                case CooldownUpdateEvent cooldownUpdateEvent:
+                    OnCooldownUpdateEvent(cooldownUpdateEvent);
+                    break;
                 default:
                     _stateController.ProcessEvent(@event);
                     break;
             }
         }
-
 
         private void OnDialogEvent(DialogEvent @event)
         {
@@ -112,6 +117,14 @@ namespace Controllers.Date
         {
             _availableActions--;
             dateUi.SetActions(_availableActions, MaxActions);
+        }
+
+        private void OnCooldownUpdateEvent(CooldownUpdateEvent @event)
+        {
+            if (@event.Type == CooldownType.Date && @event.Charged)
+            {
+                canDate = true;
+            }
         }
 
         public void StartDate()
@@ -175,13 +188,10 @@ namespace Controllers.Date
 
         public void EnableDating()
         {
-            StartCoroutine(RestartDating(GameController.Instance.datingRestartTimeInS));
-        }
-
-        private IEnumerator RestartDating(float waitTime)
-        {
-            yield return new WaitForSeconds(waitTime);
-            canDate = true;
+            if (canDate)
+                return;
+            GameEventSystem.Send(
+                new CooldownResetEvent(CooldownType.Date, GameController.Instance.datingRestartTimeInS));
         }
     }
 }

@@ -1,29 +1,27 @@
+using Data;
 using Events;
-using Events.Player;
+using Events.Game;
 using Services;
 
 namespace UI.Bars
 {
     public class AttackBar : AUIBar, IEventListener
     {
-        public float sizeUpdates = 10;
-
         private void OnEnable()
         {
-            GameEventSystem.Subscribe(typeof(AttackBarEvent), this);
+            GameEventSystem.Subscribe(typeof(CooldownUpdateEvent), this);
         }
 
         private void OnDisable()
         {
-            GameEventSystem.Unsubscribe(typeof(AttackBarEvent), this);
+            GameEventSystem.Unsubscribe(typeof(CooldownUpdateEvent), this);
         }
 
         public void OnEvent(IEvent @event)
         {
-            if (@event is AttackBarEvent attackBarEvent)
+            if (@event is CooldownUpdateEvent cooldown && cooldown.Type == CooldownType.Attack)
             {
-                UpdateScale(0);
-                StartCoroutine(UpdateSize(sizeUpdates, attackBarEvent.WaitTimeInS));
+                UpdateScale(cooldown.Value);
             }
         }
     }

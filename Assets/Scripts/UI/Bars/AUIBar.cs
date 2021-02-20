@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,17 +22,6 @@ namespace UI.Bars
         {
             var localScale = bar.localScale;
             bar.localScale = new Vector3(localScale.x, y, localScale.z);
-        }
-
-        protected IEnumerator UpdateSize(float updates, float waitTimeInS)
-        {
-            var timeDelta = waitTimeInS / updates;
-            var sizeDelta = 1 / updates;
-            while (!Mathf.Approximately(bar.localScale.y, 1))
-            {
-                UpdateScale(bar.localScale.y + sizeDelta);
-                yield return new WaitForSeconds(timeDelta);
-            }
         }
     }
 }
