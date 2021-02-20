@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Constants;
 using Controllers;
 using Controllers.Weapon;
 using Events;
@@ -39,7 +40,7 @@ namespace Objects.Player
         public Vector2 direction = Vector2.zero;
         public float moveSpeed = 1f;
         public float attackWait = 10f;
-        public float health = 100f;
+        public float health = Game.MaxPlayerHealth;
         public PlayerWeaponController weapon;
         public InventoryController inventory;
 
