@@ -50,7 +50,7 @@ namespace Objects.Enviroment
                     ChangeState(DoorState.Open);
                     break;
                 case DoorState.NeedKey:
-                    GameEventSystem.Send(new DialogEvent("You","I need to find a key."));
+                    GameEventSystem.Send(new DialogEvent("You","I need to find a key.", true, DialogColor.Player));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

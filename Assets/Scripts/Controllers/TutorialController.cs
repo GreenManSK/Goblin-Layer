@@ -114,7 +114,7 @@ namespace Controllers
             if (_date == 3 && !@event.Start)
             {
                 GameEventSystem.Send(new DialogEvent("You",
-                    "It's so embarrassing! I need some time before I speak with them again. Maybe I should run, so they don't kill me in the meantime."));
+                    "It's so embarrassing! I need some time before I speak with them again. Maybe I should run, so they don't kill me in the meantime.", true, DialogColor.Player));
                 _date++;
             }
 
@@ -124,12 +124,12 @@ namespace Controllers
             {
                 dateBar.SetVisibility(true);
                 GameEventSystem.Send(new DialogEvent("You", "Maybe a compliment will convince it to spare my life?",
-                    false));
+                    false, DialogColor.Player));
                 _date++;
             }
             else if (_date == 2)
             {
-                GameEventSystem.Send(new DialogEvent("You", "Now there are two of them. I should check out both."));
+                GameEventSystem.Send(new DialogEvent("You", "Now there are two of them. I should check out both.", true, DialogColor.Player));
                 _date++;
             }
         }
@@ -145,7 +145,7 @@ namespace Controllers
         private IEnumerator AttackPrompt()
         {
             yield return new WaitForSeconds(0.5f);
-            GameEventSystem.Send(new DialogEvent("You", "Swinging a sword is hard! I can't do this too often.", true));
+            GameEventSystem.Send(new DialogEvent("You", "Swinging a sword is hard! I can't do this too often.", true, DialogColor.Player));
             attackBar.SetVisibility(true);
         }
 
@@ -156,7 +156,7 @@ namespace Controllers
             if (@event.Health < 20f)
             {
                 GameEventSystem.Send(new DialogEvent("You",
-                    "I'm too weak to kill it. Maybe I can do something to save my life..."));
+                    "I'm too weak to kill it. Maybe I can do something to save my life...", true, DialogColor.Player));
                 firstGoblin.attackSpeedInS = float.MaxValue;
                 datePrompt.SetActive(true);
                 GameController.Mechanics.seduction = true;
@@ -169,12 +169,12 @@ namespace Controllers
             switch (@event.Collectible.type)
             {
                 case CollectibleType.Key:
-                    GameEventSystem.Send(new DialogEvent("You", "Key! Now I can open the door.", true));
+                    GameEventSystem.Send(new DialogEvent("You", "Key! Now I can open the door.", true, DialogColor.Player));
                     door.ChangeState(DoorState.Close);
                     break;
                 case CollectibleType.Compendium:
                     GameEventSystem.Send(new DialogEvent("You",
-                        "\"Compendium: Guide to seducing goblins\" What degenerate would write something like this? And who would read it?"));
+                        "\"Compendium: Guide to seducing goblins\" What degenerate would write something like this? And who would read it?", true, DialogColor.Player));
                     GameEventSystem.Send(new HealEvent(640f));
                     GameController.PlayerAbilities.die = true;
                     GameController.Mechanics.attackSeduction = true;

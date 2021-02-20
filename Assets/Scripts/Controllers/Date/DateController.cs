@@ -157,7 +157,7 @@ namespace Controllers.Date
             _arrow.transform.position = goblins[_activeIndex].transform.position;
             GameController.Instance.SetCameraTarget(goblin.transform);
             GameEventSystem.Send(new DialogEvent("Goblin",
-                GoblinTypesConfig.GetDefinition(goblin.type).RandomDateStartText(), false));
+                GoblinTypesConfig.GetDefinition(goblin.type).RandomDateStartText(), false, DialogColor.Goblin));
             UpdateGoblin();
         }
 

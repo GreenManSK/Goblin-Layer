@@ -6,9 +6,11 @@ using Events;
 using Events.Game;
 using Events.Input;
 using Events.UI;
+using RotaryHeart.Lib.SerializableDictionary;
 using Services;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Components.Date
 {
@@ -23,7 +25,9 @@ namespace UI.Components.Date
         public GameObject box;
         public TMP_Text text;
         public GameObject nextIndicator;
+        public Image background;
         public int displayLines = 3;
+        public DialogColorDictionary colors;
 
         private bool _controlsEnabled = false;
         private bool _needsConfirmation = false;
@@ -36,17 +40,28 @@ namespace UI.Components.Date
             ComputeFontSize();
         }
 
+        private void Start()
+        {
+            var transparency = background.color.a;
+            foreach (DialogColor color in Enum.GetValues(typeof(DialogColor)))
+            {
+                var temp = colors[color];
+                temp.a = transparency;
+                colors[color] = temp;
+            }
+        }
+
         private void ComputeFontSize()
         {
             var startedActive = box.activeSelf;
             box.SetActive(true);
-            
+
             text.enableAutoSizing = true;
             text.text = string.Concat(Enumerable.Repeat("text\n", displayLines));
             text.ForceMeshUpdate();
             text.enableAutoSizing = false;
             nextIndicator.GetComponent<TMP_Text>().fontSize = text.fontSize;
-            
+
             box.SetActive(startedActive);
         }
 
@@ -88,7 +103,8 @@ namespace UI.Components.Date
                     _lastNonConfirmation = dialogEvent;
                     DisplayDialog(dialogEvent);
                 }
-            } else if (ConfirmationInputEvents.Contains(@event.GetType()))
+            }
+            else if (ConfirmationInputEvents.Contains(@event.GetType()))
             {
                 Confirm();
             }
@@ -97,6 +113,7 @@ namespace UI.Components.Date
         private void DisplayDialog(DialogEvent dialog)
         {
             text.text = $"<b>{dialog.Name.ToUpper()}</b>\n{dialog.Text}";
+            background.color = colors[dialog.DialogColor];
 
             if (dialog.Confirmational)
             {
@@ -104,6 +121,7 @@ namespace UI.Components.Date
                 GameEventSystem.Send(new StopEvent());
                 _needsConfirmation = true;
             }
+
             nextIndicator.SetActive(_needsConfirmation);
         }
 
@@ -125,5 +143,10 @@ namespace UI.Components.Date
                 GameEventSystem.Send(new ResumeEvent());
             }
         }
+    }
+
+    [System.Serializable]
+    public class DialogColorDictionary : SerializableDictionaryBase<DialogColor, Color>
+    {
     }
 }

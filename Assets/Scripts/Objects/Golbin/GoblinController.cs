@@ -192,7 +192,8 @@ namespace Objects.Golbin
             if (@event.Target == this)
             {
                 change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, @event.Type);
-                if (GoblinTypesConfig.IsPositiveSeduction(type, @event.Type) && @event.Type != SeductionType.Attack && @event.Type != SeductionType.AttackPlayer)
+                if (GoblinTypesConfig.IsPositiveSeduction(type, @event.Type) && @event.Type != SeductionType.Attack &&
+                    @event.Type != SeductionType.AttackPlayer)
                 {
                     change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.BeforeOthers);
                 }
@@ -247,6 +248,7 @@ namespace Objects.Golbin
         {
             var typeDefinition = GoblinTypesConfig.GetDefinition(type);
             string reaction;
+            var dialogColor = DialogColor.Default;
             if (Mathf.Approximately(change, 0))
             {
                 reaction = typeDefinition.RandomNeutralReactionText();
@@ -254,13 +256,15 @@ namespace Objects.Golbin
             else if (change < 0)
             {
                 reaction = typeDefinition.RandomNegativeReactionText();
+                dialogColor = DialogColor.Negative;
             }
             else
             {
                 reaction = typeDefinition.RandomPositiveReactionText();
+                dialogColor = DialogColor.Positive;
             }
 
-            GameEventSystem.Send(new DialogEvent("Goblin",reaction, true));
+            GameEventSystem.Send(new DialogEvent("Goblin", reaction, true, dialogColor));
         }
 
         private Blush GetBlush(float seduction)

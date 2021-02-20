@@ -53,7 +53,7 @@ namespace Controllers.Date.Behaviours
             }
             else
             {
-                GameEventSystem.Send(new DialogEvent("You","Nobody is here. Who am I supposed to seduce? You?!", true));
+                GameEventSystem.Send(new DialogEvent("You","Nobody is here. Who am I supposed to seduce? You?!", true, DialogColor.Player));
             }
         }
 

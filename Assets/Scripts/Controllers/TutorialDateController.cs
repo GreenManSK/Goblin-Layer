@@ -86,7 +86,7 @@ namespace Controllers
             if (step == 3 && date.ActiveGoblin.type == GoblinType.Yandere)
             {
                 GameEventSystem.Send(new DialogEvent("You",
-                    "They look and act really different. I thought all goblins are the same. Time for compliments!"));
+                    "They look and act really different. I thought all goblins are the same. Time for compliments!", true, DialogColor.Player));
                 GameController.Instance.playerAbilities.changeActive = false;
                 GameController.Instance.playerAbilities.compliment = true;
                 GameEventSystem.Send(new AbilityChangeEvent());
@@ -101,7 +101,7 @@ namespace Controllers
                 step++;
                 GameController.Instance.playerAbilities.present = false;
                 GameEventSystem.Send(new AbilityChangeEvent());
-                GameEventSystem.Send(new DialogEvent("You", "It dropped a book. Maybe I should check it out."));
+                GameEventSystem.Send(new DialogEvent("You", "It dropped a book. Maybe I should check it out.", true, DialogColor.Player));
             }
         }
 
@@ -113,7 +113,7 @@ namespace Controllers
                 step++;
                 dateUi.SetGoblin(goblin);
                 GameEventSystem.Send(new DialogEvent("You",
-                    "What? It does not look scary at all now. Maybe I can tell it what I think of it, and it will run away!"));
+                    "What? It does not look scary at all now. Maybe I can tell it what I think of it, and it will run away!", true, DialogColor.Player));
                 GameController.Instance.playerAbilities.compliment = false;
                 GameController.Instance.playerAbilities.insult = true;
                 GameEventSystem.Send(new AbilityChangeEvent());
@@ -122,7 +122,7 @@ namespace Controllers
             {
                 step++;
                 GameEventSystem.Send(new DialogEvent("You",
-                    "It didn't like that... Maybe I can try to give it a present? I had this nice rock with me!"));
+                    "It didn't like that... Maybe I can try to give it a present? I had this nice rock with me!", true, DialogColor.Player));
                 GameController.Instance.playerAbilities.insult = false;
                 GameController.Instance.playerAbilities.present = true;
                 GameEventSystem.Send(new AbilityChangeEvent());
@@ -130,7 +130,7 @@ namespace Controllers
             else if (step == 4 && seductionEvent.Type == SeductionType.Compliment)
             {
                 GameEventSystem.Send(new DialogEvent("You",
-                    "The other goblin didn't seem to like I complimented this one. Maybe I should take a look at the book I picked up... Mom, please forgive me."));
+                    "The other goblin didn't seem to like I complimented this one. Maybe I should take a look at the book I picked up... Mom, please forgive me.", true, DialogColor.Player));
                 GameController.Instance.playerAbilities.compliment = false;
                 GameController.Instance.playerAbilities.changeActive = true;
                 GameController.Instance.playerAbilities.compendium = true;
