@@ -176,7 +176,10 @@ namespace Controllers.Date
 
         private void UpdateGoblin()
         {
-            dateUi.SetGoblin(goblins[_activeIndex]);
+            if (dateUi.gameObject.activeSelf)
+            {
+                dateUi.SetGoblin(goblins[_activeIndex]);
+            }
         }
 
         private int GoblinSorter(GoblinController a, GoblinController b)
