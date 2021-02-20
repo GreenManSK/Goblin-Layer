@@ -212,9 +212,8 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   direction: {x: 0, y: 0}
   moveSpeed: 5
-  attackWait: 6
+  attackWait: 3
   health: 100
-  canDate: 1
   weapon: {fileID: 6506541928685748962}
   inventory: {fileID: 0}
 --- !u!95 &4171275456034840302
