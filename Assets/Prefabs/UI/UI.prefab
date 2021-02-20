@@ -3622,9 +3622,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 5262409791058461762}
-  sizeUpdates: 100
   icon: {fileID: 6913344425426351183}
   barSprite: {fileID: 5262409791058461760}
+  sizeUpdates: 100
 --- !u!1 &5262409791060990803
 GameObject:
   m_ObjectHideFlags: 0
@@ -5275,7 +5275,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb999e0e00984ffa842058eb05c23f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bars: {fileID: 3946600815830117171}
+  bars:
+  - {fileID: 8810366336522920212}
+  - {fileID: 5262409791633521829}
+  - {fileID: 5262409791058461763}
   avatar: {fileID: 1090053277718906166}
   encounterBar: {fileID: 5262409790967223578}
   actionBar: {fileID: 5262409790498961577}
@@ -5543,9 +5546,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 5262409791633521828}
-  sizeUpdates: 10
   icon: {fileID: 5534049259879638513}
   barSprite: {fileID: 5262409791633521834}
+  sizeUpdates: 10
 --- !u!1 &5262409791667999374
 GameObject:
   m_ObjectHideFlags: 0
@@ -6786,7 +6789,7 @@ GameObject:
   - component: {fileID: 3987244021224568502}
   - component: {fileID: 8810366336522920212}
   m_Layer: 5
-  m_Name: AttackBar
+  m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,6 +10,7 @@ using Events.Player;
 using Events.UI;
 using Objects.Golbin;
 using Services;
+using UI.Bars;
 using UI.Components.Date;
 using UI.Components.Inventory;
 using UnityEngine;
@@ -32,7 +33,7 @@ namespace UI.Controllers.Date
         private static readonly Vector2 PrevVector = new Vector2(-1, 1);
         private static readonly Vector2 NextVector = new Vector2(1, -1);
 
-        public GameObject bars;
+        public List<AUIBar> bars;
         public GoblinAvatarController avatar;
         public EncounterBarController encounterBar;
         public ActionBarController actionBar;
@@ -67,14 +68,14 @@ namespace UI.Controllers.Date
             GameEventSystem.Subscribe(ListenEvents, this);
             GameController.Instance.Input.Player.Move.performed += ChangeActive;
             EnableAbilities();
-            bars.SetActive(false);
+            bars.ForEach(b => b.SetVisibility(false));
         }
 
         private void OnDisable()
         {
             GameEventSystem.Unsubscribe(ListenEvents, this);
             GameController.Instance.Input.Player.Move.performed -= ChangeActive;
-            bars.SetActive(true);
+            bars.ForEach(b => b.SetVisibility(true));
         }
 
         public void SetData(List<GoblinController> goblins)

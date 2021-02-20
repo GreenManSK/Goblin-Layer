@@ -13,6 +13,7 @@ using Objects.Enviroment;
 using Objects.Golbin;
 using Services;
 using UI;
+using UI.Bars;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Scene = Constants.Scene;
