@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Entities;
 using Entities.Types;
 using RotaryHeart.Lib.SerializableDictionary;
+using Services;
 using UnityEngine;
 
 namespace Data
@@ -29,6 +32,7 @@ namespace Data
         }
 
         public GoblinTypeToDefinition definitions;
+        public List<SeductionToExpression> seductionExpressions;
 
         public static float GetMultiplier(GoblinType type, SeductionType seductionType)
         {
@@ -60,6 +64,21 @@ namespace Data
                 multiplier -= 1;
 
             return multiplier > 0;
+        }
+
+        public static Expression GetSeductionExpression(float seduction, Expression currentExpression)
+        {
+            foreach (var seductionToExpression in Instance.seductionExpressions)
+            {
+                if (seduction < seductionToExpression.upperBound)
+                {
+                    return !seductionToExpression.expressions.Contains(currentExpression)
+                        ? Helpers.GetRandom(seductionToExpression.expressions)
+                        : currentExpression;
+                }
+            }
+
+            return Expression.Normal;
         }
     }
 

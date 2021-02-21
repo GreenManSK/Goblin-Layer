@@ -50,7 +50,7 @@ MonoBehaviour:
       draggable: 1
       expandable: 1
       multipleSelection: 1
-      isExpanded: 1
+      isExpanded: 0
       label:
         m_Text: Keys
         m_Image: {fileID: 0}
@@ -65,7 +65,7 @@ MonoBehaviour:
       elementNameOverride: 
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
-    isExpanded: 1
+    isExpanded: 0
     _keyValues: 010000000000000002000000030000000400000005000000
     _keys: 010000000000000002000000030000000400000005000000
     _values:
@@ -426,3 +426,14 @@ MonoBehaviour:
       positiveReactionTexts: []
       negativeReactionTexts: []
       neutralReactionTexts: []
+  seductionExpressions:
+  - upperBound: -40
+    expressions: 01000000
+  - upperBound: 0
+    expressions: 0000000005000000
+  - upperBound: 21
+    expressions: 0400000007000000
+  - upperBound: 61
+    expressions: 08000000090000000a000000
+  - upperBound: Infinity
+    expressions: 0200000003000000

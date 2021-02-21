@@ -93,6 +93,7 @@ namespace Objects.Golbin
                 expressions: typeDefinition.expressions
             );
             data.hide = hide;
+            data.expression = GoblinTypesConfig.GetSeductionExpression(seduction, data.expression);
         }
 
         private void OnDestroy()
@@ -236,6 +237,7 @@ namespace Objects.Golbin
                 Instantiate(BoltsPrefab, transform);
             }
 
+            data.expression = GoblinTypesConfig.GetSeductionExpression(seduction, data.expression);
             GameEventSystem.Send(new SeductionChangeEvent(this, change));
             Updated?.Invoke();
             if (seduction >= 100)

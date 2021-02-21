@@ -54,25 +54,19 @@ namespace Services
             var randomAccessories = from accesory in accessories
                 where _random.NextDouble() < accesory.Value
                 select accesory.Key;
-            var hairstyle = GetRandom(hairstyles);
+            var hairstyle = Helpers.GetRandom(hairstyles);
             return new Goblin()
             {
-                glasses = GetRandom(glasses),
-                blush = GetRandom(blushes),
+                glasses = Helpers.GetRandom(glasses),
+                blush = Helpers.GetRandom(blushes),
                 beard = _random.NextDouble() < beard,
                 accessories = randomAccessories.ToList(),
-                costume = GetRandom(costumes),
-                hairColor = GetRandom(hairColors),
+                costume = Helpers.GetRandom(costumes),
+                hairColor = Helpers.GetRandom(hairColors),
                 hairFront = hairstyle.front,
                 hairBack = hairstyle.back,
-                expression = GetRandom(expressions)
+                expression = Helpers.GetRandom(expressions)
             };
-        }
-
-        private static T GetRandom<T>(IReadOnlyList<T> array)
-        {
-            var index = _random.Next(0, array.Count);
-            return array[index];
         }
 
         private static T[] GetArrayValues<T>() where T : Enum
