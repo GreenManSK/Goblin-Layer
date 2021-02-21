@@ -12,6 +12,10 @@ namespace Objects.Golbin.Behaviours
         {
             base.OnTransitionIn(context);
             context.Animator.SetTrigger(Animation);
+            if (context.StateController.LastState != GoblinState.Stopped)
+            {
+                context.lastSeduction = new LastSeduction();
+            }
         }
 
         public override bool IsState(GoblinState state)

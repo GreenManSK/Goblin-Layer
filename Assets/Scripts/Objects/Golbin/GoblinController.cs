@@ -42,6 +42,7 @@ namespace Objects.Golbin
         public Seeker Seeker => _seeker;
         public GameObject Player => _player;
         public SpriteRenderer Sprite => _sprite;
+        public GoblinStateController StateController => _goblinStateController;
         public HashSet<GameObject> goblinsNear = new HashSet<GameObject>();
         public event UpdatedEvent Updated;
 
@@ -57,6 +58,7 @@ namespace Objects.Golbin
         public float nearUpdateTimeInS = 0.5f;
         public float lastAttack = 0;
         public GoblinWeaponController weapon;
+        public LastSeduction lastSeduction = new LastSeduction();
 
         public GameObject HearthsPrefab;
         public GameObject BoltsPrefab;
@@ -177,8 +179,17 @@ namespace Objects.Golbin
             var sendDialog = false;
             if (@event.Target == this)
             {
-                change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, @event.Type);
-                if (GoblinTypesConfig.IsPositiveSeduction(type, @event.Type) && @event.Type != SeductionType.Present)
+                lastSeduction.Update(@event.Type);
+                change += (lastSeduction.count <= 1 ? @event.Strength : 0) *
+                          GoblinTypesConfig.GetMultiplier(type, @event.Type) *
+                          (lastSeduction.count == 0 ? 1 : 0.5f);
+                if (lastSeduction.count >= 2)
+                {
+                    change -= @event.Strength;
+                }
+
+                if (lastSeduction.count == 0 && GoblinTypesConfig.IsPositiveSeduction(type, @event.Type) &&
+                    @event.Type != SeductionType.Present)
                 {
                     change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.BeforeOthers);
                 }
@@ -257,15 +268,27 @@ namespace Objects.Golbin
                 reaction = SeductionReaction.Positive;
             }
 
-            var oldExpression = data.expression;
-            data.expression = GoblinTypesConfig.GetReactionExpression(reaction);
+            if (lastSeduction.count > 0)
+            {
+                reactionText = lastSeduction.count switch
+                {
+                    1 => "Can't you come up with something new?",
+                    2 => "It's getting boring.",
+                    _ => "Again? Who do you think I am?!"
+                };
+            }
 
-            GameEventSystem.Send(new GoblinDataChange());
+            var oldExpression = data.expression;
+            data.expression = lastSeduction.count == 0 || lastSeduction.count > 2
+                ? GoblinTypesConfig.GetReactionExpression(reaction)
+                : Expression.Sleepy;
+
+            Updated?.Invoke();
             GameEventSystem.Send(new DialogEvent("Goblin", reactionText, true, dialogColor,
                 () =>
                 {
                     data.expression = oldExpression;
-                    GameEventSystem.Send(new GoblinDataChange());
+                    Updated?.Invoke();
                 }));
         }
 
