@@ -33,6 +33,7 @@ namespace Data
 
         public GoblinTypeToDefinition definitions;
         public List<SeductionToExpression> seductionExpressions;
+        public ReactionToExpression reactionToExpression;
 
         public static float GetMultiplier(GoblinType type, SeductionType seductionType)
         {
@@ -80,10 +81,25 @@ namespace Data
 
             return Expression.Normal;
         }
+
+        public static Expression GetReactionExpression(SeductionReaction reaction)
+        {
+            return Helpers.GetRandom(Instance.reactionToExpression[reaction].expressions);
+        }
     }
 
     [Serializable]
     public class GoblinTypeToDefinition : SerializableDictionaryBase<GoblinType, TypeDefinition>
     {
+    }
+    
+    [Serializable]
+    public class ReactionToExpression : SerializableDictionaryBase<SeductionReaction, ExpressionList> {}
+
+    
+    [Serializable]
+    public class ExpressionList
+    {
+        public Expression[] expressions;
     }
 }

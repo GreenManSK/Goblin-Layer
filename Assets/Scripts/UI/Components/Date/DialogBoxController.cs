@@ -129,7 +129,8 @@ namespace UI.Components.Date
         {
             if (!_needsConfirmation)
                 return;
-            _dialogs.Dequeue();
+            var dialog = _dialogs.Dequeue();
+            dialog.OnConfirm?.Invoke();
             if (_dialogs.Count > 0)
             {
                 DisplayDialog(_dialogs.Peek());

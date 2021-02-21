@@ -6,6 +6,7 @@ using Controllers;
 using Controllers.Goblin;
 using Events;
 using Events.Date;
+using Events.Goblin;
 using Events.Player;
 using Events.UI;
 using Objects.Golbin;
@@ -27,7 +28,8 @@ namespace UI.Controllers.Date
             typeof(DialogEvent),
             typeof(DialogConfirmationEvent),
             typeof(PresentSelectEvent),
-            typeof(AbilityChangeEvent)
+            typeof(AbilityChangeEvent),
+            typeof(GoblinDataChange)
         }.AsReadOnly();
 
         private static readonly Vector2 PrevVector = new Vector2(-1, 1);
@@ -160,8 +162,11 @@ namespace UI.Controllers.Date
                 case PresentSelectEvent presentSelectEvent:
                     OnPresentSelectEvent(presentSelectEvent);
                     break;
-                case AbilityChangeEvent abilityChangeEvent:
+                case AbilityChangeEvent _:
                     EnableAbilities();
+                    break;
+                case GoblinDataChange _:
+                    avatar.UpdateDesign();
                     break;
             }
         }
