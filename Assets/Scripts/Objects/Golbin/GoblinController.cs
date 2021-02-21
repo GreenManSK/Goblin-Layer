@@ -183,9 +183,19 @@ namespace Objects.Golbin
             if (@event.Target == this)
             {
                 lastSeduction.Update(@event.Type);
-                change += (lastSeduction.count <= 1 ? @event.Strength : 0) *
-                          GoblinTypesConfig.GetMultiplier(type, @event.Type) *
-                          (lastSeduction.count == 0 ? 1 : 0.5f);
+                if (GoblinTypesConfig.IsPositiveSeduction(type, @event.Type))
+                {
+                    change += (lastSeduction.count <= 1 ? @event.Strength : 0) *
+                              GoblinTypesConfig.GetMultiplier(type, @event.Type) *
+                              (lastSeduction.count == 0 ? 1 : 0.5f);
+                }
+                else
+                {
+                    change += @event.Strength *
+                              GoblinTypesConfig.GetMultiplier(type, @event.Type) *
+                              (lastSeduction.count == 0 ? 1 : 1.5f);
+                }
+                
                 if (lastSeduction.count >= 2)
                 {
                     change -= @event.Strength;

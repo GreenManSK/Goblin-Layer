@@ -19,6 +19,9 @@ namespace UI.Components.Date
         public Animator animator;
         public Image typeIndicator;
 
+        public Image blush;
+        public Image angryMark;
+
         private void OnEnable()
         {
             animator.SetTrigger(GoblinAnimation);
@@ -35,6 +38,7 @@ namespace UI.Components.Date
             goblin = data;
             var type = GoblinTypesConfig.GetDefinition(goblin.type);
             typeIndicator.color = type.color;
+            SetGoblinEffects();
         }
 
         public void SetActive(bool active)
@@ -45,6 +49,15 @@ namespace UI.Components.Date
         public void OnEffectEnd()
         {
             animator.SetTrigger(GoblinAnimation);
+            SetGoblinEffects();
+        }
+
+        private void SetGoblinEffects()
+        {
+            blush.gameObject.SetActive(goblin.blush.gameObject.activeSelf);
+            blush.color = goblin.blush.color;
+            angryMark.gameObject.SetActive(goblin.angryMark.gameObject.activeSelf);
+            angryMark.color = goblin.angryMark.color;
         }
 
         public void OnEvent(IEvent @event)
@@ -54,6 +67,8 @@ namespace UI.Components.Date
                 return;
             if (seductionChangeEvent.Target == goblin)
             {
+                blush.gameObject.SetActive(false);
+                angryMark.gameObject.SetActive(false);
                 animator.SetTrigger(seductionChangeEvent.Change > 0 ? HearthsAnimation : BoltsAnimation);
             }
         }

@@ -545,6 +545,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     1: RH_SerializedDictionary
+    7: RH_SerializedDictionary
     13: RH_SerializedDictionary
   additionalCompilerArguments: {}
   platformArchitecture: {}
