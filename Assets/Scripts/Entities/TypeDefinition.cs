@@ -10,8 +10,6 @@ namespace Entities
     [Serializable]
     public class TypeDefinition
     {
-        private static Random _random = new Random();
-
         public Color color;
         public float compliment = 1f;
         public float flirt = 1f;
@@ -34,7 +32,8 @@ namespace Entities
         public List<string> positiveReactionTexts = new List<string>();
         public List<string> negativeReactionTexts = new List<string>();
         public List<string> neutralReactionTexts = new List<string>();
-
+        public List<string> seducedReactionTexts = new List<string>();
+        
         public string RandomDateStartText()
         {
             return RandomText(dateStartTexts) ?? "Date start text placeholder";
@@ -55,12 +54,16 @@ namespace Entities
             return RandomText(neutralReactionTexts) ?? "Neutral reaction placeholder";
         }
 
+        public string RandomSeducedReactionText()
+        {
+            return RandomText(seducedReactionTexts) ?? "Seduced reaction placeholder";
+        }
+
         private string RandomText(IReadOnlyList<string> texts)
         {
             if (texts.Count == 0)
                 return null;
-            var index = _random.Next(0, texts.Count);
-            return texts[index];
+            return Helpers.GetRandom(texts);
         }
     }
 }

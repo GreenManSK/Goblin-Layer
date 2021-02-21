@@ -60,8 +60,9 @@ namespace Objects.Golbin
         public GoblinWeaponController weapon;
         public LastSeduction lastSeduction = new LastSeduction();
 
-        public GameObject HearthsPrefab;
-        public GameObject BoltsPrefab;
+        public GameObject hearthsPrefab;
+        public GameObject hearthsTempPrefab;
+        public GameObject boltsTempPrefab;
 
         public SpriteRenderer blush;
         public SpriteRenderer angryMark;
@@ -101,7 +102,7 @@ namespace Objects.Golbin
             data.expression = GoblinTypesConfig.GetSeductionExpression(seduction, data.expression);
         }
 
-        private void OnDestroy()
+        public void Disable()
         {
             GameEventSystem.Unsubscribe(ListenEvents, this);
             if (_goblinStateController && !_goblinStateController.IsState(GoblinState.Idle))
@@ -171,7 +172,7 @@ namespace Objects.Golbin
 
         private void OnPresentEvent(PresentEvent @event)
         {
-            OnSeductionEvent(new SeductionEvent(this, SeductionType.Present, @event.Present.strength));
+            OnSeductionEvent(new SeductionEvent(@event.Target, SeductionType.Present, @event.Present.strength));
         }
 
         private void OnSeductionEvent(SeductionEvent @event)
@@ -195,7 +196,7 @@ namespace Objects.Golbin
                               GoblinTypesConfig.GetMultiplier(type, @event.Type) *
                               (lastSeduction.count == 0 ? 1 : 1.5f);
                 }
-                
+
                 if (lastSeduction.count >= 2)
                 {
                     change -= @event.Strength;
@@ -226,7 +227,8 @@ namespace Objects.Golbin
 
         private void OnStopEvent()
         {
-            if (!_goblinStateController.IsState(GoblinState.Stopped))
+            if (!_goblinStateController.IsState(GoblinState.Stopped) &&
+                !_goblinStateController.IsState(GoblinState.Seduced))
                 _goblinStateController.ChangeState(GoblinState.Stopped);
         }
 
@@ -243,11 +245,11 @@ namespace Objects.Golbin
             UpdateMiniEffect();
             if (change > 0)
             {
-                Instantiate(HearthsPrefab, transform);
+                Instantiate(hearthsTempPrefab, transform);
             }
             else if (!Mathf.Approximately(change, 0))
             {
-                Instantiate(BoltsPrefab, transform);
+                Instantiate(boltsTempPrefab, transform);
             }
 
             data.expression = GoblinTypesConfig.GetSeductionExpression(seduction, data.expression);
@@ -255,12 +257,15 @@ namespace Objects.Golbin
             Updated?.Invoke();
             if (seduction >= 100)
             {
-                Destroy(gameObject);
+                _goblinStateController.ChangeState(GoblinState.Seduced);
             }
         }
 
         private void SendDialogReaction(float change)
         {
+            if (_goblinStateController.IsState(GoblinState.Seduced))
+                return;
+            
             var typeDefinition = GoblinTypesConfig.GetDefinition(type);
             string reactionText;
             var dialogColor = DialogColor.Default;
@@ -329,7 +334,8 @@ namespace Objects.Golbin
             {
                 blush.gameObject.SetActive(true);
                 blush.color = Helpers.ChangeAlpha(blush.color, seduction > 66 ? 0.8f : 0.6f);
-            } else if (seduction < 0)
+            }
+            else if (seduction < 0)
             {
                 angryMark.gameObject.SetActive(transform);
                 angryMark.color = Helpers.ChangeAlpha(blush.color, seduction < 40 ? 0.8f : 0.6f);

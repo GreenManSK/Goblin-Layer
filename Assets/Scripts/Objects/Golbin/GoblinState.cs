@@ -6,6 +6,7 @@ namespace Objects.Golbin
         Chasing,
         Attacking,
         Dating,
-        Stopped
+        Stopped,
+        Seduced
     }
 }

@@ -228,8 +228,9 @@ MonoBehaviour:
   weapon: {fileID: 6159949125166572640}
   lastSeduction:
     count: 0
-  HearthsPrefab: {fileID: 3127232553185169188, guid: f747569c6458ae048a0f7b7082886183, type: 3}
-  BoltsPrefab: {fileID: 738183180299955854, guid: 2566b0775f3d3674486c666d4272f543, type: 3}
+  hearthsPrefab: {fileID: 3311361520550888255, guid: 9161f4363d9966945a2472b855825666, type: 3}
+  hearthsTempPrefab: {fileID: 3127232553185169188, guid: f747569c6458ae048a0f7b7082886183, type: 3}
+  boltsTempPrefab: {fileID: 738183180299955854, guid: 2566b0775f3d3674486c666d4272f543, type: 3}
   blush: {fileID: 2838838393624899501}
   angryMark: {fileID: 5664446658695331308}
 --- !u!212 &9114934777942143012
