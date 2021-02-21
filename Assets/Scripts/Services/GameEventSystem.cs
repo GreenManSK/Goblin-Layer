@@ -29,7 +29,11 @@ namespace Services
             if (_instance != null) return;
             var obj = new GameObject {name = "EventSystem"};
             _instance = obj.AddComponent<GameEventSystem>();
-            DontDestroyOnLoad(obj);
+        }
+
+        private void OnDestroy()
+        {
+            _instance = null;
         }
 
         public static void Send<T>(T @event) where T : IEvent

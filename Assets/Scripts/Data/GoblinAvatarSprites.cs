@@ -1,3 +1,4 @@
+using System;
 using Entities.Types;
 using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
@@ -24,6 +25,11 @@ namespace Data
         private void Awake()
         {
             _instance = this;
+        }
+
+        private void OnDestroy()
+        {
+            _instance = null;
         }
 
         public ColorToHair hair = new ColorToHair();

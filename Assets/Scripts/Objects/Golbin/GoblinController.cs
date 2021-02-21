@@ -199,8 +199,7 @@ namespace Objects.Golbin
             if (@event.Target == this)
             {
                 change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, @event.Type);
-                if (GoblinTypesConfig.IsPositiveSeduction(type, @event.Type) && @event.Type != SeductionType.Attack &&
-                    @event.Type != SeductionType.AttackPlayer)
+                if (GoblinTypesConfig.IsPositiveSeduction(type, @event.Type))
                 {
                     change += @event.Strength * GoblinTypesConfig.GetMultiplier(type, SeductionType.BeforeOthers);
                 }

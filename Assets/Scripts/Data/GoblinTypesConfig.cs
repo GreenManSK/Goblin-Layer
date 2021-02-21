@@ -31,6 +31,11 @@ namespace Data
             _instance = this;
         }
 
+        private void OnDestroy()
+        {
+            _instance = null;
+        }
+
         public GoblinTypeToDefinition definitions;
         public List<SeductionToExpression> seductionExpressions;
         public ReactionToExpression reactionToExpression;
@@ -60,6 +65,8 @@ namespace Data
 
         public static bool IsPositiveSeduction(GoblinType type, SeductionType seductionType)
         {
+            if (seductionType == SeductionType.Attack || seductionType == SeductionType.AttackPlayer)
+                return false;
             var multiplier = GetMultiplier(type, seductionType);
             if (seductionType == SeductionType.Present)
                 multiplier -= 1;
@@ -92,11 +99,13 @@ namespace Data
     public class GoblinTypeToDefinition : SerializableDictionaryBase<GoblinType, TypeDefinition>
     {
     }
-    
-    [Serializable]
-    public class ReactionToExpression : SerializableDictionaryBase<SeductionReaction, ExpressionList> {}
 
-    
+    [Serializable]
+    public class ReactionToExpression : SerializableDictionaryBase<SeductionReaction, ExpressionList>
+    {
+    }
+
+
     [Serializable]
     public class ExpressionList
     {
