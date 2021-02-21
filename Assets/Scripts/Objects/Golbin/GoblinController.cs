@@ -63,6 +63,9 @@ namespace Objects.Golbin
         public GameObject HearthsPrefab;
         public GameObject BoltsPrefab;
 
+        public SpriteRenderer blush;
+        public SpriteRenderer angryMark;
+
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _sprite;
         private Animator _animator;
@@ -226,7 +229,8 @@ namespace Objects.Golbin
         private void UpdateSeduction(float change)
         {
             seduction += change;
-            data.blush = GetBlush(seduction);
+            data.blush = GetBlush();
+            UpdateMiniEffect();
             if (change > 0)
             {
                 Instantiate(HearthsPrefab, transform);
@@ -292,7 +296,7 @@ namespace Objects.Golbin
                 }));
         }
 
-        private Blush GetBlush(float seduction)
+        private Blush GetBlush()
         {
             if (seduction > 66)
             {
@@ -305,6 +309,21 @@ namespace Objects.Golbin
             }
 
             return Blush.None;
+        }
+
+        private void UpdateMiniEffect()
+        {
+            blush.gameObject.SetActive(false);
+            angryMark.gameObject.SetActive(false);
+            if (seduction > 33)
+            {
+                blush.gameObject.SetActive(true);
+                blush.color = Helpers.ChangeAlpha(blush.color, seduction > 66 ? 0.8f : 0.6f);
+            } else if (seduction < 0)
+            {
+                angryMark.gameObject.SetActive(transform);
+                angryMark.color = Helpers.ChangeAlpha(blush.color, seduction < 40 ? 0.8f : 0.6f);
+            }
         }
 
         private void OnCollisionEnter2D(Collision2D other)

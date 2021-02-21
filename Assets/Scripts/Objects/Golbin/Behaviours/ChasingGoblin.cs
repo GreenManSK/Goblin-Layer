@@ -60,7 +60,10 @@ namespace Objects.Golbin.Behaviours
         {
             if (!Mathf.Approximately(_movement.x, 0))
             {
-                Context.Sprite.flipX = _movement.x < 0;
+                var flipX = _movement.x < 0;
+                Context.Sprite.flipX = flipX;
+                Context.blush.flipX = flipX;
+                Context.angryMark.flipX = flipX;
             }
         }
 
